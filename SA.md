@@ -60,20 +60,20 @@ or use  ipcalc -b 10.0.0.0/18
 10.0.0.0/19
 ipcalc -b 10.0.0.0/18 shows first Broadcast
 ```
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.0.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.0.0/19
 BROADCAST=10.0.31.255
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.32.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.32.0/19
 BROADCAST=10.0.63.255
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.64.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.64.0/19
 BROADCAST=10.0.95.255
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.96.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.96.0/19
 BROADCAST=10.0.127.255
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.128.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.128.0/19
 BROADCAST=10.0.159.255
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.160.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.160.0/19
 BROADCAST=10.0.191.255
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.192.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.192.0/19
 BROADCAST=10.0.223.255
-[ec2-user@ip-172-31-57-48 ~]⎈ : ipcalc -b 10.0.224.0/19
+[me@my-host ~]⎈ : ipcalc -b 10.0.224.0/19
 BROADCAST=10.0.255.255
 ```
