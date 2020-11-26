@@ -41,7 +41,7 @@
       echo RELOADAGENT | gpg-connect-agent
       gpg -o output.txt hiddenmessage.txt.gpg
 ```
-    - Assymetric: 
+  - Assymetric: 
         It is created by multipart key. 
       Example:
 ```
