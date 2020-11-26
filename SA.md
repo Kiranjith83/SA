@@ -1,3 +1,22 @@
+# Shared responsibility security model.
+
+# Service models.
+ - Iaas
+ - Paas
+ - Saas
+
+# HA and Fault Tolerance.
+  - HA:
+    - Helps to recover from a failure quickly. 
+  
+  - Fault Tolerance:
+    - Designed to operate throughout a failure with no user impact.
+
+# Disaster recovery
+  - RPO 
+    - How much a business can tolerate to lose, expressed in time. The maximum time between a failure and the last successful backup. 
+  - RTO 
+     - The maximum amount of time a system cab be down. How long a solution takes to recover 
 # IAM
  - Root account to have MFA to enabled. 
 
@@ -10,6 +29,7 @@
   - 99.99% Availability 
   - 99.99999999999% Durabilities
   - Tiered Storage
+    - S3 Standard.
     - S3 Infrequent Access.
     - S3 One zone Infrequent Access.
     - S3 Intelligent Tiering. (Move objects to different tier based on ML)
@@ -19,8 +39,24 @@
   - Lifecycle Management (Moves to different Tier of storage).
   - Versioning
   - Encryption
+    - At rest
+      - Server side encryption.
+         - SSE-S3
+         - SSE-KMS
+         - SSE-C
+      - Client side encryption.
+        - Encrypt and upload to S3.
+    - At transit
   - MFA for Delete. 
   - Secure using ACL and Bucket policy.
+  - Charge:
+    - Based on storage
+    - Based on number of requests.
+    - Charged on Storage management.
+    - Data transfer pricing.
+    - Transfer acceleration.
+    - Cross region replication.
+  - 0 to 5 TB file size and Unlimited storage. 
 
 
 # Subnetting.
