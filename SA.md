@@ -1,3 +1,28 @@
+# IAM
+ - Root account to have MFA to enabled. 
+
+# Billing 
+ - Create Billing alarm.
+
+# S3
+  - Read and write consistency with new file
+  - Eventual consistency with update, delete of existing it.
+  - 99.99% Availability 
+  - 99.99999999999% Durabilities
+  - Tiered Storage
+    - S3 Infrequent Access.
+    - S3 One zone Infrequent Access.
+    - S3 Intelligent Tiering. (Move objects to different tier based on ML)
+    - S3 Glacier.
+    - S3 Glacier Deep archive.
+      - Retrieval time is 12 hour.
+  - Lifecycle Management (Moves to different Tier of storage).
+  - Versioning
+  - Encryption
+  - MFA for Delete. 
+  - Secure using ACL and Bucket policy.
+
+
 # Subnetting.
 
 > Current Network:
