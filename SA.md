@@ -165,11 +165,29 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - AWS Services
     - External accounts.
     - Web identities.
-  
-
 
 # Billing 
  - Create Billing alarm.
+
+# AWS Organization.
+ - A large number of accounts for an organization could be managed by AWS Organization.
+ - First account inside AWS Org becomes the master account. 
+    - Master account cannot be restricted any way. Master account to be dedicated to 'being a master account'.
+    - This is the root account, and all accounts registered will be part of the organization unit.
+ - Generally master account can be used for.
+    - IAM users
+    - Centralized logging.
+    - Consolidated billing. 
+ - Service Control Policy: 
+    - Defines what a service account can do. 
+    - It can be applied to individual account, or Organizational Unit and it applies recursively. 
+
+ - AWS accounts to consolidate bill. 
+    - Individual accounts bills are consolidated to master account. 
+    - Member account passes the billing to the master account. 
+ - Restrict access. 
+
+
 
 # S3
   - Read and write consistency with new file
