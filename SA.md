@@ -158,6 +158,14 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - And the identity uses the temporary credentials.
   - Break glass access for emergency access for elevated permissions.
   - Grant AWS Service access.
+  - Allows resource from one account to another.
+  - Unlike IAM users, IAM roles have short term credentials.
+  - sts:AsumeRole can be done by -
+    - IAM users
+    - AWS Services
+    - External accounts.
+    - Web identities.
+  
 
 
 # Billing 
