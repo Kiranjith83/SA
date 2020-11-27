@@ -83,8 +83,22 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - Use of TLS
 
 # AWS WAF (Well architect framework)
+
+  The well architect framework tool is available, based on the pillers.
+ - WAF introduces principles for each pillers.
+  - Automation to build, modify, and evolve the infrastructure.
+  - Allows evolutionary architecture using the data. 
+  - [AWS WAF](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc) 
+
  WAF Pillers and Design principles.
  - Operation Excellence.
+    Focus on the ability to use computing resources efficiently to meet system requirements and to maintain that efficiency as demand changes and technologies evolve. 
+    - Perform operation as a code.
+    - Annotate documentation.
+    - Make frequent, small reversible changes.
+    - Refine operations procedures frequently.
+    - Anticipate failures.
+    - Learn from all operation failures.
  - Security.
     Includes the ability to protect information systems, and assets while delivering business value through risk assessments and mitigation strategies. 
     - Implement a strong identity foundation.
@@ -101,21 +115,20 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Stop guessing capacity.
     - Manage change in automation.
  - Performance efficiency. 
-    Focus on the ability to use computing resources efficiently to meet system requirements and to maintain that efficiency as demand changes and technologies evolve. 
-    - Perform operation as a code.
-    - Annotate documentation.
-    - Make frequent, small reversible changes.
-    - Refine operations procedures frequently.
-    - Anticipate failures.
-    - Learn from all operation failures.
+    Includes ability to use computing resources efficiently to meet system requirements and to maintain that efficiency as demand changes and technologies evolve.
+    - Democratize advanced technologies.
+    - Go global in minutes.
+    - Use serverless architecture. 
+    - Experiment more often.
+    - Mechanical sympathy.
  - Cost optimization. 
+    Includes the ability to avoid or eliminate unneeded cost or suboptimal resources. 
+    - Adopts a consumption model.
+    - Measure overall efficiency. 
+    - Stop spending money on data center operations.
+    - Analyze and attribute expenditure. 
+    - Use managed services to reduce cost of ownership.
 
-
-  The well architect framework tool is available, based on the pillers.
- - WAF introduces principles for each pillers.
-  - Automation to build, modify, and evolve the infrastructure.
-  - Allows evolutionary architecture using the data. 
-  - [AWS WAF](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc) 
 
 # IAM
  - Root account to have MFA to enabled. 
