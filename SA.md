@@ -152,10 +152,10 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - With roles, we define the entity who can assume the role at Trust relationships.
   - A role should have trust policy to assume and IAM policy for permissions.
   - While a assume role call is made, 
-   - An entity is allowed to assume the role if the IAM trust relationship is allowed.
-   - Once its assumed, STS generates a temporary sec credentials with time limit. 
-   - Those temp credentials gets the permissions based on the permission policy set on the role.
-   - And the identity uses the temporary credentials.
+    - An entity is allowed to assume the role if the IAM trust relationship is allowed.
+    - Once its assumed, STS generates a temporary sec credentials with time limit. 
+    - Those temp credentials gets the permissions based on the permission policy set on the role.
+    - And the identity uses the temporary credentials.
   - Break glass access for emergency access for elevated permissions.
   - Grant AWS Service access.
 
