@@ -134,7 +134,31 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 # IAM
  - Root account to have MFA to enabled. 
+ - Root user is responsible for setting up other IAM users.
  - Creating different AWS Accounts allows to control the blast radius incase something goes wrong with an account.
+ ## IAM User
+  - One among the identity provided by IAM.
+  - 500 IAM users per account.
+  - A single user can only be in 10 group.
+  - 10 managed policies per user.
+  - 1 MFA
+  - 2 access keys.
+ ## IAM Groups
+  - A group of policy.
+  - Groups have no credentials. 
+ ## IAM Policies
+ ## IAM Roles.
+  - Roles are never logged into but assumed and gains the permission it carries.
+  - With roles, we define the entity who can assume the role at Trust relationships.
+  - A role should have trust policy to assume and IAM policy for permissions.
+  - While a assume role call is made, 
+   - An entity is allowed to assume the role if the IAM trust relationship is allowed.
+   - Once its assumed, STS generates a temporary sec credentials with time limit. 
+   - Those temp credentials gets the permissions based on the permission policy set on the role.
+   - And the identity uses the temporary credentials.
+  - Break glass access for emergency access for elevated permissions.
+  - Grant AWS Service access.
+
 
 # Billing 
  - Create Billing alarm.
