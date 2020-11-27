@@ -83,12 +83,33 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - Use of TLS
 
 # AWS WAF (Well architect framework)
- WAF Pillers
+ WAF Pillers and Design principles.
  - Operation Excellence.
  - Security.
+   Includes the ability to protect information systems, and assets while delivering business value through risk assessments and mitigation strategies. 
+    - Implement a strong identity foundation.
+    - Enable traceability. 
+    - Apply security at all layers.
+    - Automate security best practices.
+    - Protect data in transit and at rest. 
+    - Prepare for security events.
  - Reliability.
+   The reliability piller includes the ability of a system to recover from the infra or service disruptions, dynamically acquire computing resources to meet demand and migrate disruptions such as mis configuration or transient network issues.
+    - Testing recovery procedures.
+    - Automatically recover from failures.
+    - Scale horizontally to increase aggregate system availability.
+    - Stop guessing capacity.
+    - Manage change in automation.
  - Performance efficiency. 
+   Focus on the ability to use computing resources efficiently to meet system requirements and to maintain that efficiency as demand changes and technologies evolve. 
+    - Perform operation as a code.
+    - Annotate documentation.
+    - Make frequent, small reversible changes.
+    - Refine operations procedures frequently.
+    - Anticipate failures.
+    - Learn from all operation failures.
  - Cost optimization. 
+ 
 
   The well architect framework tool is available, based on the pillers.
  - WAF introduces principles for each pillers.
