@@ -1,9 +1,33 @@
+# Architecture 101 terms:
+  ## Cost efficient or Cost effective architecture. 
+   - Implement a solution with AWS Product or product features that provides the require service for as little initial and ongoing costs as possible. 
+   - Example, hosting large media files effectively storing on storage solutions. 
+   - Picking the right tool for right job. 
+  
+  ## Secure.
+   - Secures data and operations from internal and external attack. 
+   - Picking right tool for right job, securely. 
+   - Choose the product for the security.
+
+  ## Application Session state. 
+   - Application session state is the data that rep what customer is doing. What they choosen, what they selected. 
+    - example 1: the shopping card selection details chosen by an user.
+    - example 2: Preserving the login details when traffic goes to horizontally scalled application server. 
+   - Making sure the application state stored in a single server, or saved externally. 
+   - If state is saved in the single server or same server, it is called stateful server
+   - If the state is saved externally, its called stateless server. This is more preferred as the application servers can be modified without effecting end user state. 
+
+  ## Undifferentiated heavy lifting. 
+   - It means any part of application or system that is not specific to the business. 
+     - Example: Describes the part of application that is used by every one, and dont have to focus on. AWS takes care of heavy lifting of the infrastructure management while running your EC2 instances.  
+   
 # Shared responsibility security model.
 
 # Service models.
  - Iaas
  - Paas
  - Saas
+ - Faas
 
 # HA and Fault Tolerance.
   - HA:
@@ -58,8 +82,23 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Encryption in transit
    - Use of TLS
 
+# AWS WAF (Well architect framework)
+ WAF Pillers
+ - Operation Excellence.
+ - Security.
+ - Reliability.
+ - Performance efficiency. 
+ - Cost optimization. 
+
+  The well architect framework tool is available, based on the pillers.
+ - WAF introduces principles for each pillers.
+  - Automation to build, modify, and evolve the infrastructure.
+  - Allows evolutionary architecture using the data. 
+  - [AWS WAF](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc) 
+
 # IAM
  - Root account to have MFA to enabled. 
+ - Creating different AWS Accounts allows to control the blast radius incase something goes wrong with an account.
 
 # Billing 
  - Create Billing alarm.
