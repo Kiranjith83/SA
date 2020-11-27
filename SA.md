@@ -14,8 +14,8 @@
     - example 1: the shopping card selection details chosen by an user.
     - example 2: Preserving the login details when traffic goes to horizontally scalled application server. 
    - Making sure the application state stored in a single server, or saved externally. 
-   - If state is saved in the single server or same server, it is called stateful server
-   - If the state is saved externally, its called stateless server. This is more preferred as the application servers can be modified without effecting end user state. 
+   - If state is saved in the single server or same server, it is called stateless.
+   - If the state is saved externally, its called stateful server. This is more preferred as the application servers can be modified without effecting end user state. 
 
   ## Undifferentiated heavy lifting. 
    - It means any part of application or system that is not specific to the business. 
@@ -48,6 +48,8 @@
 # scaling
   - Choice of scaling method (Vertical/Horizontal) determines the cost and how the scaling is configured. 
   - Appropriately selecting the scaling method determines how you architect the application, cost and what if developers need to incorporate to support their application.
+  - Elasticiy:
+    - capacity to increase or decrease the capacity based on the demand. 
 
 # Tiered Architecture.
   - To be an effective SA, need the understanding of application architecture, then design system architecture for the application. 
