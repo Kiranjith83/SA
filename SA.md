@@ -172,7 +172,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 # AWS Organization.
  - A large number of accounts for an organization could be managed by AWS Organization.
  - First account inside AWS Org becomes the master account. 
-    - Master account cannot be restricted any way. Master account to be dedicated to 'being a master account'.
+    - Master account cannot be restricted any way. Master account to be dedicated to just 'being a master account'.
     - This is the root account, and all accounts registered will be part of the organization unit.
  - Generally master account can be used for.
     - IAM users
@@ -180,14 +180,23 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Consolidated billing. 
  - Service Control Policy: 
     - Defines what a service account can do. 
-    - It can be applied to individual account, or Organizational Unit and it applies recursively. 
-
+    - It can be applied to individual account, or Organizational Unit and policy applies recursively. 
  - AWS accounts to consolidate bill. 
     - Individual accounts bills are consolidated to master account. 
     - Member account passes the billing to the master account. 
  - Restrict access. 
 
-
+### Switch roles between accounts.
+ - Is a method of accessing one account from other using only one set of credentials. 
+ - You will have a master AWS account, which has one or two role with appropriate permission. 
+  - Now the roles on master account are allowed to assume roles in organization unit accounts.
+ Steps:
+   - Login as IAM user on master account. 
+   - From the console, use switch the Role option. 
+    - AWS Organization creates an IAM role automatically on the accounts to switch into, called "OrganizationAccountAccessRole"
+   - If you invite an account, make sure to have the Roles that can be switched is created. AWS Organization will not create if an account is added by invite.
+   
+   
 
 # S3
   - Read and write consistency with new file
