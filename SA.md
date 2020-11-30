@@ -375,9 +375,13 @@ docker push YOUR_USER/containercat
     - Describes electrical, optical, mechanical medium.
     - No individual device in Layer 1, It is a shared medium. 
 
-
-  - 
-# Subnetting.
+## IP addressing
+Traditional way of sharing IPs to Small/Medium or large Org, with private IP range on each class.
+  - Class A /8
+  - Class B /16
+  - Class C /24
+  
+## Subnetting.
 
 > Current Network:
 10.0.0.0/16  -> Split the CIDR 
