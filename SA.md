@@ -356,7 +356,7 @@ docker push YOUR_USER/containercat
     - Adds the concept of Ports.
   - 3 Network 
     - End to end communication.
-    - Encapsulates packets to IP address.
+    - `Encapsulates packets` to IP address.
     - Adds capability to cross to different network (Router).
     - Each device has its own unique IP address.
     - The packets has Src and Dst IP.
@@ -365,7 +365,7 @@ docker push YOUR_USER/containercat
     - Base level networking
     - Uses Layer 1 and adds capability.
     - Adds Mac address, used to identify individual equipment.
-    - Uses Frames: A piece of data with Src and Dst Mac address.
+    - Uses `Frames`: A piece of data with Src and Dst Mac address.
     - Communicates over local network (Network HUB).
     - Adds control on who can talk to whom.
   - 1 Physical
