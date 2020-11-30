@@ -257,9 +257,6 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 Example:
   - [Git Link:](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/lambda)
   - Below sample function creates thumbnails whenever an image is uploaded to a S3 bucket (dst_bucket). 
-  - The event is driven from the upload S3 bucket trigger, where the images are uploaded.
-    - Configure the S3 bucket events to notify Lambda from the s3 upload bucket.
-   
   - Configure Lambda using below commands.
 ```
 mkdir /tmp/lambdafunction
@@ -270,6 +267,26 @@ unzip Pillow-5.4.1-cp37-cp37m-manylinux1_x86_64.whl
 rm -rf Pillow-5.4.1.dist-info
 zip -r9 lambda.zip PIL lambda_handler.py
 ```
+  - The event is driven from the upload S3 bucket trigger, where the images are uploaded.
+    - Configure the S3 bucket events to notify Lambda from the s3 upload bucket.
+
+## API Gateway
+Two types of APIs:
+  - Rest API:
+    -  Is simpler and wider compatibility. 
+    -  Uses requests and response style exchange and its stateless.
+    -  Every time a request is made its considered as Brand new communication
+  - WebSocket 
+    - The transaction that needs higher through put, webSockets has Better performance.
+    - A connection architecture is used, and communicate in a constant fashion. 
+    - A push will happen to large consumers at once.
+
+Overall steps in creating the API Gateway.
+ Create API -> Create resource -> Use a method on how to interact with the resource -> Finally choose the integration method
+  [Sample](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/apigateway)
+  [AWS Documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-lambda.html)
+
+
 
 # Subnetting.
 
