@@ -351,7 +351,7 @@ docker push YOUR_USER/containercat
   - 4 Transport
     - Reliability
     - TCP/UDP protocol works here.
-    - Uses Segments: For ordering and error correction.
+    - Uses `Segments`: For ordering and error correction.
     - Making sure the packets segment is received in order it has send and checks error.
     - Adds the concept of Ports.
   - 3 Network 
@@ -477,4 +477,33 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - /24 will have 256 network.
 
 ## IP routing.
+ - BGP Protocol. - Advertise and automatically learns the Routing.
+
+## Firewall.
+ - Layer 3 (Network) - Source/Destination IP addresses or Ranges
+ - Layer 4 (Transport) - Protocol and port num,ber
+ - Layer 5 (Session) - as Layer 4 but understand the session.
+ - Layer 7 (Application) - Application specifics eg, HTML path, images
+
+## Egress only Internet Gateway.
+  - Egress only internet gateways provide IPV6 instances with outgoing access to the public internet using IPV6 but prevents the instances from being accessed from the internet.
+  - NAT isn't required for IPV6, and so NAT GWs aren't compatible with IPV6.
+  - Egress only gateways provide the outgoing only access of a NAT GW but do so without adjusting any IP settings.
+
+# DNS Route 53
+ - DNS root zone top level database contains top level domain (TLD), managed by large organization. 
+  - .com is deligated to veriSign global registery services. 
+  - Inside the top domain, has the subdomains. 
+ - Zone files represents the area of the DNS global database. 
+ - Records are type of records saved on Zones.
+ - Authoritative: The one who has the authoritative for a zone. 
+  - When a root domain deligates the top level domain name .com to veriSign, they allow verisign to give them Name Server. 
+  - Now veriSign becomes the authoritative for .com.
+  - A authoritative response is from the server who is authorized to serve the Zone.
+  - For example, once you register the domain 'mydomain.com', the veriSign deligates a NameServer for mydomain.com and it becomes authoritative. 
+ - Flow:
+  - Local system ask for domain.com -> Root server for .com. -> Ask .com. authoritative server who is domain.com -> gets Name server for (Authoritative server) domain.com -> DNS resolver contacts NS of domain.com and gets authoritative answer.
+  - dig +trace 'domain.com'
+
+## Route 53
   - 
