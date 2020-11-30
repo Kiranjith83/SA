@@ -381,8 +381,13 @@ Traditional way of sharing IPs to Small/Medium or large Org, with private IP ran
   - Class B /16
   - Class C /24
   
-## Subnetting.
+CIDR:
+ - In addition to Classes, CIDR helps a better way for allocating wider range of subnets.
+ - 10.0.0.0/16
 
+## Subnetting.
+[Online Calculator:](https://subnettingpractice.com/calc.html)
+[Online calculation cheetsheet:](https://www.pcwdld.com/subnet-mask-cheat-sheet-guide)
 > Current Network:
 10.0.0.0/16  -> Split the CIDR 
 
@@ -460,3 +465,16 @@ BROADCAST=10.0.223.255
 [me@my-host ~]⎈ : ipcalc -b 10.0.224.0/19
 BROADCAST=10.0.255.255
 ```
+> A trick, increment the CIDR for more network. 
+In the case of 10.0.0.0/16 network, subnetting will have below network.
+  - /17 will have 2 network.
+  - /18 will have 2 network.
+  - /19 will have 4 network.
+  - /20 will have 16 network.
+  - /21 will have 32 network.
+  - /22 will have 64 network.
+  - /23 will have 128 network.
+  - /24 will have 256 network.
+
+## IP routing.
+  - 
