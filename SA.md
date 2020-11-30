@@ -249,6 +249,28 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
         - Like ID providers, cognito.
         - A service model prioritize the consumption of third-party providers, remove lot of the dependencies. Example, Data base provider, ID provider.
 
+## Lambda:
+  - Function as a service.
+  - Executes upto 15 minutes.
+  - Invoked by events, time, or by a different service.
+
+Example:
+  - [Git Link:](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/lambda)
+  - Below sample function creates thumbnails whenever an image is uploaded to a S3 bucket (dst_bucket). 
+  - The event is driven from the upload S3 bucket trigger, where the images are uploaded.
+    - Configure the S3 bucket events to notify Lambda from the s3 upload bucket.
+   
+  - Configure Lambda using below commands.
+```
+mkdir /tmp/lambdafunction
+cp lambda_handler.py /tmp/lambdafunction
+cd /tmp/lambdafunction
+wget https://files.pythonhosted.org/packages/ae/2a/0a0ab2833e5270664fb5fae590717f867ac6319b124160c09f1d3291de28/Pillow-5.4.1-cp37-cp37m-manylinux1_x86_64.whl
+unzip Pillow-5.4.1-cp37-cp37m-manylinux1_x86_64.whl
+rm -rf Pillow-5.4.1.dist-info
+zip -r9 lambda.zip PIL lambda_handler.py
+```
+
 # Subnetting.
 
 > Current Network:
