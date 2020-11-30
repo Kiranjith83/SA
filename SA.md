@@ -289,6 +289,94 @@ Overall steps in creating the API Gateway.
   
   - Enabling API cache for returning similar requests.
 
+## Step functions.
+  - Addresses the short runtime of Lambda, Stateless of Lambda
+  - Provides State machines. 
+  - Can orchestrate other AWS services and maintain the state.
+  - State machines can be operating for one year.
+  - Allows multiple Lambda to be coordinated. 
+  - Example: 
+    - User approval cycle for a change management. 
+    - [Example use case:](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/StepFunctions)
+
+# Container-Based Compute and Microservices
+
+## Docker
+  - Virtual Machines are created by taking physical machine and carving out resources dedicated to the VMs. 
+  - With the containers it creates isolated process on top a physical or virtual server. 
+    - Shares the underlying operating system but isolated process. Containers are isolated from other containers.
+  - VMs are like individual houses. 
+  - Containers are like an apartment.
+  - Choosing between containers and VM there is no once choice that fits all.
+    - Mostly based on choice between Monolythic or Microservice.
+  
+  - Running docker:
+```
+sudo amazon-linux-extras install docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+```
+  - Build a sample app image and push to repo.
+  - A docker image is a file system, that containers number of Layers. A Docker image consists of several layers. Each layer corresponds to certain instructions in your Dockerfile. The following instructions create a layer: RUN, COPY, ADD. The other instructions will create intermediate layers and do not influence the size of your image. 
+  
+```
+sudo yum install git
+git clone https://github.com/linuxacademy/content-aws-csa2019.git
+
+cd content-aws-csa2019/lesson_files/03_compute/Topic5_Containers/Docker/
+docker build -t containercat .
+docker images --filter reference=containercat
+docker run -t -i -p 80:80 containercat
+
+docker login --username YOUR_USER
+docker images
+docker tag IMAGEID YOUR_USER/containercat
+docker push YOUR_USER/containercat
+```
+
+# Networking Fundamentals
+
+## OSI Model.
+  Each layer adds benefits of layer below that.
+  - 7 Application
+    - Web browser, HTTP
+    - Application sees communication between two Layer 7. But it uses all the lower layers.
+  - 6 Presentation
+    - TLS adds Encryption.
+    - All about conversion, compression and encryption of data.
+    - FTP, SSH are added.
+  - 5 Session
+    - Session are introduced.
+    - The initiated and responded traffic will be part of the same traffic. Example IPtables stateful firewalls.
+  - 4 Transport
+    - Reliability
+    - TCP/UDP protocol works here.
+    - Uses Segments: For ordering and error correction.
+    - Making sure the packets segment is received in order it has send and checks error.
+    - Adds the concept of Ports.
+  - 3 Network 
+    - End to end communication.
+    - Encapsulates packets to IP address.
+    - Adds capability to cross to different network (Router).
+    - Each device has its own unique IP address.
+    - The packets has Src and Dst IP.
+    - Single connection or single channel communication.
+  - 2 Data link
+    - Base level networking
+    - Uses Layer 1 and adds capability.
+    - Adds Mac address, used to identify individual equipment.
+    - Uses Frames: A piece of data with Src and Dst Mac address.
+    - Communicates over local network (Network HUB).
+    - Adds control on who can talk to whom.
+  - 1 Physical
+    - Base level networking
+    - Reception or Transmission of Data.
+    - Radio freq spectrum.
+    - Describes electrical, optical, mechanical medium.
+    - No individual device in Layer 1, It is a shared medium. 
+
+
+  - 
 # Subnetting.
 
 > Current Network:
