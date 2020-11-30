@@ -282,11 +282,12 @@ Two types of APIs:
     - A push will happen to large consumers at once.
 
 Overall steps in creating the API Gateway.
- Create API -> Create resource -> Use a method on how to interact with the resource -> Finally choose the integration method
-  [Sample](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/apigateway)
-  [AWS Documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-lambda.html)
-
-
+  - Create API -> Create resource -> Use a method on how to interact with the resource -> Finally choose the integration method
+    - [Sample](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/apigateway)
+    - [AWS Documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-lambda.html)
+  - Finally create the stage to publish the API.
+  
+  - Enabling API cache for returning similar requests.
 
 # Subnetting.
 
