@@ -194,9 +194,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - Login as IAM user on master account. 
    - From the console, use switch the Role option. 
     - AWS Organization creates an IAM role automatically on the accounts to switch into, called "OrganizationAccountAccessRole"
-   - If you invite an account, make sure to have the Roles that can be switched is created. AWS Organization will not create if an account is added by invite.
-   
-   
+   - If you invite an account, make sure to have the Roles that can be switched is created. AWS Organization will not create if an account is added by invite.      
 
 # S3
   - Read and write consistency with new file
@@ -233,6 +231,23 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Cross region replication.
   - 0 to 5 TB file size and Unlimited storage. 
 
+# Serverless
+
+## APIs and MicroServices.
+  - A small component of a service which is self contained and can operate itself.
+  - APIs allows to access a microservice.
+  - Event Driven Architectures.
+    - The one which operates during an event. 
+    - Example: File being uploaded and take an action.
+    - Opposite to constant polling system, which need more resources to get an event. 
+
+  - Serverless
+    - It has two components.
+      - Function as a service.
+        - A service model to utilize short running or temporary compute. The code execution based on event, or at a scheduled time.
+      - Backend as a service.
+        - Like ID providers, cognito.
+        - A service model prioritize the consumption of third-party providers, remove lot of the dependencies. Example, Data base provider, ID provider.
 
 # Subnetting.
 
