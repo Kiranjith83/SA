@@ -246,7 +246,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     ### When to use IAM policies vs. S3 policies
       - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
 
-  ## S3 Upload.
+## S3 Upload.
     - Single PUT upload.
       - Limit to 5GGB in size.
       - Runs into performance issue, if the size is higher, as it uses single steam of data.
@@ -262,7 +262,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
       # aws s3 cp ./10Gdatafile s3://my-bucket-name
       ```
       - It is required anything over 5GB but recommended anything beyond 100MB.
-  ## S# Encryption
+## S3 Encryption
   - Encryption
     - At rest
       - Server side encryption.
@@ -272,7 +272,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
       - Client side encryption.
         - Encrypt and upload to S3.
     - At transit
-    
+
 # Serverless
 
 ## APIs and MicroServices.
