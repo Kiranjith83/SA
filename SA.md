@@ -247,21 +247,21 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
       - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
 
 ## S3 Upload.
-    - Single PUT upload.
-      - Limit to 5GGB in size.
-      - Runs into performance issue, if the size is higher, as it uses single steam of data.
-      - As its single stream, it will not get the maximum bandwidth.
-      - If did fail, the entire operation has to re-run.
-    - Multipar Upload.
-      - Object is broken upto 10,000 parts and uploads in parallel to S3. 
-      - Multiple streams of data
-      - Enhanced transfer rate.
-      - If an indiidual part fails, only that is retried.
-      ```
+  - Single PUT upload.
+    - Limit to 5GGB in size.
+    - Runs into performance issue, if the size is higher, as it uses single steam of data.
+    - As its single stream, it will not get the maximum bandwidth.
+    - If did fail, the entire operation has to re-run.
+  - Multipar Upload.
+    - Object is broken upto 10,000 parts and uploads in parallel to S3. 
+    - Multiple streams of data
+    - Enhanced transfer rate.
+    - If an indiidual part fails, only that is retried.
+    ```
       # mkfile -n0G 10Gdatafile
       # aws s3 cp ./10Gdatafile s3://my-bucket-name
-      ```
-      - It is required anything over 5GB but recommended anything beyond 100MB.
+    ```
+    - It is required anything over 5GB but recommended anything beyond 100MB.
 ## S3 Encryption
   - Encryption
     - At rest
