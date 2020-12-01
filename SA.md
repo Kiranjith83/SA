@@ -506,4 +506,36 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - dig +trace 'domain.com'
 
 ## Route 53
-  - 
+  - Private hosted zone.
+    - Need enableDNSHostnames and enableDnsSupport at VPC.
+    - Split view DNS is supported, giving Public and Private queries different records for same query. It is setup with same record with different targets.
+      - How it works? 
+      - If any zone has same record, inside the VPC the private zone overrides the public zone.
+  - Public hosted zone.
+  - Record types:
+    - A IPV4
+    - AAAA IPV6
+    - CNAME for alias
+    - MX
+    - NS - used to delegate authority for a domain server.
+    - TXT - used to descriptive text in a domain, used to verify the domain ownership.
+    - Alias record, extension of CNAME but can be used like A record.
+  - Health Checks
+    - Health checks that monitor the health of an endpoint
+    - It can perform below health checks.
+      - Monitor the Endpoints.
+      - Status of other health checks (calculated health check)
+      - State of CW Alarms.
+    - Global health check system that checks an endpoint in an agreed way with an agreed frequency.
+      - >18% of checks report healthy = healthy
+      - <18% healthy = unhealthy 
+    - Types of Health Checks
+      - HTTP and HTTPS connection check in less that 4 seconds.
+      - TCP health check: tcp connection within 10 seconds
+    - The health checks status can be also Inverted and used.
+  - [Routing Polcy:](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html)
+    - Simple:
+      A simple routing policy is a single record within a hosted zone that contains one or more values. When queried, a simple routing policy record returns all the values in randomized order. 
+      - Pros: Simple, the default, even spread of requests
+      - Cons: No performance control, no granular health checks, no influence on which IP is returned or not to be used as LoadBalancer. If Alias is picked, we can only select a single Alias record.
+    - Failover traffic.
