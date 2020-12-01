@@ -527,7 +527,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Status of other health checks (calculated health check)
       - State of CW Alarms.
     - Global health check system that checks an endpoint in an agreed way with an agreed frequency.
-      - >18% of checks report healthy = healthy
+      - If >18% of checks report healthy = healthy
       - <18% healthy = unhealthy 
     - Types of Health Checks
       - HTTP and HTTPS connection check in less that 4 seconds.
@@ -538,4 +538,20 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       A simple routing policy is a single record within a hosted zone that contains one or more values. When queried, a simple routing policy record returns all the values in randomized order. 
       - Pros: Simple, the default, even spread of requests
       - Cons: No performance control, no granular health checks, no influence on which IP is returned or not to be used as LoadBalancer. If Alias is picked, we can only select a single Alias record.
-    - Failover traffic.
+    - Failover:
+      Enhances the ability to failover from one to another record based on health check.
+      - Failover routing allows you to create two records with the same name.
+      - One is designated as the primary and another as secondary. Queries will rewove to the primary, - unless its unhealthy in which case route 53 will respond the secondary.
+      - Failover can be combined with other ty;es to allow multiple primary and secondary records. Generally, failover is used to provide emergency resources during failures.
+    - Weighted routing:
+      Control amount of traffic reaching specific resources.
+      - Route traffic to specific resource based on the weight. 
+      - The higher weight number, the more traffic it gets.
+        - Create 3 SSIDs with 3 different weights. 
+          - with weight 1
+          - with weight 2 
+          - with weight 7 
+            - Traffic will be destributed amount 10%, 20% and 70% respectively.
+      - SetID unique string, unique among the group of the record.
+      - Used for testing new features, and small portion of DNS to be redirected to certain resources.
+      
