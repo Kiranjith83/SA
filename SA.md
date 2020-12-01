@@ -10,7 +10,7 @@
    - Choose the product for the security.
 
   ## Application Session state. 
-   - Application session state is the data that rep what customer is doing. What they choosen, what they selected. 
+   - Application session state is the data that rep what customer is doing. What they choosen , what they selected. 
     - example 1: the shopping card selection details chosen by an user.
     - example 2: Preserving the login details when traffic goes to horizontally scalled application server. 
    - Making sure the application state stored in a single server, or saved externally. 
@@ -211,15 +211,6 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
       - Retrieval time is 12 hour.
   - Lifecycle Management (Moves to different Tier of storage).
   - Versioning
-  - Encryption
-    - At rest
-      - Server side encryption.
-         - SSE-S3
-         - SSE-KMS
-         - SSE-C
-      - Client side encryption.
-        - Encrypt and upload to S3.
-    - At transit
   - MFA for Delete. 
   - Secure using ACL and Bucket policy.
   - Charge:
@@ -255,9 +246,33 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     ### When to use IAM policies vs. S3 policies
       - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
 
-
-
-
+  ## S3 Upload.
+    - Single PUT upload.
+      - Limit to 5GGB in size.
+      - Runs into performance issue, if the size is higher, as it uses single steam of data.
+      - As its single stream, it will not get the maximum bandwidth.
+      - If did fail, the entire operation has to re-run.
+    - Multipar Upload.
+      - Object is broken upto 10,000 parts and uploads in parallel to S3. 
+      - Multiple streams of data
+      - Enhanced transfer rate.
+      - If an indiidual part fails, only that is retried.
+      ```
+      # mkfile -n0G 10Gdatafile
+      # aws s3 cp ./10Gdatafile s3://my-bucket-name
+      ```
+      - It is required anything over 5GB but recommended anything beyond 100MB.
+  ## S# Encryption
+  - Encryption
+    - At rest
+      - Server side encryption.
+         - SSE-S3
+         - SSE-KMS
+         - SSE-C
+      - Client side encryption.
+        - Encrypt and upload to S3.
+    - At transit
+    
 # Serverless
 
 ## APIs and MicroServices.
