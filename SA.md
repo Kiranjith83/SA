@@ -230,6 +230,33 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Transfer acceleration.
     - Cross region replication.
   - 0 to 5 TB file size and Unlimited storage. 
+  ## S3 Permission
+    - Comes with legacy sec baggage.
+    - Very S3 bucket is owned by the account.
+    - Only entity initially has access is the account that created the bucket.
+    - Identity Policies and attach to IAM Entities.
+      - You cannot provide S3 identity policy for IAM Identities that you have no control. (Or from other IAM Account).
+    - What if if you want to apply various access to identity that you dont control?
+      - Use Resource policy.
+        - Resource policy with S3 bucket is called bucket policy. 
+        - Can be used to apply any identities accessing the bucket.
+        - It doesn't matter which account holds the identity. 
+        - You attach S3 bucket policies at the bucket level (i.e. you can’t attach a bucket policy to an S3 object), but the permissions specified in the bucket policy apply to all the objects in the bucket.
+        - Any policy that has explicit denies will override any allow.
+      - ACL, or access control list.
+        - Legacy method, and suggests to use Resource policies.
+        - They control access in simple way for Bucket and objects.
+    - Block public access, is a setting applied on top of any existing settings as a protection.
+      - Block public access overrules any other public grant.
+    >
+      - If you’re more interested in `“What can this user do in AWS?”` then IAM policies are probably the way to go. You can easily answer this by looking up an IAM user and then examining their IAM policies to see what rights they have.
+      - If you’re more interested in `“Who can access this S3 bucket?”` then S3 bucket policies will likely suit you better. You can easily answer this by looking up a bucket and examining the bucket policy.
+
+    ### When to use IAM policies vs. S3 policies
+      - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
+
+
+
 
 # Serverless
 
@@ -554,4 +581,22 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
             - Traffic will be destributed amount 10%, 20% and 70% respectively.
       - SetID unique string, unique among the group of the record.
       - Used for testing new features, and small portion of DNS to be redirected to certain resources.
-      
+    - Latency:
+      With latency based routing, route53 consults a latency database each time a request occurs to a given latency based host in DNS from a resolver server. Record set with the same name are considered part pf the same latency based set. Each is allocated to a region. The record set returned is the one with the lowest latency to the resolver server.
+      - It maintains a database of latency between internet based endpoints. 
+      - The record is returned on the region based record which is configured at the Latency routing policy.
+      - Lookup will resolve or return the one near to the client.
+      - It is not only based on Geography, but also based on the ISP.
+    - Geolocation:
+      Lets one choose the resources that serve traffic based on geographic region from which queries originated. 
+      - With Geolocation pick a location Country, continent, and SetID.
+      - A crucial difference between Latency and Geolocation is that, unless there is a geolocation based on region configured it will return no record for the client.
+      - Can be used to limit the region based lookup. 
+      - When a given resolver attempts a lookup, it returns only record with matching name and matching incoming location.
+      - Different location of granularity can be applied to the location (Countries, Continents etc).
+      - Default can be used to choose to return traffic for any geo location.
+      - Order of traffic returned is based on the Geoproximilty.
+    - Multivalue Answer:
+      - Same like simple routing policy but allows multiple records with the same name. 
+      - Returns upto 8 of the records in random.
+
