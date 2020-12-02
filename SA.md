@@ -292,7 +292,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - At transit
 ## S3 Static Website and CORS
 - Static Web Hosting
-  - Static web hosting will provide a unique endpoint URL th at can be accessed by any web browser.
+  - Static web hosting will provide a unique endpoint URL that can be accessed by any web browser.
   - Static S3 can host
     - HTML, CSS, JavaScript
     - Media (Audio, movies and images)
@@ -304,6 +304,17 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 - [CORS](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html)
   - CORS is a security measure allowing a web application running in one domain to reference resources in another.
   - If an application is running a webpage that loads object from a different S3 bucket, CORS can be used.
+
+## S3 Object versioning
+- Versioning enabled at per bucket basis.
+- Once enabled any operations that would otherwise modify objects generate new version of that original object.
+- Once enabled you are billed for all versions of the objects.
+- Normally Deleting by adding Delete marker. To permanently delete the objects, select all objects and its versions and delete.
+- By deleting the delete marker, you can un-delete an object. 
+- MFA delete allows to enforce to use MFA to delete S3 bucket.
+- [Delete Object](https://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectVersions.html)
+- [MFA Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html)
+
 
 
 # Serverless
