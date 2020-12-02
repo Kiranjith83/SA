@@ -290,9 +290,19 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
         - Use client, application or manually perform the action.
         - Example: Backup application uses S3 storage, backup data is encrypted prior to upload to S3.
     - At transit
+## S3 Static Website and CORS
+  - Static web hosting will provide a unique endpoint URL th at can be accessed by any web browser.
+  - Static S3 can host
+    - HTML, CSS, JavaScript
+    - Media (Audio, movies and images)
+    - By default S3 objects are private, the anonymous users has to be enabled.
+      - Unblocking public access
+      - Make sure the Object permission can be read by un-authenticated user. (From actions make public on all objects)
+      - Or create bucket policy to allow any principles to perform S3:GetObject, on resource S3 bucket.
+
+
 
 # Serverless
-
 ## APIs and MicroServices.
   - A small component of a service which is self contained and can operate itself.
   - APIs allows to access a microservice.
