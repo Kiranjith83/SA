@@ -201,14 +201,6 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Eventual consistency with update, delete of existing it.
   - 99.99% Availability 
   - 99.99999999999% Durabilities
-  - Tiered Storage
-    - S3 Standard.
-    - S3 Infrequent Access.
-    - S3 One zone Infrequent Access.
-    - S3 Intelligent Tiering. (Move objects to different tier based on ML)
-    - S3 Glacier.
-    - S3 Glacier Deep archive.
-      - Retrieval time is 12 hour.
   - Lifecycle Management (Moves to different Tier of storage).
   - Versioning
   - MFA for Delete. 
@@ -221,6 +213,36 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Transfer acceleration.
     - Cross region replication.
   - 0 to 5 TB file size and Unlimited storage. 
+## S3 Storage Class
+- Tiered Storage
+  - S3 Standard.
+    - All purpose storage class
+    - 99.99999999999%(11 ninees) durability.
+    - Replicates in 3+ Az
+    - No minimum object size or retrieval fee.
+  - S3 Infrequent Access S3-IA.
+    - Objects with real-time access is required by infrequent.
+    - 99.9% availability. 
+    - 3+Az  replication. 
+    - Cheaper than standard.
+    - 30 days and 128 KB min charges and object retrieval fee.
+  - S3 One zone Infrequent Access.
+    - Non critical and/reproducibl eobject.
+    - 99.5% availability.
+    - Only 1 Az
+    - 30 days and 128 KB min charges and object retrieval fee.
+    - Chepaer than Standard and standard IA.
+  - S3 Intelligent Tiering. (Move objects to different tier based on ML)
+  - S3 Glacier.
+    - Long term archival storage (Warm or cold backup).
+    - Retrieval could take minutes or hours. (faster the higher the cost).
+    - 3+ Az replication. 90 days and 40KB min charge and retrieval.
+  - S3 Glacier Deep archive.
+    - Retrieval time is 12 hour.
+    - Long term archival for cold backup.
+    - 180 days and 40KB min
+    - Cheaper than Glacier and replacement for Tape storage.
+
 ## S3 Permission
   - Comes with legacy sec baggage.
   - Very S3 bucket is owned by the account.
@@ -329,7 +351,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - The URL is tied to the person who created. Meaning the User access rights has to be available.
    - If any role which has credential expiry and generates the presigned URL, will have issues after the role credentials are expired.
     - Note: Roles gets temporary credentials from STS and has expiry. 
-    
+
 
 
 
