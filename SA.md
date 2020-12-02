@@ -315,6 +315,22 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 - [Delete Object](https://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectVersions.html)
 - [MFA Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html)
 
+## S3 presigned URL.
+- A presigned URL cab ve created by an identity inside AWS providing access to an object using creator's access permission.
+  - By default when a object is accessed, the authorization check is performed at the access of the check. Using the identity of the user.
+    - Presigned URLS changes the way object is accessed. 
+    - Presigned URL allows to generate a specific URL that has access rights encoded to the URL.
+```
+ # aws s3 presign s3://bucketname/objectname
+```
+   - This will generate a preassigned URL with the identity of the user who executed the above command. Now whoever executes the resulting URL will be able to access the object. 
+   - The access uses the user identity who generated teh presign URL. 
+   - Presigned URL expires in 36 hour.
+   - The URL is tied to the person who created. Meaning the User access rights has to be available.
+   - If any role which has credential expiry and generates the presigned URL, will have issues after the role credentials are expired.
+    - Note: Roles gets temporary credentials from STS and has expiry. 
+    
+
 
 
 # Serverless
