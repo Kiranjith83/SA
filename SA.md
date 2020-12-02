@@ -239,9 +239,9 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
       - They control access in simple way for Bucket and objects.
   - Block public access, is a setting applied on top of any existing settings as a protection.
     - Block public access overrules any other public grant.
-  >
-    - If you’re more interested in `“What can this user do in AWS?”` then IAM policies are probably the way to go. You can easily answer this by looking up an IAM user and then examining their IAM policies to see what rights they have.
-    - If you’re more interested in `“Who can access this S3 bucket?”` then S3 bucket policies will likely suit you better. You can easily answer this by looking up a bucket and examining the bucket policy.
+
+  - If you’re more interested in `“What can this user do in AWS?”` then IAM policies are probably the way to go. You can easily answer this by looking up an IAM user and then examining their IAM policies to see what rights they have.
+  - If you’re more interested in `“Who can access this S3 bucket?”` then S3 bucket policies will likely suit you better. You can easily answer this by looking up a bucket and examining the bucket policy.
 
 ### When to use IAM policies vs. S3 policies
   - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
@@ -263,6 +263,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     ```
     - It is required anything over 5GB but recommended anything beyond 100MB.
 ## S3 Encryption
+  - Encryption is done at object level
   - Encryption
     - At rest.
       - Server side encryption.
