@@ -244,7 +244,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - If you’re more interested in `“Who can access this S3 bucket?”` then S3 bucket policies will likely suit you better. You can easily answer this by looking up a bucket and examining the bucket policy.
 
 ### When to use IAM policies vs. S3 policies
-      - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
+  - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
 
 ## S3 Upload.
   - Single PUT upload.
@@ -264,13 +264,30 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - It is required anything over 5GB but recommended anything beyond 100MB.
 ## S3 Encryption
   - Encryption
-    - At rest
+    - At rest.
       - Server side encryption.
          - SSE-S3
+          - AES-256 algorithm is used by SSE-S3.
+          - S# manages encryption end to end with less administration over head.
+          - S3 data encryption using Keys managed by S3.
+          - It uses one of the KMS DEK to encrypt the data, and keys are encrypted and stored with the Objects.
          - SSE-KMS
+          - SSE-KMS allows role seperation.
+          - Unlike in SSE-S3, the user who has access to object can decrypt the data.
+          - A specific KMS master key is used to encrypt the data.
+          - Ideally customer can create a Customer Managed Keys.
+          - And the permission specifically can be defined at the CMK.
+          - This enabled  to have specific IAM user/role who has permission to the KMS key to decrypt the data.
+          - S3 Admin and KMS key access can be given to two different users for role separation.
          - SSE-C
+          - Server side encryption with customer managed key.
+          - When uploading object, you also provide the encryption key and heavy load of encryption is managed by S3.
+          - Once the encryption is done, key is discarded. 
+          - Admin heavy process in managing the keys. Customer should take care of key management.
       - Client side encryption.
         - Encrypt and upload to S3.
+        - Use client, application or manually perform the action.
+        - Example: Backup application uses S3 storage, backup data is encrypted prior to upload to S3.
     - At transit
 
 # Serverless
