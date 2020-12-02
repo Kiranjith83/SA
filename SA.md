@@ -213,11 +213,11 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Transfer acceleration.
     - Cross region replication.
   - 0 to 5 TB file size and Unlimited storage. 
-## S3 Storage Class
+## S3 Storage Classes
 - Tiered Storage
   - S3 Standard.
     - All purpose storage class
-    - 99.99999999999%(11 ninees) durability.
+    - 99.99999999999%(11 nines) durability.
     - Replicates in 3+ Az
     - No minimum object size or retrieval fee.
   - S3 Infrequent Access S3-IA.
@@ -227,12 +227,16 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Cheaper than standard.
     - 30 days and 128 KB min charges and object retrieval fee.
   - S3 One zone Infrequent Access.
-    - Non critical and/reproducibl eobject.
+    - Non critical and/reproducible object.
     - 99.5% availability.
     - Only 1 Az
     - 30 days and 128 KB min charges and object retrieval fee.
-    - Chepaer than Standard and standard IA.
-  - S3 Intelligent Tiering. (Move objects to different tier based on ML)
+    - Cheaper than Standard and standard IA.
+  - S3 Intelligent Tiering. (Move objects to different tier based on ML).
+    - A storage class available in S3, designed for unpredicted data pattern.
+    - Object that aren't accessed for 30 days are moved to the Infrequent tier. Which offers lower cost.
+    - If its accessed, it moves to Standard tier.
+    - Only monthly automation and monitoring fee is charged
   - S3 Glacier.
     - Long term archival storage (Warm or cold backup).
     - Retrieval could take minutes or hours. (faster the higher the cost).
@@ -242,7 +246,21 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Long term archival for cold backup.
     - 180 days and 40KB min
     - Cheaper than Glacier and replacement for Tape storage.
+## S3 Lifecycle
+  - Can be configured for any versions of object that is not current to be transitioned to a different storage class. 
+  - Any older version of object's storage class can be changed.
+  - Once moved to a storage tiere from a standard, can't reverse the process to move back to standard storage class using LifeCycle policy.
 
+## S3 Cross region replication.
+  - One way replication of data from a source bucket to destination bucket in **different region**.
+  - By default, replicated object keep their:
+    - Storage class.
+    - Object name (Key).
+    - Object owner.
+    - Object permission.
+      - **But this settings can be changed to inherit destination bucket owner or other details**
+  - Can be entire bucket, prefix or tags from source bucket to replicate.
+  - 
 ## S3 Permission
   - Comes with legacy sec baggage.
   - Very S3 bucket is owned by the account.
@@ -274,11 +292,11 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Runs into performance issue, if the size is higher, as it uses single steam of data.
     - As its single stream, it will not get the maximum bandwidth.
     - If did fail, the entire operation has to re-run.
-  - Multipar Upload.
+  - Multipart Upload.
     - Object is broken upto 10,000 parts and uploads in parallel to S3. 
     - Multiple streams of data
     - Enhanced transfer rate.
-    - If an indiidual part fails, only that is retried.
+    - If an individual part fails, only that is retried.
     ```
       # mkfile -n0G 10Gdatafile
       # aws s3 cp ./10Gdatafile s3://my-bucket-name
@@ -295,7 +313,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
           - S3 data encryption using Keys managed by S3.
           - It uses one of the KMS DEK to encrypt the data, and keys are encrypted and stored with the Objects.
          - SSE-KMS
-          - SSE-KMS allows role seperation.
+          - SSE-KMS allows role separation.
           - Unlike in SSE-S3, the user who has access to object can decrypt the data.
           - A specific KMS master key is used to encrypt the data.
           - Ideally customer can create a Customer Managed Keys.
