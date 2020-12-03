@@ -825,6 +825,10 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Mostly used by social media sites.
 
 ## RDS
+- Supports instance types:
+  - Burstable
+  - Memory optimized
+  - General Purpose
 - Used to provision fully functional Relational Database Service
 - Deployed both single or highly available (Multi) AZ deployment.
 - RDS supports 
@@ -860,9 +864,10 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - During restore also need to keep special attention to the networking and security group. It will not be as same as original server.
  
 ### RDS Resiliency: 
+[An overview or comparison between Multi Az and Readreplica](https://aws.amazon.com/rds/details/multi-az/)
 - Two ways can RDS achieve resiliency.
   - Multi-AZ
-    - When provision multi AZ RDS, iut creates secondary standby instance,
+    - When provision multi AZ RDS, it creates secondary standby instance,
     - RDS perform `synchronous replication` when Multi-AZ. Copied from Primary node to Secondary Node.
     - Replication happens between instances.
     - RDS perform an Automatic failover during failure.
@@ -880,4 +885,10 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - It performs `Asynchronous replication`.
     - It is created independently, Meaning CNAME is different.
     - While creating the destination region, network  settings, instance spec, can be chosen.
+    - Inorder to create the read replica, the master instance has to have the automatic backup enabled.
+    - Can promote a read replica in case of a DR situation.
+    - If additional read is needed, or having heavy read application, could point the application to read replicas.
+    - 5 read replicas can be attached to a single source.
+    - Hierarchy of read replicas are possible. But there will be a lag and application has to support this eventual consistency.
+    - Read replicas updates are independent.
 
