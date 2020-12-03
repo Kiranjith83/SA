@@ -864,7 +864,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - During restore also need to keep special attention to the networking and security group. It will not be as same as original server.
  
 ### RDS Resiliency: 
-[An overview or comparison between Multi Az and Readreplica](https://aws.amazon.com/rds/details/multi-az/)
+[An overview or comparison between Multi Az and Read Replica](https://aws.amazon.com/rds/details/multi-az/)
 - Two ways can RDS achieve resiliency.
   - Multi-AZ
     - When provision multi AZ RDS, it creates secondary standby instance,
@@ -892,3 +892,30 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Hierarchy of read replicas are possible. But there will be a lag and application has to support this eventual consistency.
     - Read replicas updates are independent.
 
+### SQL Aurora
+- Is a custom designed database engine. 
+- Compatible with MySQL and PostgreSQL tools.
+- Aurora operates with a radically different architecture as opposed to the other RDS database engines.
+  - Aurora uses a base configuration of a "cluster", as shared volume.
+  - Max of 64 TiB, 6 replicas and 3 availability zones.
+  - A cluster contains a single primary instance and zero or more replicas.
+  - Aurora is billed for the storage that is used not the allocation.
+  - In the cluster write comes from a single node, and read happens on other two nodes.
+- Aurora uses subnet groups, (Which subnet the db has to deploy into)
+- Cluster storage:
+  - All instances primary and replicas use the same shared storage. The Cluster volumes.
+  - Cluster volume is SSD based and can be upto 64 TiB.
+  - Replicates data six times across three AZ.
+  - Tolerate two failures without writes being impacted and three failures without read impact.
+  - Aurora storage is auto healing.
+- Cluster scaling and availability.
+  - Cluster volume scales automatically and billed for consumed data. Data is backed up to S3.
+  - Aurora replicas improve availability, can be promoted to primary instance quickly and allow for efficient read scaling.
+  - Reads and writes use the cluster endpoint.
+  - reads can use the reader endpoint which balances the connection overall replica instances.
+- Instance reservations can be purchased for Aurora instance types.
+- It has different types of instances compared to other rds instances.
+  - Every cluster creates with a primary instance, and allowed to write to the cluster.
+  - It is possible to add additional reader instances within the Aurora cluster.
+  - Failover tier
+    - Tier0 to tier15 specifies the failover priority. tier0 has higher priority. 
