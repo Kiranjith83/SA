@@ -260,7 +260,12 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Object permission.
       - **But this settings can be changed to inherit destination bucket owner or other details**
   - Can be entire bucket, prefix or tags from source bucket to replicate.
-  - 
+  - Replication is not retroactive, meaning only replicates objects that is added after the replication enabled.
+  - Replication is only one way.
+  - System actions like lifecycle rules are not replicated.
+  - Cross region replication SSE-C encryption not supported
+  - Only SSE-S3 and if enabled KMS encrypted objects are supported.
+
 ## S3 Permission
   - Comes with legacy sec baggage.
   - Very S3 bucket is owned by the account.
@@ -309,7 +314,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
       - Server side encryption.
          - SSE-S3
           - AES-256 algorithm is used by SSE-S3.
-          - S# manages encryption end to end with less administration over head.
+          - S3 manages encryption end to end with less administration over head.
           - S3 data encryption using Keys managed by S3.
           - It uses one of the KMS DEK to encrypt the data, and keys are encrypted and stored with the Objects.
          - SSE-KMS
@@ -714,3 +719,52 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Same like simple routing policy but allows multiple records with the same name. 
       - Returns upto 8 of the records in random.
 
+# CloudFront
+- CDN is a aglobal cache that stores copies of your data on edge caches.
+- Origin
+  - The server or service that hosts your content. It can be S3 bucket, web server or Amazon media store.
+- Distribution
+  - The configuration entity within  CloudFront. Its where you configure all aspects of specific implementation of CloudFront form.
+  - Two types
+    - Web distribution
+      - Speed of content delivery for static files and media files.
+    - RTMP
+      - Adobe media server protocol for flash
+- Edge Location:
+  - The local infra that hosts caches of your data. Positioned ion over 150 locations globally over 30 countries.
+- Regional Edge Caches
+  - Larger versions of edge locations. Less of them but have more capacity and can serve larger areas.
+
+- Origin fetch:
+ - If the content is not cached at the edge location, it will perform a origin fetch from origin.
+- By default the CloudFront comes up with default domain name at cloudfront distribution. that works with both HTTP and HTTPS.
+  - But this can be changed with custom domain name for the distribution, if so need to create SSL certificate proves ownership of the domain. 
+  - The cert can be imported from ACM.
+- CloudFront is by default public facing, but can be configured to use privately with "Trusted signers".
+  - With this configuration in place, only signed URLs or signed cookies needed to access the distribution.
+
+## OAI
+- Origin Access Identity. 
+  - Usecase: 
+    - Only allow access to a resource over CloudFront. And not direct access backend application directly.
+    - To avoid lower level of performance by direct access.
+    - Dont want customers to directly access object and use OAI.
+  - Configured under Origin and Origin group and restrict with the identity created as OAI.
+  - The S3 bucket behind the CloudFront will get policy only for Origin access identity. Make sure that if any other statements were in place.
+
+# EFS
+- NFSv4
+- Accessed via mount targets.
+- For Linux
+- Accessed via VPC, VPN or Direct connect.
+- Performance
+  - General purpose
+  - Max IO
+    - Designed for  when a large number of instances need to access the filesystem.
+  - Two throughputs modes.
+    - Bursting.
+      - 100MiB/s base burst.
+    - Provisioned
+- Lifecycle Management
+  - Standard
+  - Infrequent access.
