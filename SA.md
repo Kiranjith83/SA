@@ -754,6 +754,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 
 # EFS
 - NFSv4
+- Designed for Large scale parallel access of data.
 - Accessed via mount targets.
 - For Linux
 - Accessed via VPC, VPN or Direct connect.
@@ -768,3 +769,57 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - Lifecycle Management
   - Standard
   - Infrequent access.
+- amazon-efs-utils helps to get type of file system efs.
+  - `mount -t efs <filesystem id>:/path  /to/system/path`
+
+# Database
+## Database models
+- DBMS is the database management system.
+  - MySQL, MongoDB are example of DBMS. which stores and handles data.
+
+- SQL (Relational)
+  - Designed to store data with strong built-in relation ship. 
+    - Organization storing information about Team members and departments and how they are related.
+    - Organize data into tables and link them together based on relation ship.
+    - This relation ship help to retrieve and combine data with one or more tables with single query
+    - Relational database uses process called normalization.
+      - Normalization is a set of data modeling rule, and has two functions.
+        - eliminates any redundant data, anything that repeats
+        - ensures any data is stored together is depended on each other other wise its separated.
+      - Normalization was developed in an attempt to minimize the duplication of data, when storage was costly.
+      - Now CPU is most expensive at the moment and also due to scaling issue the movement is towards to non-relational as storage is not any more most costly.
+    - In relational database need to create schema in advance, and relation groups the data into tables.
+  - Can use Structured Query Language to query the database.
+  - If your data has relationship and if its fixed, and not often changed then relational database are faster.
+  - Because the relationship is fixed, it struggle with any situation or data which has fluid relation ship.
+    - It struggles with social media sites.
+    - Hard to scale the relational database, as single system needs to acces it all ideally in memory and difficult to seperate the data.
+
+- NOSQL (Non-Relational)
+  - Are group of product
+    - Key value 
+      - DynbamoDB
+      - Simple type of db.
+      - Its list of keys and corresponding data to values.
+      - Excellent method to store data as:
+        - excellent wat to store data don't have much structures.
+        - username and passwords
+        - Session states.
+        - Used for in memory caching.
+      - Able to cope with high velocity of read and write. And can be easily scaled.
+    - Document
+      - MongoDB, AWS Document DB
+      - Used for semi structured data and stored as document.
+         - Rather than requiring a schema, it can store data as document in json structure, identified by documnet ID.
+         - Example: info about orders, patient record, content management, user profiles, 
+    - Column
+      - RedShift
+      - Data is stored in disk on columns
+      - Each record is stored on columns, allows to perform analytic query in efficient way.
+      - Analytical, and Datawarehouse products.
+    - Graph
+      - Neo4j, neptune
+      - Designed for dynamic relationship.
+      - Social media sites, tracking relationship between different elements.
+      - Irrespective of the relational database, no schema to be defined and the relationship changes dynamically.
+      - Mostly used by social media sites.
