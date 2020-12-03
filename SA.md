@@ -823,3 +823,27 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Social media sites, tracking relationship between different elements.
       - Irrespective of the relational database, no schema to be defined and the relationship changes dynamically.
       - Mostly used by social media sites.
+
+## RDS
+- Used to provision fully functional Relational Database Service
+- Deployed both single or highly available (Multi) AZ deployment.
+- RDS supports 
+  - MySQL
+  - MariaDB
+  - Oracle
+  - PostgreSQL
+  - MSSQL
+  - Aurora - Inhouse developed engine with more features and performance enhancements.
+- RDS can move between primary and secondary during failover. The CNAME mapping does changes to backend instance during failover.
+- Two types of storage supported
+  - General purpose SSD GP2:
+    - 3 IOPS per GB
+    - Burst to 3000 IOPS
+  - Provisioned IOPS SSD (io1)
+    - 1000 to 80000 IOPS.
+- RDS supports encryption with below conditions:
+  - Encryption can be configured when creating DB instances.
+  - Encryption cab be added by taking snapshopt, convert to encrypted snapshot and create DB.
+  - Cannot remove encryption.
+  - Read replica needs to be at the same state as the primary instance are (with respect to encryption)
+  - Encryption snapshots can be copied between region - KMS CMK are region specific.
