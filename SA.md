@@ -858,4 +858,26 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - No matter what method to perform restore, it creates a new Database instance.
   - This leads to reconfigure application during when RDS restore happens.
   - During restore also need to keep special attention to the networking and security group. It will not be as same as original server.
+ 
+### RDS Resiliency: 
+- Two ways can RDS achieve resiliency.
+  - Multi-AZ
+    - When provision multi AZ RDS, iut creates secondary standby instance,
+    - RDS perform `synchronous replication` when Multi-AZ. Copied from Primary node to Secondary Node.
+    - Replication happens between instances.
+    - RDS perform an Automatic failover during failure.
+    - It can happen if there are isolated issues with underlying hardware or configuration upgrade.
+      - In the case of software upgrade, it changes the secondary instance first, changes the CNAME mapping then finally update the primary instance.
+    - Converting from normal to multi-az occurs downtime.
+    - If any RDS but Aurora, CNAME Points to Primary. No additional capability  or control is given for the standby. 
+      - From RDS respective there will be a brief outage during failover. As DNS involved, it might take from single digit sec to double digit. 
+    - In RDS other than Aurora its limited to two Availability zone.
+    - Backups are taken from Secondary to reduce the impact on Performance.
+
+  - Read replicas
+    - Allow systems to scale out to greater amount of read.
+    - They are the read only replicas of RDS created on same of different region.
+    - It performs `Asynchronous replication`.
+    - It is created independently, Meaning CNAME is different.
+    - While creating the destination region, network  settings, instance spec, can be chosen.
 
