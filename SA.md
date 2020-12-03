@@ -776,8 +776,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 ## Database models
 - DBMS is the database management system.
   - MySQL, MongoDB are example of DBMS. which stores and handles data.
-
-- SQL (Relational)
+- **SQL (Relational)**
   - Designed to store data with strong built-in relation ship. 
     - Organization storing information about Team members and departments and how they are related.
     - Organize data into tables and link them together based on relation ship.
@@ -793,11 +792,11 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - If your data has relationship and if its fixed, and not often changed then relational database are faster.
   - Because the relationship is fixed, it struggle with any situation or data which has fluid relation ship.
     - It struggles with social media sites.
-    - Hard to scale the relational database, as single system needs to acces it all ideally in memory and difficult to seperate the data.
+    - Hard to scale the relational database, as single system needs to access it all ideally in memory and difficult to separate the data.
 
-- NOSQL (Non-Relational)
+- **NOSQL (Non-Relational)**
 - [More details](https://database.guide/nosql-database-types/)
-  - Are group of product
+  - Are groups of product
     - Key value 
       - DynbamoDB
       - Simple type of db.
