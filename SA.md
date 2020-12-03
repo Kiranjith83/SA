@@ -796,6 +796,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Hard to scale the relational database, as single system needs to acces it all ideally in memory and difficult to seperate the data.
 
 - NOSQL (Non-Relational)
+- [More details](https://database.guide/nosql-database-types/)
   - Are group of product
     - Key value 
       - DynbamoDB
