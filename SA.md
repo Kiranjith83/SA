@@ -833,7 +833,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - Oracle
   - PostgreSQL
   - MSSQL
-  - Aurora - Inhouse developed engine with more features and performance enhancements.
+  - Aurora - In house developed engine with more features and performance enhancements.
 - RDS can move between primary and secondary during failover. The CNAME mapping does changes to backend instance during failover.
 - Two types of storage supported
   - General purpose SSD GP2:
@@ -847,3 +847,15 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - Cannot remove encryption.
   - Read replica needs to be at the same state as the primary instance are (with respect to encryption)
   - Encryption snapshots can be copied between region - KMS CMK are region specific.
+### RDS backup and restore
+- RDS supports manual snapshot-based backups as well as automatic point-in-time recovery-capable backups with a 1-35 day retention period.
+- Database snapshot can be performed manually.
+- Backups are performed automatically and retention is for 35 days, with once a day with  database backup window.
+  - Only the data consumed are billed, and its incremental.
+  - Automatic backups are 35 days of max retention is not a long term backup solution.
+- Ability to perform point in time recovery.
+  - RDS always backup the transaction history in every 5 minutes, allows to perform point in time recovery.
+- No matter what method to perform restore, it creates a new Database instance.
+  - This leads to reconfigure application during when RDS restore happens.
+  - During restore also need to keep special attention to the networking and security group. It will not be as same as original server.
+
