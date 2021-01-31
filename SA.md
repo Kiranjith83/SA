@@ -802,7 +802,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Simple type of db.
       - Its list of keys and corresponding data to values.
       - Excellent method to store data as:
-        - excellent wat to store data don't have much structures.
+        - excellent way to store data don't have much structures.
         - username and passwords
         - Session states.
         - Used for in memory caching.
@@ -847,7 +847,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - 1000 to 80000 IOPS.
 - RDS supports encryption with below conditions:
   - Encryption can be configured when creating DB instances.
-  - Encryption cab be added by taking snapshopt, convert to encrypted snapshot and create DB.
+  - Encryption can be added by taking snapshot, convert to encrypted snapshot and create DB.
   - Cannot remove encryption.
   - Read replica needs to be at the same state as the primary instance are (with respect to encryption)
   - Encryption snapshots can be copied between region - KMS CMK are region specific.
@@ -875,7 +875,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - In the case of software upgrade, it changes the secondary instance first, changes the CNAME mapping then finally update the primary instance.
     - Converting from normal to multi-az occurs downtime.
     - If any RDS but Aurora, CNAME Points to Primary. No additional capability  or control is given for the standby. 
-      - From RDS respective there will be a brief outage during failover. As DNS involved, it might take from single digit sec to double digit. 
+      - From RDS perspective there will be a brief outage during failover. As DNS involved, it might take from single digit sec to double digit. 
     - In RDS other than Aurora its limited to two Availability zone.
     - Backups are taken from Secondary to reduce the impact on Performance.
 
@@ -919,3 +919,9 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - It is possible to add additional reader instances within the Aurora cluster.
   - Failover tier
     - Tier0 to tier15 specifies the failover priority. tier0 has higher priority. 
+- Aurora is not just an enhancement of RDS, but ut is a new Arch with shared storage, addressable replicas and parallel queries. 
+- Different endpoint types
+  - Read endpoint 
+  - Write endpoints. 
+  - Data base instance endpoints. 
+  
