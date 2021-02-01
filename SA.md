@@ -1081,3 +1081,24 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Only eventually consistent queries to be performed and strongly consistent will not be available. 
     - Projected attributes can be set on GSUs as they can be used to fine tune the attributes that is really read by "application", to improve the performance. 
       - Access to non projected attributes will have a large performance issue as well (Full table needs to be read.).
+
+#### In-Memory Caching DAX
+- DAX is dynamoDB in memory accelerator. 
+  - If data is needed within micro sec, DAX can be beneficial. 
+  - DAX runs inside the VPC uses cluster arch With one or more node. 
+  - When the item is read once, it resides in DAX, a process called cache HIT.
+  - Kind of proxy, which leaves on same computer instances.
+  - DAX is designed for high index read application that can't afford read latency.
+  - Application require strongly consistent ones are not recommended, only good for eventual consistent reads. 
+  - 
+
+## Elastic Cache.
+- Historically, EC was used in DynamoDB, but later AWS delveoped DAX.
+- ES supports Redis and MemecacheD .
+- It is in-memory data store and two common use cases are:
+  - Offloading database reads by caching responses, improving application speed and reduce costs.
+  - Storing user session state, allowing for stateless compute instances(used for fault tolerance architectures).
+- It is generally used with Key Value databases.
+- But also used to store simple session data.
+- It can also use with SQL database engines.
+- A performance enhancing, and to be part of fault tolerance arch for stateless appliation.
