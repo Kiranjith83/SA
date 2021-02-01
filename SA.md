@@ -1118,4 +1118,8 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - ALB Supports EC2, ECS, EKS, Lambda, HTTPS, HTTP/2 and WebSockets and can integrate with AWS WAF.
 - Better support with COntainers and Microservices. 
 - Traffic is routed as Targets -> Target group -> Content Rules.
+  - Target is something that can point the connection at. The target types can be EC2 instances, Lambda Functions, IP address.
+  - Target groups are collection of targets.
 - ALB supports multiple SSL certificates using SNI.
+- ALB can have a custom port for heath check (Override/Traffic port feature)
+- 
