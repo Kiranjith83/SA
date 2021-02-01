@@ -971,7 +971,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - When reading or writing the item, have to read the full size of the item.
   - GetItem API is used to get the item, it can be retrieved by partition or Sort keys.
 - An attribute can be various available data types Like string, boolean etc. 
-- Partition Key
+#### Partition Key
 - Sort Key
   - Take an example of DDB table used by different stations to update weather information. IN that case the station ID will be partition Key and the date and time it reports the weather will be the Sort Key. Now if station updates weather in same hour then older hour will not be replaced, as it can be identified with two Sort Keys reported in different time.
 - DDB consists of 
@@ -982,7 +982,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Default 3 AZ replicas to help failover.  
 - An attribute is a Key and Value - An attribute name and value. 
 - Every table in a specific region needs to be unique, and a table gets an ARN.
-- SCAN and QUERY
+#### SCAN and QUERY
   - SCAN can be simply ran on any table that retrieves every single item in the table. 
     - Additional filters can be added during the scan.
     - SCAN operation can consume all capacity as it retrieves full items.
@@ -1005,7 +1005,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - Suites unstructured data, like keys and values, Json data and more complex data. 
   - DDB is data base as a service product. It is serverless from customer perspective. 
   - If its not a fixed schema, if its web scale app, ID federation, any lightweight DB all key words goes in direction of DDB.
-- Performance and Billing 
+#### Performance and Billing 
 - DDB has two read/write 
 - Partitions are the low level entity which stores the data. 
 - DDB achieves the high level of performance by splitting the data to the partitions. 
@@ -1036,9 +1036,48 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
         - The above applies for Strong consistency. 
         - The default is eventual consistency, which allows 2 reads of 4KB with 1 RCU. 
         - So half of strong consistency is needed which is 10 RCU.
-      
 -  Read/write capacity modes. 
   - Provisioned.
-    -  Predictable workload.
+    -  Predictable workload by calculating the RCUs and WCUs for the application workload.
   - On-demand. 
-    - Used for application workload which is too complex to predict. 
+    - Used for application workload which is too complex to predict, system determines the WCUs and RCUs. 
+
+#### DynamoDB Streams and Triggers
+- DDB streams are enabled on per table.
+- Stream provides an ordered list of changes that occur to the items within a DDB. A stream is a rolling 24 hour window of changes.
+- All stream has ARN.
+- Stream can triggered with Lambda, invoking function whenever items are changed in DDB.
+- Types of stream -
+  - KEYS_ONLY
+    - Whenever an item is added, updated or deleted the keys of the items are added to the stream.
+  - NEW_IMAGE
+    - The entire item is added to the stream "post-change"
+  - OLD_IMAGE
+    - The entire item is added to the stream "pre-change"
+  - NEW_AND_OLD_IMAGES
+    - Both the new and old version of the item are added to the stream.
+- An event driven function can be triggered with the stream trigger.
+  - For example, having KEYS_ONLY and trigger the lambda as soon as a new item is added.
+
+#### DynamoDB Indexes
+- What if we want to retrieve information for different partition keys? 
+ - Scans could get the data but it will read all items in the table, and it consumes the capacity of whole capacity allotted. 
+- It provides an alternative representation of data in a table. Which is useful for applications with varying query demands. 
+- Any access patterns which doesn't fall into the table - Index can be used. 
+- Two types. 
+  - Local secondary Indexes.
+    - It has to be created at the time of table creation.
+    - They use the same partition key but an alternative sort key.
+    - They share teh RCU and WCU values of the main table.
+    - Allows to perform query on the Index, at Sort Keys created instead of item partition key.
+    - It is kind of creating new item with different Sort Key, which has the same data.
+    - Limited to 5 indexes.
+  - Global Secondary indexes.
+    - It can be created at any point after the table is created.
+    - They can use different partition and sort keys. 
+    - They have their own RCU and WCUs.
+    - 20 GSUs limit per table are soft limit.
+    - GSU dont share the data with the table. 
+    - Only eventually consistent queries to be performed and strongly consistent will not be available. 
+    - Projected attributes can be set on GSUs as they can be used to fine tune the attributes that is really read by "application", to improve the performance. 
+      - Access to non projected attributes will have a large performance issue as well (Full table needs to be read.).
