@@ -924,4 +924,39 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - Read endpoint 
   - Write endpoints. 
   - Data base instance endpoints. 
-  
+- (Backtrack)[https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html] 
+  - Feature allows to rollback the database to the previous state. 
+  - Other RDS only allows to restore from the backup.
+  - Max is 72 hours.
+  - Rolling back with Backtrack will cause downtime. The entire database storage is being rolled back. 
+- Any issues happens to one of the writer instance it changes the role (fails over) to next available one. 
+
+####  Parallel Queries and Aurora Global
+- Parallel query configured while creating the Database. 
+- Its a feature allows queries to be executed on all nodes in the cluster.
+  - This is used on larger queries that gives massive benefits. 
+- Aurora Global database is selected while creating the database. 
+  - It consists one primary AWS region and one readonly secondary region.
+  - Aurora replicates data across the region with in secs. Allowing rapid replication with low latency.
+  - Useful for global resilience, or need a secondary region serving data.
+  - The region info of the cluster will be noted as 'Global'.
+
+#### Aurora Serverless Essentials
+- The relation DB without admin overhead. 
+- It offers ability to scale the capacity using ACUs(Aurora capacity Units).
+- Specify the min and max ACUs
+- Proxy fleets
+  - A transparent set of proxying instances, without the application knowing the difference.
+- Removes complexity of the self managed DB system.
+- If the capacity is exceeds, it creates more db instances and adds to cluster. 
+- This is selected while creating the DB, choosing Serverless at Database Features.
+- Aurora Serverless can be restored from the snapshot.
+- It can be treated as just similar as ASG. With no activity the ACUs can be set to zero and significantly reduce the cost. This is called pause state with zero ACUs. 
+- But it comes with a cost, as the resume process takes time and until then it takes time. 
+- AWS maintains active/warm pool instances for faster scale-up from pause mode.
+- It uses private links to add endpoints inside the VPC to connect to the aurora serverless. 
+- You cant currently access from a cross VPN or a inter region VPC. 
+- To use the query editor it needs to use the Data API.
+- Data editor is only available in Aurora Serverless. 
+
+### NoSQL DynamoDB.
