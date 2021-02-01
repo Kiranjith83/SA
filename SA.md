@@ -960,3 +960,43 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - Data editor is only available in Aurora Serverless. 
 
 ### NoSQL DynamoDB.
+- NoSQL DB, features more in dev and sysops exams. 
+- Referred to a key value, but not really true its more accurate to describe as a wide column store.
+- ITEM, is a collection of attributes upto 400KB inside a table that shares the same key structure as every other item in the table. 
+  - Item consists of primary key of the table(partition key or both partition and sort keys).
+  - Attributes and values. Example "Name": "customer name"
+  - As long of the primary keys (paritition keys or sortkeys) are unique it adds new entry.
+  - Items in the table can have various structure in the attribute values.
+  - All total of max value of 400KB.
+  - When reading or writing the item, have to read the full size of the item.
+  - GetItem API is used to get the item, it can be retrieved by partition or Sort keys.
+- An attribute can be various available data types Like string, boolean etc. 
+- Partition Key
+- Sort Key
+  - Take an example of DDB table used by different stations to update weather information. IN that case the station ID will be partition Key and the date and time it reports the weather will be the Sort Key. Now if station updates weather in same hour then older hour will not be replaced, as it can be identified with two Sort Keys reported in different time.
+- DDB consists of 
+  - Tables 
+    - Collection of items that share the same partition key or share the same partition key and sort sortkey together with other configuration and performance settings.
+    - DDB Tables are created with in the VPC by default. Resource level permissions are not available, but have to be controlled using IAM. 
+    - Status code of 200 shows written to DDB. 
+    - Default 3 AZ replicas to help failover.  
+- An attribute is a Key and Value - An attribute name and value. 
+- Every table in a specific region needs to be unique, and a table gets an ARN.
+
+- SCAN and QUERY
+  - SCAN can be simply ran on any table that retrieves every single item in the table. 
+    - Additional filters can be added during the scan.
+    - SCAN operation can consume all capacity as it retrieves full items.
+    - Scan helps to search with multiple partition keys.
+    - SCAN reads entire table and shows the results.
+  - QUERY allow to perform lookups the table without reading every items. 
+    - It can retrieve data for single partition key. And has to run against a single partition key while filtering the SortKeys
+    - It can filter based on Partition and Sort key. It only consumes the capacity unit for the specific/range of item.
+    - Query can be only performed on a single partition key. If you want to work with multiple partition keys have to use SCAN.
+
+- Backup and restore
+  - Point in time restore can be enabled at the table level.
+  - Manual explicit backup is supported by DDB. Backup contains all the configurations and the indexes.
+  - Restoring backup to the new table name.
+  - 
+- Encryption comes as standard on DDB
