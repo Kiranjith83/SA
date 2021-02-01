@@ -982,7 +982,6 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Default 3 AZ replicas to help failover.  
 - An attribute is a Key and Value - An attribute name and value. 
 - Every table in a specific region needs to be unique, and a table gets an ARN.
-
 - SCAN and QUERY
   - SCAN can be simply ran on any table that retrieves every single item in the table. 
     - Additional filters can be added during the scan.
@@ -993,10 +992,53 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - It can retrieve data for single partition key. And has to run against a single partition key while filtering the SortKeys
     - It can filter based on Partition and Sort key. It only consumes the capacity unit for the specific/range of item.
     - Query can be only performed on a single partition key. If you want to work with multiple partition keys have to use SCAN.
-
 - Backup and restore
   - Point in time restore can be enabled at the table level.
   - Manual explicit backup is supported by DDB. Backup contains all the configurations and the indexes.
   - Restoring backup to the new table name.
-  - 
 - Encryption comes as standard on DDB
+- By default the tables are created on region base.
+  - Global table functionality can be enabled on the tables by enabling Streams then add list of regions to the tables to replicate to.
+  - Global tables can be only enabled on an empty table.
+- DDB comes with full integration to Cloudwatch.
+- When to use DDB over other DBs.
+  - Suites unstructured data, like keys and values, Json data and more complex data. 
+  - DDB is data base as a service product. It is serverless from customer perspective. 
+  - If its not a fixed schema, if its web scale app, ID federation, any lightweight DB all key words goes in direction of DDB.
+- Performance and Billing 
+- DDB has two read/write 
+- Partitions are the low level entity which stores the data. 
+- DDB achieves the high level of performance by splitting the data to the partitions. 
+  - DDB hashes the partition key and denotes where the data is stored on the partition.
+- DDB increase the number of partitions when the demand is increased. 
+- The read and write capacity is distributed across each partition tables. 
+- Reading and Writing performance is depending on the partition performance. 
+- A partition is replicated into 3 AZs. The partitions are residing on Nodes.
+  - Leader node makes sure data is replicated to the other nodes, and leader nodes guarantees access to the recent updated node.
+  - Eventual consistence occurs if the data is read from Non Leader node, immediately after commiting the data.
+  - By default the read is eventual consistent read, which is half of the cost of strong consistent (read from leader).
+  - Read capacity Units:
+    - One RCU is 4 KB of data read from a table per sec in a strongly consistent way. 
+    - Reading 2 KB of data consumes 1 RCU. Reading 4.5 KB of data takes 2 RCU. Reading 10x400 bytes takes 10 RCU.
+    - If eventual consistent reads are okay, 1 RCU can allow for 2x4KB of data reads per sec. 
+  - Write Capacity Untis.
+    - One ECU is 1 KB of data or less written to a table. An operation that writes 200 bytes consumes 1 WCU, an operation that writes 2 KB consumes 2 WCU. 
+    - Five operations of 200 bytes consumes 5 WCU.
+    - Example 1:
+      - A system needs to store 60 patient records of 1.5 KB each and every min. What ECU should be allocated on patient record table? 
+        - 60 records per min =~ 1 per second (and the DDB RCU/WCU buffer can smooth this out if not)
+        - Each record is 1.5 KB. 1 WCU = 1 KB per sec, so each record requires 2 WCU.
+        - WCU is per sec, so setting of WCU should be 2. 
+    - Example 2:
+      - A weather application reads data from a DDB table. Each item in the table is 7 KB in size. How many RCUs should be set on the table to allow for 10 reads per sec?
+        - 1 item is 7 KB. So need 2 RCU per item in a sec. (1 RCU is 4 KB)
+        - 10 reads per sec for 7 KB = 10x2 = 20 RCU
+        - The above applies for Strong consistency. 
+        - The default is eventual consistency, which allows 2 reads of 4KB with 1 RCU. 
+        - So half of strong consistency is needed which is 10 RCU.
+      
+-  Read/write capacity modes. 
+  - Provisioned.
+    -  Predictable workload.
+  - On-demand. 
+    - Used for application workload which is too complex to predict. 
