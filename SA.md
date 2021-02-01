@@ -1103,3 +1103,19 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - A performance enhancing, and to be part of fault tolerance arch for stateless application.
 
 # Load Balancing and Auto Scaling
+- Historically, LBs were only able to route traffic to instances inside an AZ, causing uneven traffic distribution if AZ instances are not equal. 
+  - To resolve this disparity introduced the cross zone loadbalancing, which is enabled by default now.
+## CLB
+- Supports layer 3 and 4 (TCP and SSL) and some HTTPS features(Configuring HTTP health check)
+- Its not a Layer 7 device so no real HTTPS. 
+- One SSL Cert per CLB, which can get expensive for complex deployments. 
+- SSL Offload, can be connected to AutoScaling Group.
+- Health check min time is 5 sec.
+## ALB
+- Operates at L7 OSI model
+- ALBS are recomended as the default LB for VPCs. Better performance and cheaper than CLB. 
+- Content rules Host-based and Path based rules can be set for routing traffic.
+- ALB Supports EC2, ECS, EKS, Lambda, HTTPS, HTTP/2 and WebSockets and can integrate with AWS WAF.
+- Better support with COntainers and Microservices. 
+- Traffic is routed as Targets -> Target group -> Content Rules.
+- ALB supports multiple SSL certificates using SNI.
