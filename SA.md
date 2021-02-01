@@ -1101,4 +1101,6 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - It is generally used with Key Value databases.
 - But also used to store simple session data.
 - It can also use with SQL database engines.
-- A performance enhancing, and to be part of fault tolerance arch for stateless appliation.
+- A performance enhancing, and to be part of fault tolerance arch for stateless application.
+
+# Load Balancing and Auto Scaling
