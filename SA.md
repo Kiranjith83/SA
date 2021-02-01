@@ -1090,7 +1090,6 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - Kind of proxy, which leaves on same computer instances.
   - DAX is designed for high index read application that can't afford read latency.
   - Application require strongly consistent ones are not recommended, only good for eventual consistent reads. 
-  - 
 
 ## Elastic Cache.
 - Historically, EC was used in DynamoDB, but later AWS delveoped DAX.
