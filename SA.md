@@ -1140,5 +1140,19 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 
 # Auto Scaling
 ## Launch Config
-
+- What has to be launched. 
+- Initial way of creating ASG.
+- Cannot change a Launch config, but can copy to new.
+  - This is to avoid any impact to any Existing ASGs using the Launch config. 
 ## Launch Templates
+- Preferred
+- Addresses some of the weakness of legacy launch configurations
+  - Versioning and inheritance.
+  - Tagging
+  - More adv purchase options.
+  - New instance features:
+    - Elastic graphics
+    - T2/T3 unlimited settings
+    - Placement groups
+    - Capacity reservations
+    - Tenancy options.
