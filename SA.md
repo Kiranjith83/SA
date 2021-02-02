@@ -1102,7 +1102,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - It can also use with SQL database engines.
 - A performance enhancing, and to be part of fault tolerance arch for stateless application.
 
-# Load Balancing and Auto Scaling
+# Load Balancing
 - Historically, LBs were only able to route traffic to instances inside an AZ, causing uneven traffic distribution if AZ instances are not equal. 
   - To resolve this disparity introduced the cross zone loadbalancing, which is enabled by default now.
 ## CLB
@@ -1122,4 +1122,23 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - Target groups are collection of targets.
 - ALB supports multiple SSL certificates using SNI.
 - ALB can have a custom port for heath check (Override/Traffic port feature)
-- 
+- ALB default rule gets added whenever a rule is not configured. 
+- Target group target status - unused means the target group is not registered to any ALB.
+- ALB Rules can be based on below attributes:
+  - Host header
+  - path
+  - http header
+  - http request method
+  - query string
+  - source IP
+## NLB 
+- Operates at Layer 4.
+- Less latency because no processing above Layer 4 is required, with highest performance. 
+- Static IP address 
+- source IP preservation.
+- Target can be IP address.
+
+# Auto Scaling
+## Launch Config
+
+## Launch Templates
