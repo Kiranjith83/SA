@@ -1139,6 +1139,20 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - Target can be IP address.
 
 # Auto Scaling
+- ASG defines how the Launch config/template to be scaled in/out.
+- Min and Max number never exceeds and desired capacity is modified based on metrics.
+- Scaling policies and scheduled actions allows to automatically scale in/out.
+- Scaling policies
+  - Simple scaling policies based on instance metrics. Example scale up based on CPU metrics.
+    - Example, CPU utilization is 50% then add 1 instance.
+    - It will not add another instance until the wait time is elapsed. 
+  - Target scaling policy
+    - We can define an ideal value and make sure the ASG keeps the metrics around the same.
+    - Say if the avg CPU value is set to 60%, if it goes above the value, it will add instances and goes below removes the instances.
+  - Stepped policy
+    - If CPU is 20 % to 50% add 1 instance. 
+    - If CPU is around 90%, then add 10 or more instance. 
+    - This is used in a different scenario as Simple scaling policy will only scale linearly and wait for timeout. But Stepped scaling policies are useful in different level of scaling. 
 ## Launch Config
 - What has to be launched. 
 - Initial way of creating ASG.
@@ -1156,3 +1170,6 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Placement groups
     - Capacity reservations
     - Tenancy options.
+- A launch template is immutable but can create new version using versioning.
+  - Versioning gives ability to pick, a default, latest or specific version at ASG while launching or scaling.
+- Launch template can be used to directly launch EC2 instances, by standardizing the config.
