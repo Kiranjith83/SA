@@ -1241,6 +1241,11 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - Direct connect is a one piece of physical cable and it is not highly available. 
   - Provision additional Direct connect or VPN connection for high availability.
 - One of the usecase: financial or trading application that needs low and consistent latency.
+- Provisioning time takes long. 
+  - Physical connection needs to follow the AWS Process. 
+  - Create a port request.
+  - Get letter of authorization and get DataCenter technition to get the cross connection to customer end device at partner location between AWS Direct connect.
+  - Arrange transit from the direct connect location to the business premisses.
 
 ## When and where to choose Direct Connect
 - High throughputs.
