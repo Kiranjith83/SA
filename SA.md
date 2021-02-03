@@ -1216,3 +1216,33 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - If same route mentioned twice then the static route is preferred. 
   - Any Direct is prefered over VPN.
   - Dynamic propogated leadned from BGP got lowest pref.
+## When and where to choose VPN 
+- Urgent need 
+- Cost constrains needed cheap and economical
+- Low end or consumer hardware 
+- Need Encryption
+- Flexibility to change locations
+- High availability.
+- Short term connectivity. 
+- As a cheaper alternative for DX
+- As an additional layer of HA for DX.
+# Direct connect DX
+- When you need speed and consistency. 
+- 1Gbps or 10Gbps dedicated line.
+- It uses customer or partner router to get connected physically.
+- Runs over cabling done from Customer end via DX location to AWS Direct connect.
+- Low and consistency latency with fast speed.
+- As its physical, it takes a number of days before it gets active.
+- It might take months if the cabling needs to be done DX location to customer office.
+- Private VIF and Public VIF
+  - Private VIF created to access to single VPC.
+  - Public VIF created to access to Public AWS Services endpoints.
+- The connection is not encrypted. 
+- Direct connect is a one piece of physical cable and it is not highly available. 
+  - Provision additional Direct connect or VPN connection for high availability.
+
+## When and where to choose Direct Connect
+- High throughputs
+- Consistent performance and low latency
+- Large amount of data - (Cheaper than VPN if its high vol)
+- No contention with existing internet connection.
