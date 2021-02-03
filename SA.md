@@ -1153,6 +1153,10 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - If CPU is 20 % to 50% add 1 instance. 
     - If CPU is around 90%, then add 10 or more instance. 
     - This is used in a different scenario as Simple scaling policy will only scale linearly and wait for timeout. But Stepped scaling policies are useful in different level of scaling. 
+- An ALB association can be done from ASG, by selecting the Target Group. This allows instances to be automatically registered to the target group. 
+  - The target group has to be associated with the ALB. 
+- Health check type can be ELB/EC2 at ASG.
+
 ## Launch Config
 - What has to be launched. 
 - Initial way of creating ASG.
@@ -1173,3 +1177,42 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - A launch template is immutable but can create new version using versioning.
   - Versioning gives ability to pick, a default, latest or specific version at ASG while launching or scaling.
 - Launch template can be used to directly launch EC2 instances, by standardizing the config.
+
+# VPN 
+- Components
+  - Customer gateway:
+    - Represents a physical piece of hardware at customer end.
+    - Its generally a router or hardware at the customer end. 
+    - Capable of IPSec VPN connectivity using Static or Dynamic routing.
+    - Customer GW with AWS COnsole is the logical representation.
+    - Configure:
+      - Create the CGW using Static or Dynamic Routing is used at the hardware. 
+      - Static routing - Share the VPC and home network address to each end.
+      - Dynamic routing - Network details are shared automatically over BGP. For that just share the Autonomous System Number (ASN) of customer GW.
+  - VPG Virtual Private Gateway.
+    - It is a GW like IGW, or NAT Gateway, and VPC router routes the traffic to VPGW.
+    - VPGW can be attached to a Single VPC and it acts as a endpoint for the VPN Tunnels.
+  - VPN Connections:
+    - Site to Site VPN Connections.
+      - THIS IS THE LOGICAL ENTITY THAT LINKS THE VPW AND CGW
+      - Different types of configuration connections can be done. 
+        - Single Tunnel to Single customer gateway. 
+        - Two tunnels to Single customer gateway.
+          - Tunnels are multiple AZs connecting to single Customer Gateway.
+        - VPN Connections between two different customer gateways and VPN connection has two tunnels going to Customer Gateways.
+          - Support fully high availability.
+      - Once the VPC configuration is done download the configuration.  
+- VPN Connection is quick to setup in minutes
+- Per hour cost.
+- Data charges for outgoing, heigher than Direct connect. 
+- VPNS economical if lower data req. 
+- VPNs performance depend on CGW devices. 
+- VPNs use encryption end to end, perfromance impacted with the CPU of CGW. 
+- Variable performance due to internet latency. 
+- Cheaper and quick to setup.
+- Route propogation preference as below:
+  - Routing in general, local route takes priority.
+  - In route table with longest prefix is preferred
+  - If same route mentioned twice then the static route is preferred. 
+  - Any Direct is prefered over VPN.
+  - Dynamic propogated leadned from BGP got lowest pref.
