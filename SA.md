@@ -1240,9 +1240,10 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - The connection is not encrypted. 
 - Direct connect is a one piece of physical cable and it is not highly available. 
   - Provision additional Direct connect or VPN connection for high availability.
+- One of the usecase: financial or trading application that needs low and consistent latency.
 
 ## When and where to choose Direct Connect
-- High throughputs
-- Consistent performance and low latency
-- Large amount of data - (Cheaper than VPN if its high vol)
+- High throughputs.
+- Consistent performance and low latency.
+- Large amount of data - (Cheaper than VPN if its high vol).
 - No contention with existing internet connection.
