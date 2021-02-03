@@ -1246,9 +1246,48 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
   - Create a port request.
   - Get letter of authorization and get DataCenter technition to get the cross connection to customer end device at partner location between AWS Direct connect.
   - Arrange transit from the direct connect location to the business premisses.
+- VPN over Public VIF at DX enables encryption.
 
 ## When and where to choose Direct Connect
 - High throughputs.
 - Consistent performance and low latency.
 - Large amount of data - (Cheaper than VPN if its high vol).
 - No contention with existing internet connection.
+
+## Considering both VPN and DX
+- VPN as a cheaper HA option for DX.
+- VPN as a additinal layer of HA (in addition to two DX).
+- If some form of connectivity is needed immediately, VPN provides before the DX connection is live.
+- VPN Can be used to add encryption on top of DX (Public VIF VPN).
+
+# Snowball, Snowball Edge, and Snowmobile
+- AWS Snowball, Snowball Edge, and Snowmobile are all products designed to allow huge data transfers in and out of AWS. 
+- All devides are portable storage devices. 
+- This can be used to add in or copy large amount of data. 
+- Useful if Large amount of data, limitted internet or not eco viable to transfer large data, or time it takes to get the data transfered.  
+## Snowball
+- 50 TB to 80TB.
+- 1 Gbps with RJ45 or 10Gbps (LR/SR) using a SFP.
+- Data encryption using KMS.
+- End to end process time is low for the amount of data.
+- Larger jobs or multiple location can use multiple snowballs.
+- Used for 10TB -> 10 PB (Economical range)
+
+## Snowball Edge
+- Additional to Snowball, the snowball edge gets both storage and compute option.
+- Used as in same situation as Snowball but for the option where it requires compute.
+- A large capacity.
+- 1 Gbps with RJ45 or 10/25 Gbps (LR/SR) using a SFP, 45/50/100 Gbps (QSFP+)
+- Compute can be used for local instances or lambda functionality, local IoT, for data processing priot to ingestion into AWS.
+- Three versions:
+  - Edge storage optimized: 80TB, 24vCPU, 32G RAM
+  - Edge compute optimized: 100TB + 7.68 TB NVMe, 52vCPUs, 208G RAM
+  - Edge compute optimized with GPU.
+
+## Snowmobile
+- Portable storage data center - A shipping container on a semi truck.
+- Available with special order.
+- 100 PB.
+- Not economical for Sub 10PB and where multiple locations are required.
+
+# Data and DB Migration
