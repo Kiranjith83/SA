@@ -1291,3 +1291,34 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - Not economical for Sub 10PB and where multiple locations are required.
 
 # Data and DB Migration
+
+## Storage Gateway
+- It is a virtual appliance used for data center extensions or migrations.
+- It is a service that connects to on prem DC with AWS Storage services.
+- Benefits are:
+  - it allows to migrate the entire or part of storage to AWS.
+  - extends the storage capabilities to AWS.
+- Storage gateways are the virtual appliance running on a host platform.
+  - It is downloaded and installed on DC or onprem instances.
+  - It can install on any location that has internet connection.
+- Storage Gateway is capable of running in three modes:
+  - File gateway
+    - Choosing this option you get a virtual image that can be installed at on Prem.
+    - We get a SMB Share, and can be used to upload and download the files.
+    - Any data added to the SMB share will get saved to S3.
+    - Helps to migrate data, or use as a storage place, or unlimitted storage at on Prem.
+    - It stores files, using SMB and stores data at the S3.
+  - Volume gateway
+    - You create an access volumes, and accessed over iscsi protocol.
+    - Iscsi is used over NAS or SAN product.
+    - Its a network attached storage.
+    - Anything that uses the iscsi can use the storage.
+    - It is the block devices and the volume needs to be mounted to access.
+    - Data is stored in S3, same like snapshot based backup on S3.
+    - Data is moved to AWS by taking snapshot to S3, and copy that snapshot as volume to mount on EC2.
+  - Tape gateway
+    - Virtual Tape library (VTL), it is presented over ISCSI which supports tape drive based backups.
+    - Costly and admin overhead.
+    - Any data backed up are stored on S3.
+    - Moving tape to tapeshelf, migrates data on S3 to Glacier.
+    - 
