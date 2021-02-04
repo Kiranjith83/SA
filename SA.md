@@ -1295,6 +1295,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 ## Storage Gateway
 - It is a virtual appliance used for data center extensions or migrations.
 - It is a service that connects to on prem DC with AWS Storage services.
+- Storage gateway connects to Public Endpoint.
 - Benefits are:
   - it allows to migrate the entire or part of storage to AWS.
   - extends the storage capabilities to AWS.
@@ -1321,4 +1322,49 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Costly and admin overhead.
     - Any data backed up are stored on S3.
     - Moving tape to tapeshelf, migrates data on S3 to Glacier.
-    - 
+
+## Database migration service
+- Database Migration service AWS DMS is a service to migrate **relational database**.
+- Migrate to and from any locations with network connectivity to AWS. 
+- Traditionally two ways:
+  - Backup and restore method.
+    - Stop all input and output on DB. 
+    - DB backup is dumped to and created new db from it.
+    - Change app to use new DB.
+    - Admin overhead and takes downtime.
+    - Takes more time depending on DB size.
+  - Replication:
+    - DB is replicated to a destination.
+    - Once all the replication is done (brings to parity) 
+    - Config app to use the new endpoint.
+    - Fairly complex and admin intensive.
+    - Production and large dbs are used this way.
+- AWS DMS performs the replication as a service.
+- It is a replication instance created and its function is to migrate the database to a destination.
+- Application can continue to work on Source and at end migrate to Target.
+- Oracle, Microsoft SQL, Aurora, SAP, MongoDB, MariaDB.
+- Data can be synced to most of the above engines as well as RedShift, S3 and DDB.
+- AWS Schema Conversion Tool AWS SCT can be used to transform between different database engines as part of migration.
+  - Transforms structure of DB change while converting data between different DB engines. 
+- DMS can be used:
+  - Migrate
+  - Want to scaleup existing Database.
+  - Schema conversion tool to move data between two diff DB engines.
+  - can be used to Partial/sunset of data migration.
+  - Migration with little to no admin overhead, as a service. 
+
+# Identity Federation (IDF) and Signle sign on (SSO)
+- ID federation (IDF) is an architecture where identites of an external identity provider (IDP) are recognized.
+- SSO is where the credentials of an external iddentity are used to allow access to a local system.
+- Example: Mobile app signing with Facebook or Google account. While allowing the access, the process followed by the applicaiton is called identity federation.
+
+Types of IDF:
+  - **Cross account roles:** A remote account IDP (In this case remote IAM Role) is allowed to assume a rile and access your account's resources.
+    - Here you are allowing the external identity to allow access to your account.
+  - **SMAL 2.0 IDF**: An on prem or AWS hosted directory service instance is configured to allow AD users to login to AWS.
+    - Integrates different ID providers with application.
+  - **Web Identity Federation:** IDPs such as Google, Amazon and Facebook are allowed to assume role and access resources in the account.
+- Cognito and Secure Token Service (STS) are used for SAML and Web Identity federation.
+  - A federated identity is verified using an external IDP and by proving the identity (using a token or assertion of some kind) is allowed to swap that ID for a temporary AWS Cred by assuming a role.
+  - Cognito is a broker for SSO or IDF which provides a ID pool.
+  - Cognito allows to merge different identity and provide it as a single user. 
