@@ -1386,4 +1386,4 @@ Types of IDF:
 - When you login, you will redirect to Google, and it provides a Token.
 - This Token is passed by mobile application either directly to STS or Amazon Cognito. It basically request to assume the Role. 
   - The role assumption happens and gets back a temp sec credentials to directly access AWS Resources.
-- (A tool to play with Web Identity Federation)[https://web-identity-federation-playground.s3.amazonaws.com)
+- (A tool to play with Web Identity Federation)[https://web-identity-federation-playground.s3.amazonaws.com/index.html)
