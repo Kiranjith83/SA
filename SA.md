@@ -1449,6 +1449,7 @@ Types of IDF:
     - Order of the message added is the order that you receive. 
     - Limited to ~3000 messages per sec with batching.
     - 300 by default.
+- Architecture    
 ![Alt text](/pic/sqs.png?raw=true "SQS")
 - Used to decouple the applications. 
 - In above example, the front end and backend are decoupled.
