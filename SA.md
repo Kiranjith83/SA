@@ -1412,8 +1412,7 @@ Types of IDF:
 
 
 # Simple Queue Service
-![Alt text](/pic/sqs.png?raw=true "SQS")
-- Almost similar to the SNS architecture, but complementary to the SNS service.
+- Almost similar to the SNS architecture, and can add complementary to the SNS service.
 - Fully managed HA message queues, used for inter process, inter server or inter service messaging. 
 - SQS is used to add a message to a queue, and one of the process or service can retrieve the message.
 - Allowing Asyncronosly to talk between two components between applications.
@@ -1448,4 +1447,8 @@ Types of IDF:
     - Order of the message added is the order that you receive. 
     - Limited to ~3000 messages per sec with batching.
     - 300 by default.
-  
+![Alt text](/pic/sqs.png?raw=true "SQS")
+- Used to decouple the applications. 
+- In above example, the front end and backend are decoupled.
+  - Each of them scales and will fail independedly.
+  - Based on the messages in the queue the worker pool instances can be scaled.
