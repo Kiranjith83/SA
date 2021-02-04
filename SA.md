@@ -1373,4 +1373,4 @@ Types of IDF:
 - 
 
 ## Web Identity Federation
-- ![Alt text](/pic/webIdfederation.png?raw=true "Web Identity Federation arch diagram")
+![Alt text](/pic/webIdfederation.png?raw=true "Web Identity Federation arch diagram")
