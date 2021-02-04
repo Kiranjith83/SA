@@ -1389,6 +1389,7 @@ Types of IDF:
 - (A tool to play with Web Identity Federation)[https://web-identity-federation-playground.s3.amazonaws.com/index.html)
 
 # Simple Notification Service
+![Alt text](/pic/sns.png?raw=true "SNS")
 - It is a publisher/<Topic>/subscriber based service. 
 - So the base entitity in SNS is a topic and various entities can send messages to this topic called publishers.
 - The other end of the topic is a subscriber, that recieves the message. 
@@ -1430,8 +1431,9 @@ Types of IDF:
     - Long polling. 
       - It performs the same message checks but Waits for messages for a given WaitTimeSeconds.
         - no Need of a loop polling as during the waitTime it will get the message delivered. Saves No Message API calls.
+        - It waits for any messages until the waitTimeSeconds is expired.
 - Once you receive a message using either Short polling or Long polling the messages will be Hidden from the queue.
-  - The message is hidden for the visibilityTimeOut period. 
+  - The message is hidden for the visibilityTimeOut (30 Sec) period. 
   - When it expires the message returns to the queue for other polling service.
 - Once the message is processed, The message has to be deleted by the service.
   - This is the way the queues in the message gets HA and automatic retry.
@@ -1452,3 +1454,16 @@ Types of IDF:
 - In above example, the front end and backend are decoupled.
   - Each of them scales and will fail independedly.
   - Based on the messages in the queue the worker pool instances can be scaled.
+- Hands on experience
+```
+aws sqs get-queue-attributes --queue-url https://URL --attribute-names All
+aws sqs send-message --queue-url https://URL --message-body "INSERTMESSAGE"
+aws sqs receive-message --queue-url https://URL
+aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
+aws sqs receive-message --wait-time-seconds 10 --max-number-of-messages 10 --queue-url https://URL
+aws sqs --region us-east-1 receive-message --wait-time-seconds 10 --max-number-of-messages 10 --queue-url https://URL
+aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
+```
+- The messages once polled are always hidden, until the visibility timeout. Using receipt handle it has to be deleted.
+- A short poll returns immediately and long poll waits until the time.
+- A lambda can be triggered when a message is added to the queue.
