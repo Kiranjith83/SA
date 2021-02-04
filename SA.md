@@ -1369,8 +1369,8 @@ Types of IDF:
   - Cognito is a broker for SSO or IDF which provides a ID pool.
   - Cognito allows to merge different identity and provide it as a single user. 
 - You can never access AWS resources without an AWS Identity and if you are using an different IDP you have to perform an exchange and of token, which is the basics of IDF.
-## AWS Single SignOn with AD.
-- 
+## AWS Single SignOn with AD (SAML 2.0 Federation).
+![Alt text](/pic/ssoad.png?raw=true "AWS Single SignOn with AD arch diagram")
 
 ## Web Identity Federation
 ![Alt text](/pic/webIdfederation.png?raw=true "Web Identity Federation arch diagram")
