@@ -1412,3 +1412,40 @@ Types of IDF:
 
 
 # Simple Queue Service
+![Alt text](/pic/sqs.png?raw=true "SQS")
+- Almost similar to the SNS architecture, but complementary to the SNS service.
+- Fully managed HA message queues, used for inter process, inter server or inter service messaging. 
+- SQS is used to add a message to a queue, and one of the process or service can retrieve the message.
+- Allowing Asyncronosly to talk between two components between applications.
+- Example, once upload a file to S3, send a message to SQS so worker can go and pull the message and perform a job.
+- Each message can contain upto 256 KB, if the message is more than 256 KB then can have the data residing on S3 and the SQS message can just be the link to S3.
+- Messages from the queue are pulled by **Polling**.
+  - Two types of polling.
+    - Short polling.
+      - Is a single API queue to check for any messages. If there are messages it will get delivered.
+      - The number of messages that can be retrieved is configurable from single message to max of 10 messages.
+      - The response to short polling will be
+        - 'No messages' if there are no messages
+        - Messages that are available in the queue at that point upto 10.
+        - A constant API loop needs to be used to pull messages always, costing the API Limit.
+    - Long polling. 
+      - It performs the same message checks but Waits for messages for a given WaitTimeSeconds.
+        - no Need of a loop polling as during the waitTime it will get the message delivered. Saves No Message API calls.
+- Once you receive a message using either Short polling or Long polling the messages will be Hidden from the queue.
+  - The message is hidden for the visibilityTimeOut period. 
+  - When it expires the message returns to the queue for other polling service.
+- Once the message is processed, The message has to be deleted by the service.
+  - This is the way the queues in the message gets HA and automatic retry.
+- SQS queue are Two types
+  - Standard
+    - Standard queues are distributed and scalable to nearly unlimitted message volume. 
+    - The order is not guaranteed, but with best-effort.
+    - Certain circumstances, there will be a duplicate message received.
+    - However standard queue guarantees to be delivered at least once.
+    - Good performance, scalability.
+  - FIFO (First in and First out)
+    - They guaranteed message once and once only.
+    - Order of the message added is the order that you receive. 
+    - Limited to ~3000 messages per sec with batching.
+    - 300 by default.
+  
