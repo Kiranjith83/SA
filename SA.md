@@ -1371,6 +1371,19 @@ Types of IDF:
 - You can never access AWS resources without an AWS Identity and if you are using an different IDP you have to perform an exchange and of token, which is the basics of IDF.
 ## AWS Single SignOn with AD (SAML 2.0 Federation).
 ![Alt text](/pic/ssoad.png?raw=true "AWS Single SignOn with AD arch diagram")
+- Loging into AWS using internal AD Identity workflow as below.
+  - Login to ADFS using the AD credentials (if local workstation already logged in it might use SSO).
+  - ADFS returns the SAML Assertion (It is a token that proves that you are yourself).
+  - Now SAML asserstion is delivered to the AWS SSO endpoint. This is the endpoint configured inside the AWS if you want to use SAML SSO federation.
+  - The SSO endpoint checks the SAML asserstion with ADFS if its coming from same ADFS and validates the same. There is a trust between ADFS and AWS SSO endpoint.
+  - At this point AWS SSO returns a URL that redirects you to AWS Console and you get logged in.
+    - Prior to that, in the backend, the SSO endpoint communicates with STS and using the preconfigured Role abstracted from SAML assertion, it generates the Temporary sec credentials for the IAM Role.
+    - The URL is modified to incluide the temporary sec credential hence the user is able to successfully login.
 
 ## Web Identity Federation
 ![Alt text](/pic/webIdfederation.png?raw=true "Web Identity Federation arch diagram")
+- Lets assume you have an app on mobile app/Web app and you want to login and prompted with Google/Facebook or any other ID provider.
+- When you login, you will redirect to Google, and it provides a Token.
+- This Token is passed by mobile application either directly to STS or Amazon Cognito. It basically request to assume the Role. 
+  - The role assumption happens and gets back a temp sec credentials to directly access AWS Resources.
+- (A tool to play with Web Identity Federation)[https://web-identity-federation-playground.s3.amazonaws.com)
