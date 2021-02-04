@@ -1405,6 +1405,10 @@ Types of IDF:
   - While sending message defines what payload to be send to each protocols subscribed
 - SNS is capable of sending push notification to all mobile platforms.
 - SNS filter could be created to notify certain group of engineers.
+- Topic for SQS fanout (Explained with a scenario)
+  - People can upload video need to send message to a topic.
+  - A multiple queue subscribing to the queue which receieves the message.
+  - Each queues gets the identical message, and perform a job of decoding video to different bit rates.
 
 
 # Simple Queue Service
