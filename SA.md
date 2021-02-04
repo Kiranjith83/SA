@@ -1387,3 +1387,24 @@ Types of IDF:
 - This Token is passed by mobile application either directly to STS or Amazon Cognito. It basically request to assume the Role. 
   - The role assumption happens and gets back a temp sec credentials to directly access AWS Resources.
 - (A tool to play with Web Identity Federation)[https://web-identity-federation-playground.s3.amazonaws.com/index.html)
+
+# Simple Notification Service
+- It is a publisher/<Topic>/subscriber based service. 
+- So the base entitity in SNS is a topic and various entities can send messages to this topic called publishers.
+- The other end of the topic is a subscriber, that recieves the message. 
+- CloudWatch sending Alarm, CFN sending event notice, and almost any services can send notification to SNS.
+- It is a regional service and fully recielient to the availabilities in the region.
+- SNS has an endpoint accessible via Public or VPC endpoints.
+- SNS supports encryption at rest and transit.
+- A topic can be set with appropriate resource policies.
+- 256KB size of message could be send to a Topic.
+- The subscribers can be HTTP/S, Email, Email-json, SQS, Lambda, SMS (celluar messages) and Platform application endpoint.
+- Identical payload for all delivery 
+  - While sending message defines what payload to be send to all protocols subscribed
+- Custom payload for each delivery
+  - While sending message defines what payload to be send to each protocols subscribed
+- SNS is capable of sending push notification to all mobile platforms.
+- SNS filter could be created to notify certain group of engineers.
+
+
+# Simple Queue Service
