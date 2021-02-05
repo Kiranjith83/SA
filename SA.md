@@ -1468,3 +1468,42 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - The messages once polled are always hidden, until the visibility timeout. Using receipt handle it has to be deleted.
 - A short poll returns immediately and long poll waits until the time.
 - A lambda can be triggered when a message is added to the queue.
+
+# Elastic Trancoder.
+- Service allows to convert media from one format to another.
+- Pay for the compute resource used during the conversion.
+- If a 4k video is uploaded and need different formats, the transcoder can convert it.
+- Create pipleline for configuring the transcode process.
+  - Specify source S3 bucket and output bucket to copy the files once transcoded.
+  - Jobs are added to the pipeline.
+  - A given job can output one or more destination files.
+  - Presets has different encoding formats, device compatability, output formats and the resolution.
+  - An event driven pipeline can be created (Serverless) for a transcoding job. Once the file is on S3 start the job.
+- Multiple pipelines are added according the priority.
+
+# Analytics
+- Athena helps to query huge data sets stored in S3.
+- Only paid for the data volume queried for the service.
+- Traditional database engine needs to create the table structure and data sctructure in advance, which is called the schema.
+  - Once the schema is in place the data has to be inside the schema.
+  - Issues are
+    - Database schema cannot easily change.
+    - Maintain the database and schema even if the data is not being quiried.
+- Athena tries to address these two issues.
+- Athena handles things differents, the data stays in S3 in original format.
+- Supports XML, JSON, CSV/TSV, ARVO, ORC, PARQUET etc..
+- Main benefit is that all data can be on S3.
+- Amazon Athena is an interactive query service that utilizes schema-on-read mechanism.
+  - Schema-on-read:
+    - You can define the schema in advance.
+    - In this we define the table attribute and structure on what you want the data to be looked.
+    - Schema not only defines what structure it like on S3 but how exactly how we want it to look.
+    - Schema is only used when performing the query.
+      - it is like define a virtual table created and reads data through the virtual table.
+    - This massively reduce the admin overhead. As no need of data manupulation when the data is added to Athena, Just point to S3.
+- Athena uses serverless data processing engine.
+  - It gathers the data, reads using the schema and present it to you.
+- Athena dont make any modification to the source data.
+- Example usecase: Cloud Trail data analysis using Athena.
+  - From CloudTrail can use advanced query option to create the table (which acts as a lense). This is the method of creating Schema.
+- Billing is based on the amount of data it queiried.
