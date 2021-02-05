@@ -1390,7 +1390,7 @@ Types of IDF:
 
 # Simple Notification Service
 ![Alt text](/pic/sns.png?raw=true "SNS")
-- It is a publisher/<Topic>/subscriber based service. 
+- It is a publisher -> Topic <- subscriber based service. 
 - So the base entitity in SNS is a topic and various entities can send messages to this topic called publishers.
 - The other end of the topic is a subscriber, that recieves the message. 
 - CloudWatch sending Alarm, CFN sending event notice, and almost any services can send notification to SNS.
@@ -1482,6 +1482,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Multiple pipelines are added according the priority.
 
 # Analytics
+## AWS Athena
 - Athena helps to query huge data sets stored in S3.
 - Only paid for the data volume queried for the service.
 - Traditional database engine needs to create the table structure and data sctructure in advance, which is called the schema.
@@ -1507,3 +1508,4 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Example usecase: Cloud Trail data analysis using Athena.
   - From CloudTrail can use advanced query option to create the table (which acts as a lense). This is the method of creating Schema.
 - Billing is based on the amount of data it queiried.
+- Useful for adhoc situation, querying large dataset infrequently. 
