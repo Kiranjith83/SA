@@ -1535,3 +1535,28 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Any manupulation, calculation of data EMR is used.
   - Remember query can be achieved by Athena.
 
+##  Kinesis and Firehose
+- Is scalable and resilient streaming service from AWS>
+- It is designed to ingest large amount of data from hunders, thousands or even millions of producers.
+- Consumers can access a rolling window of that data or it can be stored in persistent storage of database products.
+- How Kinesis is nothing like SQS:
+  - It is designed to allow to process real time data.
+  - Example: Imagine millions of IoT sending telemetry to send. 
+    - Think about the amoung data being send and need processing, the bandwidth needed, API endpoints and computing powers needed for such infrasctructure and storage.
+    - This can be a barrier for scaling up.
+    - Think about you delevoped an app, it went viral. Now a million of user tapping telemetry is being tracked by the mobile app and generates large amount of data.
+- Kinesis is designed to ingest huge quantity of data in real time.
+- It is fully managed service and most scalable service in AWS.
+- Architecture    
+![Alt text](/pic/kinesis.png?raw=true "Kinesis")
+- Producers 
+  - Are the things that put data into Kinesis. 
+  - Any services that are able to make use of Kinesis API to inject data.
+- Consumers 
+  - Are the one who can consume data which is added to Kinesis. 
+- Kinesis Stream.
+  - Is where the producers push data into. 
+  - It allows consumptions to consumers. 
+  - It include storage for all incoming data with a 24 hour default window and can be increased to seven daus for an additional charge. 
+  - Data records are added by producers and read by consimers.
+  
