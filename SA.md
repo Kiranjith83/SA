@@ -1607,7 +1607,10 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Each compute nodes has Slices that performes the query.
 - It can scale to any load level and desgined to operate in PB.
 - Differences between diff analytical tools?
-  - Athena is used for transaction type of query where data in S3.
+  - **Athena** is used for transactional types of query where data in S3.
+    - Same type of query that you do with Relational DB.
     - No need to maintain the DB infra.
-  - EMR is used to perform analytical and when needs to modify the data.
-  - If the data is processed and one single location that can do a analytical data query, then RedShift is used.
+  - **EMR** is used to perform analytical and when needs to modify the data.
+    - When semi structure or unstructure data needs some modification from one form to another EMR is used.
+  - **RedShift**: If the data is processed and one single location that can do a analytical data query, then RedShift is used.
+    - Once data is proccessed by different types of tools and need a summariezed analysis of ther data RedShift is used.
