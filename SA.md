@@ -1559,4 +1559,29 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - It allows consumptions to consumers. 
   - It include storage for all incoming data with a 24 hour default window and can be increased to seven daus for an additional charge. 
   - Data records are added by producers and read by consimers.
+  - A stream provides a rolling 24 hour, the data is not modified or deleted until the data record rolling window.
+  - Stream can scale almost infinetly, and is performed using Kinesis Shard. 
+- Kinesis Shard.
+  - Shard provides capacity to the Stream.
+  - Each shard gives one 1MB of injection and 2MB of consumption capacity per Stream.
+  - If stream needs more load, add more Shard.
+  - All consumers consumes shard. 
+  - Ability to scale in or out as Shard can be modified after a stream is created.
+- Kinesis Data record.
+  - The data that is added by Producers and read by consumers is called Kinesis Data record.
+  - A data record can be upto 1 MB in size. 
+- Kinesis supports
+  - Data Stream
+  - Video Stream
+- SQS doesnt support one message being processed by many, but Kinesis allows multiple consumers to process.
+- Kinesis is not used to decouple the application, but allows large scale application to process the data in the stream rolling time.
+- Example data from IoT process the data
+  - Lambda of Temperature to report temp.
+  - Lambda of Rain predicts rain from the same stream data.
+- Kinesis Data Firehose.
+  - It can accept record from data stores.
+  - It can persistently store data on S3.
+  - It can also be stored on RedShift, Elastic Search and Splunk.
+  - It can perform Data transformation using SQL query, modify data and store it to S3 or RedShift. 
+  - Example, Streaming record from producers reaches Kinesis Stream, and Kinesis Fire hose can be a consumer, who does SQL query and stores data in ElasticSearch/S3.
   
