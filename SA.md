@@ -1586,3 +1586,28 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Example, Streaming record from producers reaches Kinesis Stream, and Kinesis Fire hose can be a consumer, who does SQL query and stores data in ElasticSearch/S3.
 - Charge for every million payload poll.
   - Payload poll is 25KB of data.
+
+## RedShift
+- Is petabyte scale data wareshouse solution.
+- Data base is designed for OLAP based application (Online Alalytical Processing).
+- OLTP (Online Transaction Processing) which is what most normal db do.
+- Update and add individual record is what RDS do. 
+- RedShift is used for Dataware housing and Analytics and data is stored in Column.
+  - For example: Every ones firstname, surname and everyones age is stored together in same location of physical storage devices.
+  - So it is better doing query for large amount of same type of data.
+    - Example looking up people who has similar Surname, Age etc. 
+- Traditional DB will be costly and time consuming for such scenarios.
+- It uses cluster architecture capable of loading and unloading data from S3.
+- Kinesis and Firehose can be a product that can store data in RedShift.
+- Architecture    
+![Alt text](/pic/redshift.png?raw=true "RedShift")
+- Leader node 
+  - Decides to execute the query and allocates to specific the Slices.
+- Compute nodes
+  - Each compute nodes has Slices that performes the query.
+- It can scale to any load level and desgined to operate in PB.
+- Differences between diff analytical tools?
+  - Athena is used for transaction type of query where data in S3.
+    - No need to maintain the DB infra.
+  - EMR is used to perform analytical and when needs to modify the data.
+  - If the data is processed and one single location that can do a analytical data query, then RedShift is used.
