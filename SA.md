@@ -1614,3 +1614,4 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
     - When semi structure or unstructure data needs some modification from one form to another EMR is used.
   - **RedShift**: If the data is processed and one single location that can do a analytical data query, then RedShift is used.
     - Once data is proccessed by different types of tools and need a summariezed analysis of ther data RedShift is used.
+    - Reporting, end of month processing (periodic analysis), trends etc.
