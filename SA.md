@@ -1579,9 +1579,10 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Lambda of Temperature to report temp.
   - Lambda of Rain predicts rain from the same stream data.
 - Kinesis Data Firehose.
-  - It can accept record from data stores.
+  - It can accept record from Stream.
   - It can persistently store data on S3.
   - It can also be stored on RedShift, Elastic Search and Splunk.
   - It can perform Data transformation using SQL query, modify data and store it to S3 or RedShift. 
   - Example, Streaming record from producers reaches Kinesis Stream, and Kinesis Fire hose can be a consumer, who does SQL query and stores data in ElasticSearch/S3.
-  
+- Charge for every million payload poll.
+  - Payload poll is 25KB of data.
