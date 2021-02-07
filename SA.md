@@ -1509,3 +1509,29 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - From CloudTrail can use advanced query option to create the table (which acts as a lense). This is the method of creating Schema.
 - Billing is based on the amount of data it queiried.
 - Useful for adhoc situation, querying large dataset infrequently. 
+
+## Elastic MapReduce (EMR)
+- Is a product allows to perform the analysis of semi-structured and unstructured data.
+- It is based on the Apache Hadoop framework, and service is delivered as a Managed Cluster using EC2 instances.
+- The EMR cluster has Marster Nodes and Core Nodes running on Managed EC2 instances.
+  - **Master node** controller manages HDFS, allocation of work etc.
+  - Master node never be used as a spot instances (can only be used for short lived clusters). 
+  - **Core nodes** manages the data for the HDFS shared filesystem. 
+  - Failure of core nodes can cause storage instability and any job or part of a big job running on the system fails.
+  - **Task nodes** they only runs tasks. It has no role in cluster management. 
+  - Task nodes failures can be recovered.
+- S3 uses as data store. EMRFS the whole data is residing on S3.
+- EMR is used for huge scale log analysis, indexing, machine learning, financial analysis, simulations, bioinformatics and many other large scale application.
+  - It process huge sets of data.
+  - The cluster split the works and allocates portions to the nodes. 
+  - As its cluster it needs a shared filesystem. Traditionally in Hadoop it was using HDFS. The filesystem existed to the life time of cluster.
+  - EMRFS cluster file system is an enhancement for filestem specific to EMR, based on S3.
+  - Data exists on EMRFS even if the cluster is unavailable. 
+  - This is one of the benefits and it can be used for ad hoc work. 
+- When to use it?
+  - It is ondemand billing.
+  - Used for short lived tasks.
+  - Used for large scale data analytics.
+  - Any manupulation, calculation of data EMR is used.
+  - Remember query can be achieved by Athena.
+
