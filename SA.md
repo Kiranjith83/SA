@@ -1718,7 +1718,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Architecture
 ![Alt text](/pic/vpcflowlog.png?raw=true "VPCFlowLog")
 - Flow logs capture 
-  - Order of VPC Flow are as follow:
+  - Order of VPC Flow log format as follow:
     - `account-id, inteface-id, src ip, dst Ip, src port, dst port, protocol, numbe of packets, bytes, start and end time, Allowed or rejected action and Flow log log-status`.
   - It is not used sniff the traffic or contect of the traffic, just used the metadata to get above information.
 - Creating the Flow logs allows to choose the destination - S3 or CloudWatch.
@@ -1821,3 +1821,14 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - In this example, a sample text is encrypted and decrypted using the CMK.
 - KMS has Custom Key store.
   - KMS is capable of Interacting with CloudHSM, so it can use FIPS 140-2 Level 3 encryption.
+
+# Beanstalk
+- When to select?
+  - Low level infra control.
+  - Code needs to be designed for Beanstalk. 
+  - No admin overhead, absolute no admin overhead with all above critera. 
+# OpsWorks
+- Designed for Infra engineer not for delveloper.
+
+# Exam Preperation
+- 
