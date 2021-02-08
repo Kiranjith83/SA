@@ -1705,3 +1705,50 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - In Cloudwatch the log group includes all the interfaces as log stream.
 - VPC Flow logs can't be used for "Realtime" analytics.
 - Windows License activation, 169.254.168.254 address, Amazon DNS Traffic, DHCP traffic and VPC Router traffics are Not captured.
+### Analyze VPC Flow Logs Data in Athena
+##### Create the Athena table:
+```
+    CREATE EXTERNAL TABLE IF NOT EXISTS default.vpc_flow_logs (
+      version int,
+      account string,
+      interfaceid string,
+      sourceaddress string,
+      destinationaddress string,
+      sourceport int,
+      destinationport int,
+      protocol int,
+      numpackets int,
+      numbytes bigint,
+      starttime int,
+      endtime int,
+      action string,
+      logstatus string
+    )  
+    PARTITIONED BY (dt string)
+    ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY ' '
+    LOCATION 's3://{your_log_bucket}/AWSLogs/{account_id}/vpcflowlogs/us-east-1/'
+    TBLPROPERTIES ("skip.header.line.count"="1");
+```
+
+##### Create partitions to be able to read the data:
+```
+    ALTER TABLE default.vpc_flow_logs
+    ADD PARTITION (dt='{Year}-{Month}-{Day}')
+    location 's3://{your_log_bucket}/AWSLogs/{account_id}/vpcflowlogs/us-east-1/{Year}/{Month}/{Day}';
+```
+##### Run the following query in a new query window:
+```
+    SELECT day_of_week(from_iso8601_timestamp(dt)) AS
+      day,
+      dt,
+      interfaceid,
+      sourceaddress,
+      destinationport,
+      action,
+      protocol
+    FROM vpc_flow_logs
+    WHERE action = 'REJECT' AND protocol = 6
+    order by sourceaddress
+    LIMIT 100;
+```
