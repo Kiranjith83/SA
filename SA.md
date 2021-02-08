@@ -1669,6 +1669,26 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Example, Create metrics and alarm for a string in /var/log/messages. 
   - Example, Metrics for Application specific strings.
   - Metric filter is created at the Log Group. 
+### CloudWatch Events.
+- Location to see the event happened in AWS Cloud.
+- Events has a near real-time vibility of changes that happen within an AWS Accounts.
+- Using rules can match against certain events and deliver those events to a number of supported targets.
+- With rules, many AWS Services are natively supported as events sources and deliver the events directly.
+- For other CW allows event pattern matching against CloudTrail events.
+- Additional rules support scheduled events as sources allowing a cron style function for periodically passing events to targets.
+- Example of event targets:
+  - EC2 instances
+  - Lambda
+  - Step function state machines
+  - SNS Topics
+  - SQS Queues
+  - And many more.
+- Example:
+  - 1. Daily at 12.00AM -> invoke Lambda -> Update DDB Table
+  - 2. CloudTrail Stopping event -> Lambda function re-enable Ctrail  
+- Difference between Ctrail and CW Events is that CW events can do something based on a event, But ctrail can only monitor.
+- Apart form Ctrail, CW Event can see the issue as it occurs (No delay)
+
 
 ## CloudTrail
 - Is a governance, compliance, risk governance and auditing service.
@@ -1751,4 +1771,43 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
     WHERE action = 'REJECT' AND protocol = 6
     order by sourceaddress
     LIMIT 100;
+```
+# AWS KMS (Key management service)
+- KMS Allows to create modify and delete customer Master Keys.
+- AWS KMS provides regional security Ket management and encryption and decryption services.
+- KMS is FIPS 140-2 Level 2 validated and certain aspects support Level 3.. 
+- KMS can use CloudHSM via Custom Key Stores (FIPS 140-2 Level 3)
+- KMS manages customer master keys (CMK), which are created in a region and never leave the region or KMS.
+- They can encrypt or decrypt data **utp 4 KB**.
+- By default KMS is capable of performing cyrptographic operations on Data upto 4 KB in size using CMKs
+- Any form of encryption in AWS uses KMS.
+- Types of CMK
+  - AWS Owned CMK.
+    - Cannot view
+    - Cannot Manage
+    - Not dedicated to AWS Account. 
+    - Keys used by AWS on a shared basis across many accounts.
+  - AWS Managed CMK.
+    - Can view
+    - But cannot Manage
+    - It is dedicated to the Account 
+    - It is used by default if you pick encryption within most AWS Services and formatted as aws/service-name.
+    - Only service they belong can use them directly.
+  - Customer Managed.
+    - Created by customer.
+    - Can view
+    - can Manage 
+    - Dedicated to the account.
+    - Certain services allow you to pick a CMK you manage. Customer managed keys allow key rotation configuration.
+    - They can be controlled via Key polices and enable and disable.
+    - If we are configuring an encryption for service in AWS then CMK is used, as it allows to make changes.
+- Hand on demo Customer Managed Keys
+```
+aws kms create-key --description "LA KMS DEMO CMK"
+aws kms create-alias --target-key-id XXX --alias-name "alias/lakmsdemo" --region us-east-1
+echo "this is a secret message" > topsecret.txt
+aws kms encrypt --key-id KEYID --plaintext file://topsecret.txt --output text --query CiphertextBlob 
+aws kms encrypt --key-id KEYID --plaintext file://topsecret.txt --output text --query CiphertextBlob | base64 --decode > topsecret.encrypted
+aws kms decrypt --ciphertext-blob fileb://topsecret.encrypted --output text --query Plaintext | base64 --decode 
+aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 ```
