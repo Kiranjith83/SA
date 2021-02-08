@@ -1693,10 +1693,14 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Flow logs aren't realtime, it doesn't capture actual data but only metadata of the traffic.
 - Flow log are attached to VPC, then entire interface in the VPC is monitored.
   - If at Subnet level only interfaces at the subnet is monitored.
+  - Creating the flow log at a level, it captures the logs down in the hierarchy.
 - Architecture
 ![Alt text](/pic/vpcflowlog.png?raw=true "VPCFlowLog")
 - Flow logs capture 
-  - account-id, inteface-id, dst/src port/ip, protocol, start and end time, packets, bytes, action and log-status.
+  - Order of VPC Flow are as follow:
+    - `account-id, inteface-id, src ip, dst Ip, src port, dst port, protocol, numbe of packets, bytes, start and end time, Allowed or rejected action and Flow log log-status`.
   - It is not used sniff the traffic or contect of the traffic, just used the metadata to get above information.
 - Creating the Flow logs allows to choose the destination - S3 or CloudWatch.
-- 
+- In Cloudwatch the log group includes all the interfaces as log stream.
+- VPC Flow logs can't be used for "Realtime" analytics.
+- Windows License activation, 169.254.168.254 address, Amazon DNS Traffic, DHCP traffic and VPC Router traffics are Not captured.
