@@ -1647,7 +1647,8 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
     - Threshold: Exceeding this is bad.
       - Static: You define a condition, if value more or less then alarm.
       - Anomly: CW detects a normal range from the history with a long term data. And if exceeds it triggers anomly.
-    - Period: How lond the threshold should be bad before an alarm is triggered.
+    - Period: How lond the threshold should be bad before an alarm is triggered. 
+      - CloudWatch period is related to its threshold. It is the length of time in which a threshold is surpassed before an alarm is generated.
     - Action: What to do when alarm triggers.
       - SNS
       - ASG
