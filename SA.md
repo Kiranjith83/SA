@@ -1615,3 +1615,40 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - **RedShift**: If the data is processed and one single location that can do a analytical data query, then RedShift is used.
     - Once data is proccessed by different types of tools and need a summariezed analysis of ther data RedShift is used.
     - Reporting, end of month processing (periodic analysis), trends etc.
+
+# Monitoring and Logging
+## CloudWatch
+- Architecture    
+![Alt text](/pic/cw.png?raw=true "CloudWatch")
+- CW provides a full suite of metrics collection and monitoring functionality.
+- With AWS CW all services send data to CloudWatch which groups together called Metrics and based on Alarms from the metrics could take action.
+- Publish data using CW Agents from custom location.
+- By default:
+  - EC2 instance Network usage, CPU Usage are shown by default(at hypervisor level).
+  - CW Agent needs be installed for metrics within the instance (Memory monitoring).
+- CW can be thought of a repository service for metrics.
+- **Metrics** are a time ordered set of data points.
+  - Each of data points or actual value at specific point in time are grouped to form the metrics.
+    - Example: CPU Usage at 24:00:00 hrs.
+- Frequency of datapoint injection depends on service.
+- Data retention is based on granularity:
+  - One hour metrics are retained for 455 days.
+  - Five minutes metrics for 63 days.
+  - One minute metrics for 15 days.
+    - *The older the data get the lesser the granularity. Super detail data only matter is short term. The long term will be checked with the trend*.
+- Metrics are grouped into **Namespaces**
+- Alarm can be created on Metrics taking a action if the alarm is triggered. 
+  - Alarms have three states
+    - **Insufficient**: Not enough data to judge the state. Alarms start in this state. 
+    - **Alarm**: The alarm threshold has been breached. 
+    - **Ok**: Alarm has not been breached.
+  - Alarms are configured with below key componenents.
+    - Metric: the data points over time being measured.
+    - Threshold: Exceeding this is bad.
+      - Static: You define a condition, if value more or less then alarm.
+      - Anomly: CW detects a normal range from the history with a long term data. And if exceeds it triggers anomly.
+    - Period: How lond the threshold should be bad before an alarm is triggered.
+    - Action: What to do when alarm triggers.
+      - SNS
+      - ASG
+      - EC2
