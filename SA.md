@@ -1672,6 +1672,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 ## CloudTrail
 - Is a governance, compliance, risk governance and auditing service.
 - Records activites within AWS Account. 
+- One of the first thing to be enabled.
 - By default the CloudTrail is enabled on all new accounts by 90 days.
 - Older AWS Account, needs to create a new trail and create it seperately.
 - All AWS API calls are logged.
@@ -1684,3 +1685,18 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Trail can be stored at a S3 bucket.
   - While delivering logs to S3, we can also configure to delivery CloudTrail to CloudWatch in parallel.
     - This allows to create a metrics fileter and alarm for certain type of AWS API events.
+- Logs are delievered in batches to S3 and CloudWatch hence there will be a bit delay.
+
+## VPC Flow logs.
+- VPC Flow logs allow you to capture metada about the traffic flowing in and out of networking interfaces within a VPC.
+- Flow logs can be placed on a specific network interface, A Subnet or an entire VPC **to capture metadata from the capture point and anything within it**. 
+- Flow logs aren't realtime, it doesn't capture actual data but only metadata of the traffic.
+- Flow log are attached to VPC, then entire interface in the VPC is monitored.
+  - If at Subnet level only interfaces at the subnet is monitored.
+- Architecture
+![Alt text](/pic/vpcflowlog.png?raw=true "VPCFlowLog")
+- Flow logs capture 
+  - account-id, inteface-id, dst/src port/ip, protocol, start and end time, packets, bytes, action and log-status.
+  - It is not used sniff the traffic or contect of the traffic, just used the metadata to get above information.
+- Creating the Flow logs allows to choose the destination - S3 or CloudWatch.
+- 
