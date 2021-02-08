@@ -1831,4 +1831,17 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - Designed for Infra engineer not for delveloper.
 
 # Exam Preperation
-- 
+- re:Invent Videos 1xx, 2xx, 3xx or 4xx videos. 
+  - Suggest 4xx videos
+    - Compute
+    - Storage
+    - Network
+    - Database
+- [Exam registration Link](https://aws.amazon.com/certification/certified-solutions-architect-associate/) 
+- [Sample Questions](https://d1.awsstatic.com/training-and-certification/docs/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf)
+- [Exam Guide](https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS_Certified_Solutions_Architect_Associate-Exam_Guide_EN_1.8.pdf)
+- 3 Phase to answer
+  - 1 Answer immediately the easy questions.
+  - 2 need thoughts, answer and of mark for review and move on.
+  - 3 reserve questions. Might be very few, and will have enough time to answer it.
+-  
