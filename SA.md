@@ -1801,6 +1801,13 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
     - Certain services allow you to pick a CMK you manage. Customer managed keys allow key rotation configuration.
     - They can be controlled via Key polices and enable and disable.
     - If we are configuring an encryption for service in AWS then CMK is used, as it allows to make changes.
+- Key created by default trust everyone in the account.
+- KMS uses base 64 encoded text for any operations to send or receive data to KMS.
+- When decrypting dont have to specify the CMK Key ID. This is because, whenever you have the encrypted data - inside that it has the link back to the CMK that is used to encrypt the data.
+- KMS Re-Encrypt:
+  - If customer has access to files, but dont want to see the data.
+  - KMS can run re-encrypt, to encrypt plain text.
+- KMS can generate DEK (Data encryption Keys) using CMK to encrypt large amount (> 4KB data) file. 
 - Hand on demo Customer Managed Keys
 ```
 aws kms create-key --description "LA KMS DEMO CMK"
@@ -1811,3 +1818,6 @@ aws kms encrypt --key-id KEYID --plaintext file://topsecret.txt --output text --
 aws kms decrypt --ciphertext-blob fileb://topsecret.encrypted --output text --query Plaintext | base64 --decode 
 aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 ```
+- In this example, a sample text is encrypted and decrypted using the CMK.
+- KMS has Custom Key store.
+  - KMS is capable of Interacting with CloudHSM, so it can use FIPS 140-2 Level 3 encryption.
