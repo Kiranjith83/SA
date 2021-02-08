@@ -1652,3 +1652,27 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
       - SNS
       - ASG
       - EC2
+### CloudWatch Logs
+- Subset of CW designed to collect and store logs
+- Log Event: the time stamp YYYYMMDDHHMMSS together with the RAW Message makes up the LogEvent.
+- Log streams: Log events are grouped to Log Stream:
+- Log Groups: A log group is a container for log sreams, It controls retentiion, monitoring and access control.
+  - Example: /aws/lambda/mylambdafunction
+  - Whenever a service sending data to CW, its send to Log Group.
+- Inside Log Group -> Log Stream -> Log events 
+  Example: Log group of EC2 -> Log Stream of Instance IDs -> Log event of messages. 
+- Log group can get exported to S3.
+- Steam to AWS and AWS ECS is configured from Log Group. 
+- Retention of logs configured.
+- Metric filter can be used to filter a string from the log event and create the metric.
+  - Example, Create metrics and alarm for a string in /var/log/messages. 
+  - Example, Metrics for Application specific strings.
+  - Metric filter is created at the Log Group. 
+
+## CloudTrail
+- Is a governance, compliance, risk governance and auditing service.
+- Records activites within AWS Account. 
+- By default the CloudTrail is enabled on all new accounts by 90 days.
+- All AWS API calls are logged.
+- By default 90 days old events are available in Event History.
+- 
