@@ -1673,6 +1673,14 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Is a governance, compliance, risk governance and auditing service.
 - Records activites within AWS Account. 
 - By default the CloudTrail is enabled on all new accounts by 90 days.
+- Older AWS Account, needs to create a new trail and create it seperately.
 - All AWS API calls are logged.
 - By default 90 days old events are available in Event History.
-- 
+- **Trail** inside the CloudTrail defines exactly what is logged and where it want to store the data.
+  - Trail is per region configuration.
+  - Output location:
+  - Management events: are associated with management operations (All AWS Api events). 
+  - Data Events: Provides insights to the resource operations with in a service. Example S3 and Lambda.
+  - Trail can be stored at a S3 bucket.
+  - While delivering logs to S3, we can also configure to delivery CloudTrail to CloudWatch in parallel.
+    - This allows to create a metrics fileter and alarm for certain type of AWS API events.
