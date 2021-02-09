@@ -222,7 +222,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - If you invite an account, make sure to have the Roles that can be switched is created. AWS Organization will not create if an account is added by invite.      
 
 # S3
-  - S3 Read and write consistency with new file.
+  - S3 Read and write consistency with new file explained as:
     - Read after Write consistency for PUTs of new Object. 
       - If you upload a file, the file is readable immediately.
     - Eventual Consistency for OverWrite PUTS and DELETES.
@@ -232,6 +232,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Lifecycle Management (Moves to different Tier of storage).
   - Versioning
   - MFA for Delete of Objects. 
+  - Bucket name will get the DNS name.
   - Secure using ACL and Bucket policy.
   - Charge:
     - Based on storage
@@ -248,6 +249,12 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Value (This is simply the data and is made up of a sequence of bytes)
     - Version ID (Used if versioning is enabled)
     - Metadata (Details about data being stored)
+## S3 Transfer acceleration
+- Enables fast, easy and secure transfer of files over long distances between cx end and an S3 bucket.
+- Transfer acceleration takes advantage of Amazon CloudFront's globally distributed edge locations.
+- As the data arrives at an edge location, data is routed to AWS S3 over an optimized network path.
+- Using AWS Backbone network to copy the data, and speeds up user upload.
+
 ## S3 Storage Classes
 - Tiered Storage
   - S3 Standard.
@@ -261,7 +268,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - 3+Az  replication. 
     - Cheaper than standard.
     - 30 days and 128 KB min charges and object retrieval fee.
-  - S3 One zone Infrequent Access.
+  - S3 One zone Infrequent Access (previously had similar offering as S3 RRS ).
     - Non critical and/reproducible object.
     - 99.5% availability.
     - Only 1 Az.
@@ -412,7 +419,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - If any role which has credential expiry and generates the presigned URL, will have issues after the role credentials are expired.
     - Note: Roles gets temporary credentials from STS and has expiry. 
 
-
+## Must read before exam
+[AWS S3 FAQ](https://aws.amazon.com/s3/faqs/)
 
 
 # Serverless
