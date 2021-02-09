@@ -1,3 +1,19 @@
+# Certified Solution Architect Notes
+***Disclaimer: Below information may or may not be correct. This is solely created for my own reference. You are welcome to refer on a condition that the author is not responsible for any issues related to below content.***
+Topic to be learned to pass
+## Core Services
+- Compute
+- Security, Identity and Compliance
+- Network and Content Delivery
+- Storage 
+- Databases
+## Other Services
+- Analytics
+- Desktop & App Streaming
+- Management and Governance.
+- Machine Learning
+- Migration and Transfer 
+
 # Architecture 101 terms:
   ## Cost efficient or Cost effective architecture. 
    - Implement a solution with AWS Product or product features that provides the require service for as little initial and ongoing costs as possible. 
@@ -136,6 +152,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
  - Root account to have MFA to enabled. 
  - Root user is responsible for setting up other IAM users.
  - Creating different AWS Accounts allows to control the blast radius incase something goes wrong with an account.
+ - Centralized access, Shared access, Granular Permissions, Identity Federation (AD, using any IDP).
+ - Provides temporary access (Application allowing to upload files to S3).
  ## IAM User
   - One among the identity provided by IAM.
   - 500 IAM users per account.
@@ -143,10 +161,14 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - 10 managed policies per user.
   - 1 MFA
   - 2 access keys.
+ ### IAM Root account
+ - God Mode user
+ - As a best practice enable MFA.
  ## IAM Groups
   - A group of policy.
   - Groups have no credentials. 
  ## IAM Policies
+  - Json formatted documents gives permission as to what a user can do.
  ## IAM Roles.
   - Roles are never logged into but assumed and gains the permission it carries.
   - With roles, we define the entity who can assume the role at Trust relationships.
@@ -1022,7 +1044,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Reading 2 KB of data consumes 1 RCU. Reading 4.5 KB of data takes 2 RCU. Reading 10x400 bytes takes 10 RCU.
     - If eventual consistent reads are okay, 1 RCU can allow for 2x4KB of data reads per sec. 
   - Write Capacity Untis.
-    - One ECU is 1 KB of data or less written to a table. An operation that writes 200 bytes consumes 1 WCU, an operation that writes 2 KB consumes 2 WCU. 
+    - One WCU is 1 KB of data or less written to a table. An operation that writes 200 bytes consumes 1 WCU, an operation that writes 2 KB consumes 2 WCU. 
     - Five operations of 200 bytes consumes 5 WCU.
     - Example 1:
       - A system needs to store 60 patient records of 1.5 KB each and every min. What ECU should be allocated on patient record table? 
@@ -1845,3 +1867,7 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
   - 1 Answer immediately the easy questions.
   - 2 need thoughts, answer and of mark for review and move on.
   - 3 reserve questions. Might be very few, and will have enough time to answer it.
+- 130 Minutes
+- 65 Questions
+- Passing score 720
+- 3 yrs validity.
