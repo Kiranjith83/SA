@@ -227,11 +227,11 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
       - If you upload a file, the file is readable immediately.
     - Eventual Consistency for OverWrite PUTS and DELETES.
       - Update/delete of file has eventual consistency.
-  - 99.99% Availability 
-  - 99.99999999999% Durabilities
+  - 99.99% Availability. 
+  - 99.99999999999% Durabilities (11 Nines).
   - Lifecycle Management (Moves to different Tier of storage).
   - Versioning
-  - MFA for Delete. 
+  - MFA for Delete of Objects. 
   - Secure using ACL and Bucket policy.
   - Charge:
     - Based on storage
@@ -253,7 +253,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - S3 Standard.
     - All purpose storage class
     - 99.99999999999%(11 nines) durability.
-    - Replicates in 3+ Az
+    - Replicates in 3+ AZs.
     - No minimum object size or retrieval fee.
   - S3 Infrequent Access S3-IA.
     - Objects with real-time access is required by infrequent.
@@ -264,7 +264,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - S3 One zone Infrequent Access.
     - Non critical and/reproducible object.
     - 99.5% availability.
-    - Only 1 Az
+    - Only 1 Az.
     - 30 days and 128 KB min charges and object retrieval fee.
     - Cheaper than Standard and standard IA.
   - S3 Intelligent Tiering. (Move objects to different tier based on ML).
@@ -281,6 +281,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Long term archival for cold backup.
     - 180 days and 40KB min
     - Cheaper than Glacier and replacement for Tape storage.
+### Storage class comparission
+![Alt text](/pic/s3compare.png?raw=true "S3Comapre")
 ## S3 Lifecycle
   - Can be configured for any versions of object that is not current to be transitioned to a different storage class. 
   - Any older version of object's storage class can be changed.
