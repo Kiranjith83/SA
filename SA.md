@@ -109,7 +109,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Allows evolutionary architecture using the data. 
   - [AWS WAF](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc) 
 
- WAF Pillers and Design principles.
+ WAF Pilers and Design principles.
  - Operation Excellence.
     Focus on the ability to use computing resources efficiently to meet system requirements and to maintain that efficiency as demand changes and technologies evolve. 
     - Perform operation as a code.
@@ -127,7 +127,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Protect data in transit and at rest. 
     - Prepare for security events.
  - Reliability.
-    The reliability piller includes the ability of a system to recover from the infra or service disruptions, dynamically acquire computing resources to meet demand and migrate disruptions such as mis configuration or transient network issues.
+    The reliability pillar includes the ability of a system to recover from the infra or service disruptions, dynamically acquire computing resources to meet demand and migrate disruptions such as mis configuration or transient network issues.
     - Testing recovery procedures.
     - Automatically recover from failures.
     - Scale horizontally to increase aggregate system availability.
@@ -155,6 +155,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
  - Creating different AWS Accounts allows to control the blast radius incase something goes wrong with an account.
  - Centralized access, Shared access, Granular Permissions, Identity Federation (AD, using any IDP).
  - Provides temporary access (Application allowing to upload files to S3).
+ - IAM is universal (Not regional).
  ## IAM User
   - One among the identity provided by IAM.
   - 500 IAM users per account.
@@ -163,7 +164,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - 1 MFA
   - 2 access keys.
  ### IAM Root account
- - God Mode user
+ - God Mode user. If the email is hacked, and AWS Password is reset, then end of story. So ->
  - As a best practice enable MFA.
  ## IAM Groups
   - A group of policy.
@@ -190,7 +191,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Web identities.
 
 # Billing 
- - Create Billing alarm.
+ - Create Billing alarm from CloudWatch Console -> Billing (Click on Create Alarm at below section).
+ - Enable with SNS notification.
 
 # AWS Organization.
  - A large number of accounts for an organization could be managed by AWS Organization.
@@ -220,8 +222,11 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - If you invite an account, make sure to have the Roles that can be switched is created. AWS Organization will not create if an account is added by invite.      
 
 # S3
-  - Read and write consistency with new file
-  - Eventual consistency with update, delete of existing it.
+  - S3 Read and write consistency with new file.
+    - Read after Write consistency for PUTs of new Object. 
+      - If you upload a file, the file is readable immediately.
+    - Eventual Consistency for OverWrite PUTS and DELETES.
+      - Update/delete of file has eventual consistency.
   - 99.99% Availability 
   - 99.99999999999% Durabilities
   - Lifecycle Management (Moves to different Tier of storage).
@@ -236,6 +241,13 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Transfer acceleration.
     - Cross region replication.
   - 0 to 5 TB file size and Unlimited storage. 
+  - S3 is a universal namespace, and it names must be globally unique. 
+  - S3 successful upload gives back 200 HTTP code.
+  - S3 object consists of
+    - Keys (This is the name of the object)
+    - Value (This is simply the data and is made up of a sequence of bytes)
+    - Version ID (Used if versioning is enabled)
+    - Metadata (Details about data being stored)
 ## S3 Storage Classes
 - Tiered Storage
   - S3 Standard.
