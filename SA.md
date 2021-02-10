@@ -148,8 +148,6 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Stop spending money on data center operations.
     - Analyze and attribute expenditure. 
     - Use managed services to reduce cost of ownership.
-
-
 # IAM
  - Root account to have MFA to enabled. 
  - Root user is responsible for setting up other IAM users.
@@ -564,6 +562,13 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Multivalue Answer:
       - Same like simple routing policy but allows multiple records with the same name. 
       - Returns upto 8 of the records in random.
+
+# AWS DataSync
+- Used to move large amount of data from on prem to AWS
+- Used with NFS and SMB compatible file system.
+- Replication can be done hourly, daily or weekly
+- Install the datasync agent to start the replication
+- Useful to replicate data between EFS to EFS.
 
 # CloudFront
 - CDN is a aglobal cache that stores copies of your data on edge caches.
