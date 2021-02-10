@@ -1,7 +1,8 @@
 # Certified Solution Architect Notes
 >>> ***Disclaimer***: 
   *Below information may or may not be correct. This is solely created for my own reference. You are welcome to refer on a condition that the author is not responsible for any issues related to below content*.
-Topic to be learned to pass
+
+# Topic to be learned to pass
 ## Core Services
 - Compute
 - Security, Identity and Compliance
@@ -203,6 +204,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - IAM users
     - Centralized logging.
     - Consolidated billing. 
+    - Don not deploy resources into the paying account.
  - Service Control Policy: 
     - Defines what a service account can do. 
     - It can be applied to individual account, or Organizational Unit and policy applies recursively. 
