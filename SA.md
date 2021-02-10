@@ -255,7 +255,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 - As the data arrives at an edge location, data is routed to AWS S3 over an optimized network path.
 - Using AWS Backbone network to copy the data, and speeds up user upload.
 
-## S3 Storage Classes
+## S3 Storage Classes (Tiers)
 - Tiered Storage
   - S3 Standard.
     - All purpose storage class
@@ -288,7 +288,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Long term archival for cold backup.
     - 180 days and 40KB min
     - Cheaper than Glacier and replacement for Tape storage.
-### Storage class comparission
+### Storage class comparison
 ![Alt text](/pic/s3compare.png?raw=true "S3Comapre")
 ## S3 Lifecycle
   - Can be configured for any versions of object that is not current to be transitioned to a different storage class. 
@@ -311,8 +311,13 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Only SSE-S3 and if enabled KMS encrypted objects are supported.
 
 ## S3 Permission
+Overall 3 types of control
+- Bucket policy
+- Object policy
+- IAM
+- S3 permissions
   - Comes with legacy sec baggage.
-  - Very S3 bucket is owned by the account.
+  - Every S3 bucket is owned by the account.
   - Only entity initially has access is the account that created the bucket.
   - Identity Policies and attach to IAM Entities.
     - You cannot provide S3 identity policy for IAM Identities that you have no control. (Or from other IAM Account).
@@ -352,7 +357,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     ```
     - It is required anything over 5GB but recommended anything beyond 100MB.
 ## S3 Encryption
-  - Encryption is done at object level
+  - Encryption is done at object level but can be pushed at the bucket level.
   - Encryption
     - At rest.
       - Server side encryption.
@@ -396,10 +401,13 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 ## S3 Object versioning
 - Versioning enabled at per bucket basis.
+- Once enabled cannot stop versioning but can only Suspend it.
+- If making an object public, the only version that was selected become public. All older versions will have to manually change the permission to view as public. 
+  - Objects with different versions needs to have permissions set differently.
 - Once enabled any operations that would otherwise modify objects generate new version of that original object.
 - Once enabled you are billed for all versions of the objects.
 - Normally Deleting by adding Delete marker. To permanently delete the objects, select all objects and its versions and delete.
-- By deleting the delete marker, you can un-delete an object. 
+- By deleting an object it just adds the delete marker. By just removing the delete marker you can un-delete an object. 
 - MFA delete allows to enforce to use MFA to delete S3 bucket.
 - [Delete Object](https://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectVersions.html)
 - [MFA Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html)
@@ -418,6 +426,35 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
    - The URL is tied to the person who created. Meaning the User access rights has to be available.
    - If any role which has credential expiry and generates the presigned URL, will have issues after the role credentials are expired.
     - Note: Roles gets temporary credentials from STS and has expiry. 
+
+## S3 Lifecycle
+- Lifecycle rules automates managing objects between the different storage tiers.
+- can be used in conjunction with versioning.
+- Can be applied to current versions and previous versions.
+
+## S3 Object lock and S3 version Lock.
+- Object level or at entire bucket level the lock can be applied.
+- Use S3 Object lock to store object using `Write once and Read Many (WORM Model)`
+- Helps to prevent objects from being deleted or modified for a fixed amount of time or indefinitely. 
+- Two modes in S3 Object Lock
+  - Governance mode
+    - User cant overwrite or delete the object version or alter its lock settings unless they have special permission.
+    - Protects objects against being deleted by most users, but still grant some users permission to alter the retention settings or delete the object if necessary.
+  - Compliance mode.
+    - Cant be overwritten or deleted by any users, including the root user in the AWS Account.
+    - When object is locked in compliance mode, its retention mode cant be changed and its retention period cant be shortened. 
+    - Compliance mode ensures an object version cant be overwritten or deleted for the duration of the retention period.
+- Retention period.
+  - Retention period protects an object version for a fixed amount of time.
+  - After retention period expires the object version can be overwritten or deleted unless you also place a legal hold on the object version.
+- Legal Hold
+  - Prevents an object version from being overwritten or deleted. However, it doesn't have an associated retention period. 
+  - It remains in effect until removed. Legal holds can be freely placed and removed by users with permission - s3:PutObjectLegalHold permission.
+  
+## S3 Glacier Vault Lock
+- Allows to easily deploy and enforce compliance controls for individual S3 Glacier vaults with a Vault Lock Policy. 
+- Allows to specify controls such as WORM and lock future edits.
+- Once locked the policy can no longer be changed.
 
 ## Must read before exam
 [AWS S3 FAQ](https://aws.amazon.com/s3/faqs/)
