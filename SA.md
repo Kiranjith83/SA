@@ -1460,6 +1460,7 @@ Overall 3 types of control
     - Snapshots are incremental backups that capture only changed blocks. All snapshot storage is also compressed to minimizde the storage charges.
     - Available in two types
       - Stored Volumes
+        - Entire data is stored in S3.
       - Cached Volumes
         - Usign S3 as primary data store but Retains frequently accessed data locally in your storage gateway.
         - This minimize the need to scale on-prem storage with low latency for frequently accessed data.
@@ -1655,6 +1656,13 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - From CloudTrail can use advanced query option to create the table (which acts as a lense). This is the method of creating Schema.
 - Billing is based on the amount of data it queiried.
 - Useful for adhoc situation, querying large dataset infrequently. 
+
+## Macie 
+- Prevents PII (Personal Identity Information) identity theft.
+- Security service service which uses ML and NLP (Natural Language processing) to discover, classify and protect sensitive data stored in S3.
+- Uses AI to identify if the data stored in S3 has PII and alerts.
+- Can also used to analyze Ctrail logs for suspicious API activity.
+
 
 ## Elastic MapReduce (EMR)
 - Is a product allows to perform the analysis of semi-structured and unstructured data.
