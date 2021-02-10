@@ -563,6 +563,277 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Same like simple routing policy but allows multiple records with the same name. 
       - Returns upto 8 of the records in random.
 
+
+# S3
+  - S3 Read and write consistency with new file explained as:
+    - Read after Write consistency for PUTs of new Object. 
+      - If you upload a file, the file is readable immediately.
+    - Eventual Consistency for OverWrite PUTS and DELETES.
+      - Update/delete of file has eventual consistency.
+  - 99.99% Availability. 
+  - 99.99999999999% Durabilities (11 Nines).
+  - Lifecycle Management (Moves to different Tier of storage).
+  - Versioning
+  - MFA for Delete of Objects. 
+  - Bucket name will get the DNS name.
+  - Secure using ACL and Bucket policy.
+  - Charge:
+    - Based on storage
+    - Based on number of requests.
+    - Charged on Storage management.
+    - Data transfer pricing.
+    - Transfer acceleration.
+    - Cross region replication.
+  - 0 to 5 TB file size and Unlimited storage. 
+  - S3 is a universal namespace, and it names must be globally unique. 
+  - S3 successful upload gives back 200 HTTP code.
+  - S3 object consists of
+    - Keys (This is the name of the object)
+    - Value (This is simply the data and is made up of a sequence of bytes)
+    - Version ID (Used if versioning is enabled)
+    - Metadata (Details about data being stored)
+## S3 Transfer acceleration
+- Enables fast, easy and secure transfer of files over long distances between cx end and an S3 bucket.
+- Transfer acceleration takes advantage of Amazon CloudFront's globally distributed edge locations.
+- As the data arrives at an edge location, data is routed to AWS S3 over an optimized network path.
+- Using AWS Backbone network to copy the data, and speeds up user upload.
+- [Compare the speed now](https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html)
+## S3 Storage Classes (Tiers)
+- Tiered Storage
+  - S3 Standard.
+    - All purpose storage class
+    - 99.99999999999%(11 nines) durability.
+    - Replicates in 3+ AZs.
+    - No minimum object size or retrieval fee.
+  - S3 Infrequent Access S3-IA.
+    - Objects with real-time access is required by infrequent.
+    - 99.9% availability. 
+    - 3+Az  replication. 
+    - Cheaper than standard.
+    - 30 days and 128 KB min charges and object retrieval fee.
+  - S3 One zone Infrequent Access (previously had similar offering as S3 RRS ).
+    - Non critical and/reproducible object.
+    - 99.5% availability.
+    - Only 1 Az.
+    - 30 days and 128 KB min charges and object retrieval fee.
+    - Cheaper than Standard and standard IA.
+  - S3 Intelligent Tiering. (Move objects to different tier based on ML).
+    - A storage class available in S3, designed for unpredicted data pattern.
+    - Object that aren't accessed for 30 days are moved to the Infrequent tier. Which offers lower cost.
+    - If its accessed, it moves to Standard tier.
+    - Only monthly automation and monitoring fee is charged
+  - S3 Glacier.
+    - Long term archival storage (Warm or cold backup).
+    - Retrieval could take minutes or hours. (faster the higher the cost).
+    - 3+ Az replication. 90 days and 40KB min charge and retrieval.
+  - S3 Glacier Deep archive.
+    - Retrieval time is 12 hour.
+    - Long term archival for cold backup.
+    - 180 days and 40KB min
+    - Cheaper than Glacier and replacement for Tape storage.
+### Storage class comparison
+![Alt text](/pic/s3compare.png?raw=true "S3Comapre")
+## S3 Lifecycle
+  - Can be configured for any versions of object that is not current to be transitioned to a different storage class. 
+  - Any older version of object's storage class can be changed.
+  - Once moved to a storage tiere from a standard, can't reverse the process to move back to standard storage class using LifeCycle policy.
+
+## S3 Cross region replication.
+  - One way replication of data from a source bucket to destination bucket in **different region**.
+  - Versioning must be enabled on both source and destination.
+  - Delete markers are not replication.
+
+  - By default, replicated object keep their:
+    - Storage class.
+    - Object name (Key).
+    - Object owner.
+    - Object permission.
+      - **But this settings can be changed to inherit destination bucket owner or other details**
+  - Can be entire bucket, prefix or tags from source bucket to replicate.
+  - Replication is not retroactive, meaning only replicates objects that is added after the replication enabled.
+  - Replication is only one way.
+  - System actions like lifecycle rules are not replicated.
+  - Cross region replication SSE-C encryption not supported
+  - Only SSE-S3 and if enabled KMS encrypted objects are supported.
+
+## S3 Permission
+Overall 3 types of control
+- Bucket policy
+- Object policy
+- IAM
+- S3 permissions
+  - Comes with legacy sec baggage.
+  - Every S3 bucket is owned by the account.
+  - Only entity initially has access is the account that created the bucket.
+  - Identity Policies and attach to IAM Entities.
+    - You cannot provide S3 identity policy for IAM Identities that you have no control. (Or from other IAM Account).
+  - What if if you want to apply various access to identity that you dont control?
+    - Use Resource policy.
+      - Resource policy with S3 bucket is called bucket policy. 
+      - Can be used to apply any identities accessing the bucket.
+      - It doesn't matter which account holds the identity. 
+      - You attach S3 bucket policies at the bucket level (i.e. you can’t attach a bucket policy to an S3 object), but the permissions specified in the bucket policy apply to all the objects in the bucket.
+      - Any policy that has explicit denies will override any allow.
+    - ACL, or access control list.
+      - Legacy method, and suggests to use Resource policies.
+      - They control access in simple way for Bucket and objects.
+  - Block public access, is a setting applied on top of any existing settings as a protection.
+    - Block public access overrules any other public grant.
+
+  - If you’re more interested in `“What can this user do in AWS?”` then IAM policies are probably the way to go. You can easily answer this by looking up an IAM user and then examining their IAM policies to see what rights they have.
+  - If you’re more interested in `“Who can access this S3 bucket?”` then S3 bucket policies will likely suit you better. You can easily answer this by looking up a bucket and examining the bucket policy.
+
+# Sharing S3 bucket across accounts.
+- Using Bucket policy & IAM (Programmatic)
+- Using Bucket ACLs & IAM (Programmatic (Programmatic)
+- Cross Account IAM Roles (Programmatic and Console access).
+
+
+
+### When to use IAM policies vs. S3 policies
+  - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
+
+## S3 Upload.
+  - Single PUT upload.
+    - Limit to 5GGB in size.
+    - Runs into performance issue, if the size is higher, as it uses single steam of data.
+    - As its single stream, it will not get the maximum bandwidth.
+    - If did fail, the entire operation has to re-run.
+  - Multipart Upload.
+    - Object is broken upto 10,000 parts and uploads in parallel to S3. 
+    - Multiple streams of data
+    - Enhanced transfer rate.
+    - If an individual part fails, only that is retried.
+    ```
+      # mkfile -n0G 10Gdatafile
+      # aws s3 cp ./10Gdatafile s3://my-bucket-name
+    ```
+    - It is required anything over 5GB but recommended anything beyond 100MB.
+## S3 Encryption
+  - Encryption is done at object level but can be pushed at the bucket level.
+  - Encryption
+    - At rest.
+      - Server side encryption.
+         - SSE-S3
+          - AES-256 algorithm is used by SSE-S3.
+          - S3 manages encryption end to end with less administration over head.
+          - S3 data encryption using Keys managed by S3.
+          - It uses one of the KMS DEK to encrypt the data, and keys are encrypted and stored with the Objects.
+         - SSE-KMS
+          - SSE-KMS allows role separation.
+          - Unlike in SSE-S3, the user who has access to object can decrypt the data.
+          - A specific KMS master key is used to encrypt the data.
+          - Ideally customer can create a Customer Managed Keys.
+          - And the permission specifically can be defined at the CMK.
+          - This enabled  to have specific IAM user/role who has permission to the KMS key to decrypt the data.
+          - S3 Admin and KMS key access can be given to two different users for role separation.
+         - SSE-C
+          - Server side encryption with customer managed key.
+          - When uploading object, you also provide the encryption key and heavy load of encryption is managed by S3.
+          - Once the encryption is done, key is discarded. 
+          - Admin heavy process in managing the keys. Customer should take care of key management.
+      - Client side encryption.
+        - Encrypt and upload to S3.
+        - Use client, application or manually perform the action.
+        - Example: Backup application uses S3 storage, backup data is encrypted prior to upload to S3.
+    - At transit
+## S3 Static Website and CORS
+- Static Web Hosting
+  - Static web hosting will provide a unique endpoint URL that can be accessed by any web browser.
+  - Static S3 can host
+    - HTML, CSS, JavaScript
+    - Media (Audio, movies and images)
+    - By default S3 objects are private, the anonymous users has to be enabled.
+      - Unblocking public access
+      - Make sure the Object permission can be read by un-authenticated user. (From actions make public on all objects)
+      - Or create bucket policy to allow any principles to perform S3:GetObject, on resource S3 bucket.
+  - S3 logs can be collected for sever access logs.
+- [CORS](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html)
+  - CORS is a security measure allowing a web application running in one domain to reference resources in another.
+  - If an application is running a webpage that loads object from a different S3 bucket, CORS can be used.
+
+## S3 Object versioning
+- Versioning enabled at per bucket basis.
+- Once enabled cannot stop versioning but can only Suspend it.
+- If making an object public, the only version that was selected become public. All older versions will have to manually change the permission to view as public. 
+  - Objects with different versions needs to have permissions set differently.
+- Once enabled any operations that would otherwise modify objects generate new version of that original object.
+- Once enabled you are billed for all versions of the objects.
+- Normally Deleting by adding Delete marker. To permanently delete the objects, select all objects and its versions and delete.
+- By deleting an object it just adds the delete marker. By just removing the delete marker you can un-delete an object. 
+- MFA delete allows to enforce to use MFA to delete S3 bucket.
+- [Delete Object](https://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectVersions.html)
+- [MFA Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html)
+
+## S3 presigned URL.
+- A presigned URL cab ve created by an identity inside AWS providing access to an object using creator's access permission.
+  - By default when a object is accessed, the authorization check is performed at the access of the check. Using the identity of the user.
+    - Presigned URLS changes the way object is accessed. 
+    - Presigned URL allows to generate a specific URL that has access rights encoded to the URL.
+```
+ # aws s3 presign s3://bucketname/objectname
+```
+   - This will generate a preassigned URL with the identity of the user who executed the above command. Now whoever executes the resulting URL will be able to access the object. 
+   - The access uses the user identity who generated teh presign URL. 
+   - Presigned URL expires in 36 hour.
+   - The URL is tied to the person who created. Meaning the User access rights has to be available.
+   - If any role which has credential expiry and generates the presigned URL, will have issues after the role credentials are expired.
+    - Note: Roles gets temporary credentials from STS and has expiry. 
+
+## S3 Lifecycle
+- Lifecycle rules automates managing objects between the different storage tiers.
+- can be used in conjunction with versioning.
+- Can be applied to current versions and previous versions.
+
+## S3 Object lock and S3 version Lock.
+- Object level or at entire bucket level the lock can be applied.
+- Needs to be enabled while creating the bucket. Once its created it cannot be enaled.
+- Use S3 Object lock to store object using `Write once and Read Many (WORM Model)`
+- Helps to prevent objects from being deleted or modified for a fixed amount of time or indefinitely. 
+- Two modes in S3 Object Lock
+  - Governance mode
+    - User cant overwrite or delete the object version or alter its lock settings unless they have special permission.
+    - Protects objects against being deleted by most users, but still grant some users permission to alter the retention settings or delete the object if necessary.
+  - Compliance mode.
+    - Cant be overwritten or deleted by any users, including the root user in the AWS Account.
+    - When object is locked in compliance mode, its retention mode cant be changed and its retention period cant be shortened. 
+    - Compliance mode ensures an object version cant be overwritten or deleted for the duration of the retention period.
+- Retention period.
+  - Retention period protects an object version for a fixed amount of time.
+  - After retention period expires the object version can be overwritten or deleted unless you also place a legal hold on the object version.
+- Legal Hold
+  - Prevents an object version from being overwritten or deleted. However, it doesn't have an associated retention period. 
+  - It remains in effect until removed. Legal holds can be freely placed and removed by users with permission - s3:PutObjectLegalHold permission.
+  
+## S3 Glacier Vault Lock
+- Allows to easily deploy and enforce compliance controls for individual S3 Glacier vaults with a Vault Lock Policy. 
+- Allows to specify controls such as WORM and lock future edits.
+- Once locked the policy can no longer be changed.
+
+## S3 Performance.
+- S3 has extremely low latency, You can get the first byte out of S3 within 100-200 Mil Sec.
+- 3500 PUT/COPY/POST/DELETE and 5500 GET/HEAD requests per second per prefix in a bucket.
+- The more prefix the better performance can achieve. 
+  - You can increase your read or write performance by parallelizing reads. For example:
+    - Two prefixes gets you 11000 requests per sec. 
+    - Four prefixes gets 22000 requests per sec.
+- Multipart upload
+  - Recommended for files over 100MB
+  - Required for files over 5GB
+- S3 Byte-Range Fetches
+  - Parallelize the download.
+
+# S3 Select and Glacier Select.
+- Enables application to retrieve only a subset of data from an object by using simple SQL expression.
+- Helps to return only the data from the store application needed instead of retrieving the entire object.
+- This can improve the performance of underlying application.
+- Same feature at Glacier is called glacier select.
+
+
+## Must read before exam
+[AWS S3 FAQ](https://aws.amazon.com/s3/faqs/)
+
+
 # AWS DataSync
 - Used to move large amount of data from on prem to AWS
 - Used with NFS and SMB compatible file system.
@@ -571,28 +842,36 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
 - Useful to replicate data between EFS to EFS.
 
 # CloudFront
-- CDN is a aglobal cache that stores copies of your data on edge caches.
+- CDN is a global cache that stores copies of your data on edge caches.
 - Origin
   - The server or service that hosts your content. It can be S3 bucket, web server or Amazon media store.
 - Distribution
   - The configuration entity within  CloudFront. Its where you configure all aspects of specific implementation of CloudFront form.
+  - It is the collection of the edge location.
   - Two types
     - Web distribution
       - Speed of content delivery for static files and media files.
     - RTMP
-      - Adobe media server protocol for flash
+      - Adobe media server protocol for flash used for media streaming.
 - Edge Location:
   - The local infra that hosts caches of your data. Positioned ion over 150 locations globally over 30 countries.
+  - Edge locations are not just Read only, you can write them (Ex PUT object onto them).
+    - Example use case: S# Accelerator.
 - Regional Edge Caches
   - Larger versions of edge locations. Less of them but have more capacity and can serve larger areas.
-
 - Origin fetch:
  - If the content is not cached at the edge location, it will perform a origin fetch from origin.
+ - TTL expires the cache.
 - By default the CloudFront comes up with default domain name at cloudfront distribution. that works with both HTTP and HTTPS.
   - But this can be changed with custom domain name for the distribution, if so need to create SSL certificate proves ownership of the domain. 
   - The cert can be imported from ACM.
 - CloudFront is by default public facing, but can be configured to use privately with "Trusted signers".
   - With this configuration in place, only signed URLs or signed cookies needed to access the distribution.
+- Invalidating Cache:
+  - This is the option of clearing cache from the edge location.
+  - This incurs charges. Useful if customer is still seeing the older data, after the data is updated at the origin.
+  - Create an invalidate individual objects, entire dir, sub dir etc (Example /* to invalidate everything).
+    - It means no longer it will go to edge location.
 
 ## OAI
 - Origin Access Identity. 
@@ -602,6 +881,9 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Dont want customers to directly access object and use OAI.
   - Configured under Origin and Origin group and restrict with the identity created as OAI.
   - The S3 bucket behind the CloudFront will get policy only for Origin access identity. Make sure that if any other statements were in place.
+# CloudFront Signed URLs or Cookies and S3 Signed URLS.
+- 
+
 
 # EFS
 - NFSv4
