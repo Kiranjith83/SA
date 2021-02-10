@@ -881,8 +881,12 @@ Overall 3 types of control
     - Dont want customers to directly access object and use OAI.
   - Configured under Origin and Origin group and restrict with the identity created as OAI.
   - The S3 bucket behind the CloudFront will get policy only for Origin access identity. Make sure that if any other statements were in place.
-# CloudFront Signed URLs or Cookies and S3 Signed URLS.
-- 
+# CloudFront Signed URLs and Signed Cookies.
+- Signed URLs
+  - If individual file access needs control, then signed URL.
+- Signed Cookies.
+  - If individual needs access to more services then Signed Cookies are used.
+
 
 
 # EFS
@@ -1377,8 +1381,8 @@ Overall 3 types of control
 - Provisioning time takes long. 
   - Physical connection needs to follow the AWS Process. 
   - Create a port request.
-  - Get letter of authorization and get DataCenter technition to get the cross connection to customer end device at partner location between AWS Direct connect.
-  - Arrange transit from the direct connect location to the business premisses.
+  - Get letter of authorization and get DataCenter technician to get the cross connection to customer end device at partner location between AWS Direct connect.
+  - Arrange transit from the direct connect location to the business premises.
 - VPN over Public VIF at DX enables encryption.
 
 ## When and where to choose Direct Connect
@@ -1407,6 +1411,7 @@ Overall 3 types of control
 - Used for 10TB -> 10 PB (Economical range)
 
 ## Snowball Edge
+- 100TB data transfer devide with on board storage and compute capacity.
 - Additional to Snowball, the snowball edge gets both storage and compute option.
 - Used as in same situation as Snowball but for the option where it requires compute.
 - A large capacity.
@@ -1439,6 +1444,7 @@ Overall 3 types of control
   - File gateway
     - Choosing this option you get a virtual image that can be installed at on Prem.
     - We get a SMB Share, and can be used to upload and download the files.
+    - Also available in NFS Share.
     - Any data added to the SMB share will get saved to S3.
     - Helps to migrate data, or use as a storage place, or unlimitted storage at on Prem.
     - It stores files, using SMB and stores data at the S3.
@@ -1450,6 +1456,13 @@ Overall 3 types of control
     - It is the block devices and the volume needs to be mounted to access.
     - Data is stored in S3, same like snapshot based backup on S3.
     - Data is moved to AWS by taking snapshot to S3, and copy that snapshot as volume to mount on EC2.
+    - Data written to these volumes can be asynchronously backed up as point in time snapshop of your volumes and stored in the cloud as Amazon EBS Snapshots.
+    - Snapshots are incremental backups that capture only changed blocks. All snapshot storage is also compressed to minimizde the storage charges.
+    - Available in two types
+      - Stored Volumes
+      - Cached Volumes
+        - Usign S3 as primary data store but Retains frequently accessed data locally in your storage gateway.
+        - This minimize the need to scale on-prem storage with low latency for frequently accessed data.
   - Tape gateway
     - Virtual Tape library (VTL), it is presented over ISCSI which supports tape drive based backups.
     - Costly and admin overhead.
