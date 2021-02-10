@@ -434,6 +434,7 @@ Overall 3 types of control
 
 ## S3 Object lock and S3 version Lock.
 - Object level or at entire bucket level the lock can be applied.
+- Needs to be enabled while creating the bucket. Once its created it cannot be enaled.
 - Use S3 Object lock to store object using `Write once and Read Many (WORM Model)`
 - Helps to prevent objects from being deleted or modified for a fixed amount of time or indefinitely. 
 - Two modes in S3 Object Lock
@@ -455,6 +456,26 @@ Overall 3 types of control
 - Allows to easily deploy and enforce compliance controls for individual S3 Glacier vaults with a Vault Lock Policy. 
 - Allows to specify controls such as WORM and lock future edits.
 - Once locked the policy can no longer be changed.
+
+## S3 Performance.
+- S3 has extremely low latency, You can get the first byte out of S3 within 100-200 Mil Sec.
+- 3500 PUT/COPY/POST/DELETE and 5500 GET/HEAD requests per second per prefix in a bucket.
+- The more prefix the better performance can achieve. 
+  - You can increase your read or write performance by parallelizing reads. For example:
+    - Two prefixes gets you 11000 requests per sec. 
+    - Four prefixes gets 22000 requests per sec.
+- Multipart upload
+  - Recommended for files over 100MB
+  - Required for files over 5GB
+- S3 Byte-Range Fetches
+  - Parallelize the download.
+
+# S3 Select and Glacier Select.
+- Enables application to retrieve only a subset of data from an object by using simple SQL expression.
+- Helps to return only the data from the store application needed instead of retrieving the entire object.
+- This can improve the performance of underlying application.
+- Same feature at Glacier is called glacier select.
+
 
 ## Must read before exam
 [AWS S3 FAQ](https://aws.amazon.com/s3/faqs/)
