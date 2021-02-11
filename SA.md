@@ -1428,8 +1428,64 @@ Overall 3 types of control
 - 100 PB.
 - Not economical for Sub 10PB and where multiple locations are required.
 
-# Data and DB Migration
+# EC2
+- On demand instance
+- Spot Instances
+- Dedicated hosts
+  - For licensing tagged to Hardwre (Oracle).
+  - Regulatory requirement.
+  - On demand hourly
+  - Reservation purchase 70% off on ondemand.
+- Reserved Instance types
+  - Standard reserved 
+    - 75% off on-demand instance
+  - Convertible reserved instances 
+    - 54% off and ability change the attributes of RI as long as the exchange results in the creation of RI of equal or great value.
+  - Scheduled Reserved Instances
+    - Available to Launch within the time windows you reserve. Allowing toi match the capacity reservation to predictable recurring schedule happening at a fraction of a day/month or week.
+- Instance Types overview
+- Other than Root volumes are not deleted by default during termination of instance.
 
+# EBS
+- General purpose SSD
+  - General workload
+  - API NAME: gp2
+  - 1GiB - 16Gib
+  - Max IOPS 16000
+- Provisioned IOPS SSD
+  - High performance
+  - Database
+  - API NAME: io1
+  - 4G - 16G
+  - 64000 IOPS
+- Throughput Optimized HDD
+  - Low cost HDD for frequent accessed, throughput sensitive workloads
+  - Big Data and Dataware house
+  - API NAME: st1
+  - 500G - 16T
+  - 500 IOPS
+- Cold HDD
+  - Low cost HDD less freqent workload
+  - API NAME: sc1
+  - 500G - 16T
+  - 250 IOPS
+- EBS Magnetic
+  - Infrequesnt access data
+  - API NAME: Standadrd
+  - 1G-1T
+  - 40-200 IOPS
+
+# ENI vs ENA vs EFA
+## ENI
+- Elastic Network Interface 
+## ENA
+- Enhanced Networking. 
+- Uses single root I/o virtualization (SR-IOV) to provide high performance networking capabilities on supported instance types.
+## EFA
+- A network devide that you can attach to your EC2 instance to accelerate HPC and Machine learning apps
+
+
+# Data and DB Migration
 ## Storage Gateway
 - It is a virtual appliance used for data center extensions or migrations.
 - It is a service that connects to on prem DC with AWS Storage services.
