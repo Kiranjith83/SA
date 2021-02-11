@@ -1038,6 +1038,7 @@ Overall 3 types of control
       - From RDS perspective there will be a brief outage during failover. As DNS involved, it might take from single digit sec to double digit. 
     - In RDS other than Aurora its limited to two Availability zone.
     - Backups are taken from Secondary to reduce the impact on Performance.
+    - Automatically fails over to the secondary az one.
 
   - Read replicas
     - Allow systems to scale out to greater amount of read.
@@ -1051,6 +1052,7 @@ Overall 3 types of control
     - 5 read replicas can be attached to a single source.
     - Hierarchy of read replicas are possible. But there will be a lag and application has to support this eventual consistency.
     - Read replicas updates are independent.
+    - Manually have to point to the read replica.
 
 ### SQL Aurora
 - Is a custom designed database engine. 
