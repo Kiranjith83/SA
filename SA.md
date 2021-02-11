@@ -1504,6 +1504,30 @@ Overall 3 types of control
 - Option to "Enable hybernation as a Stop" Behavior while launching the instance.
   - To enable hibernation, space is allocated on the root volume to store the instance memory (RAM). Make sure that the root volume is large enough to store the RAM contents and accommodate your expected usage, e.g. OS, applications. To use hibernation, the root volume must be an encrypted EBS volume. 
 
+## EC2 placement group.
+- Recommends homogenous instances within clustered placement groups.
+- Can't merge placement groups.
+- Cluster placement group
+  - Grouping of instances very close together with in a Availability zone.
+  - Apps that need very low latency and network through put.
+  - Works with in a AZ.
+- Spread Placement Group
+  - Group of instances that are each placed on distinct underlying hardware.
+  - Recomended for apps that have a small number of critical instances that should be kept apart from each other.
+  - EC2 instances never allowed on same underlying hardware.
+  - This placement group is better for individual instances.
+- Partition Placement Group.
+  - Similar like spread placement but used for group of instances.
+  - EC2 creates a logical segment for a group of instances called partitions.
+  - And ensures that each partitions within a placement group has its own set of rack. 
+  - Each rack is with its own network and power soruce.
+  - No two partition are on same rack. 
+  - This placement group is better for a group of instances that needed to be seperated from another group of instances.
+
+## HPC 
+- AWS Parallel cluster helps to manage the HPC clusters.
+
+
 # EBS
 - General purpose SSD
   - General workload
@@ -2109,6 +2133,17 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - In this example, a sample text is encrypted and decrypted using the CMK.
 - KMS has Custom Key store.
   - KMS is capable of Interacting with CloudHSM, so it can use FIPS 140-2 Level 3 encryption.
+# AWS WAF
+- Allow all requests except the ones you specify.
+- Blocks all request except the one you specify
+- Count the requests that match the properties that you specify.
+- Protection based on conditions
+  - IP address
+  - Country
+  - Strings
+  - Length of request.
+  - Presence of malicious SQL code 
+  - Cross site scripting 
 
 # Beanstalk
 - When to select?
