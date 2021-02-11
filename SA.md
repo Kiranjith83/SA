@@ -933,6 +933,7 @@ Overall 3 types of control
       - The Standard storage class is used to store frequently accessed files.
 
 # Database
+
 ## Database models
 - DBMS is the database management system.
   - MySQL, MongoDB are example of DBMS. which stores and handles data.
@@ -953,6 +954,7 @@ Overall 3 types of control
   - Because the relationship is fixed, it struggle with any situation or data which has fluid relation ship.
     - It struggles with social media sites.
     - Hard to scale the relational database, as single system needs to access it all ideally in memory and difficult to separate the data.
+  - Adding data should make sure it is consistent across all the columns in the data base.
 
 - **NOSQL (Non-Relational)**
 - [More details](https://database.guide/nosql-database-types/)
@@ -984,7 +986,27 @@ Overall 3 types of control
       - Irrespective of the relational database, no schema to be defined and the relationship changes dynamically.
       - Mostly used by social media sites.
 
+### Data warehousing
+- Used for business intelligence.
+- Tools like Cognos, Jaspersoft, SQL Server Reporting services, Oracle Hyperion, SAP Business Warehouse.
+- Used to pull in very large and complex data sets. Usually used by management to do queries on data (Such as current performance vs targets etc)
+- OLTP (Online Transaction Processing)
+  - Example:
+    - Order number 111222333 pulls up a row of data such as Name, Date, Address to Deliver to Delivery status etc.
+- OLAP (Online Analytics Processing)
+  - Example:
+    - Lets say a manager want to understand the Net Profit for EMEA and Pacific for the Digital Radio Product.
+    - Sum of Radios Sold in EMEA.
+    - Sum of Radios Sold in Pacific
+    - Unit cost of radio in each region sales price of each radio etc
+    - This can involve large query and can pull up huge data.
+- In this case we want to have different databases to split the work. 
+  - One which runs the normal transaction for website (OLTP)
+  - One for running complex queries for OLAP
+
+
 ## RDS
+- Used for OLTP.
 - Supports instance types:
   - Burstable
   - Memory optimized
@@ -1254,6 +1276,8 @@ Overall 3 types of control
   - Application require strongly consistent ones are not recommended, only good for eventual consistent reads. 
 
 ## Elastic Cache.
+- Think of a scenario, Amazon.com customer visiting a common store and many people visiting the same page.
+  - Then the Caches of these queries for the most common queries can takes out the huge load from the backend DB
 - Historically, EC was used in DynamoDB, but later AWS delveoped DAX.
 - ES supports Redis and MemecacheD .
 - It is in-memory data store and two common use cases are:
@@ -1263,7 +1287,10 @@ Overall 3 types of control
 - But also used to store simple session data.
 - It can also use with SQL database engines.
 - A performance enhancing, and to be part of fault tolerance arch for stateless application.
-
+- Two flavours
+  - Memcached
+  - Redis
+  
 # Load Balancing
 - Historically, LBs were only able to route traffic to instances inside an AZ, causing uneven traffic distribution if AZ instances are not equal. 
   - To resolve this disparity introduced the cross zone loadbalancing, which is enabled by default now.
@@ -1900,6 +1927,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Payload poll is 25KB of data.
 
 ## RedShift
+- OLAP
 - Is petabyte scale data wareshouse solution.
 - Data base is designed for OLAP based application (Online Alalytical Processing).
 - OLTP (Online Transaction Processing) which is what most normal db do.
