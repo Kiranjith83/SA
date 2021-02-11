@@ -887,13 +887,30 @@ Overall 3 types of control
 - Signed Cookies.
   - If individual needs access to more services then Signed Cookies are used.
 
+# Amazon FSx for Windows.
+- Provides a fully managed native win filesystem so you can easily move windows based applications that require file storage to aws.
+- FSX is built on windows server.
+- A managed win server (SMB) file service.
+- Supports AD Users, Access control lists, groups and security policy with Distributed File system namespaces and replication. 
+- Used in IIS, MS SQL, Sharepoint or native MS application.
 
+# AWS FSx for Luster
+- Managed filesystem optimized for compute intesive workloads  like HPC, ML, Media data processing workflows and electronic design automation.
+- With AWS FSx, you can launch and run a Lustre file system that can process massive data sets at upto hundreds of gigabytes per sec of throughput, Mil of IOPS and sub-millisecond latencies.
+- Fast, scalable, shared file storage works natively with AWS S3.
+- Supported: 
+  - Compatible with the most popular Linux-based AMIs, including Amazon Linux, Amazon Linux 2, Red Hat Enterprise Linux (RHEL), CentOS, SUSE Linux and Ubuntu. FSx for Lustre is also compatible with both x86-based EC2 instances and Arm-based EC2 instances powered by the AWS Graviton2 processor.
+- [Read the FAQ Here](https://aws.amazon.com/fsx/lustre/faqs/)
 
 # EFS
 - NFSv4
 - Designed for Large scale parallel access of data.
 - Accessed via mount targets.
 - For Linux
+- No need to pre-provision storage. It grows as in data is added, scales upto petabytes.
+- Thousands of concurrent NFS connections supported.
+- Data is stored across multi AZ. 
+- Read after Write consistency.
 - Accessed via VPC, VPN or Direct connect.
 - Performance
   - General purpose
@@ -908,6 +925,12 @@ Overall 3 types of control
   - Infrequent access.
 - amazon-efs-utils helps to get type of file system efs.
   - `mount -t efs <filesystem id>:/path  /to/system/path`
+- EFS storage class
+  -  EFS lifecycle management feature automates moving files from Standard storage to IA storage.
+    - Infrequent Access 
+      - The Infrequent Access (IA) storage class is a lower-cost storage class that's designed for storing long-lived, infrequently accessed files cost-effectively.
+    - Standard 
+      - The Standard storage class is used to store frequently accessed files.
 
 # Database
 ## Database models
@@ -1431,6 +1454,35 @@ Overall 3 types of control
 # EC2
 - On demand instance
 - Spot Instances
+  - Available upto 90% discount.
+  - The instance will be provisioned so long as the spot proice is Below the max spot price.
+  - `Spot Block` to stop spot instances from terminated even iof the spot price goes over max spot price.
+  - Spot Instances with a defined duration (also known as Spot blocks) are designed not to be interrupted and will run continuously for the duration you select.
+    - This can set between `one to six` hours.
+    - When a request with a duration is fulfilled, the price for your Spot Instance is fixed, and this price remains in effect until the instance terminates
+  - Spot is used for
+    - Big data analytics
+    - Containerized workloads
+    - CI/CD and testing
+    - Web Services
+    - Image and media rendering
+    - HPC
+  - Spot is not good for
+    - Persistent workloads
+    - Critical job
+    - Databases
+  - Spot Fleets
+    - Spot fleets are collection spot and Optionally on-Demand instances.
+    - Spot Fleet tries to match t he target capacity with your proce restraints.
+    - To ensure that you always have instance capacity, you can include a request for On-Demand capacity in your Spot Fleet request. 
+    - Allocation Stratergy for SpotFleet
+      - CapacityOptimizized
+      - lowestPrice
+      - diversified
+        - Spot instances are distributed across all pods
+      - instancePoolsToUseCount
+        - The spot instances are distributed across the number of spot instance pools you specify. 
+        - Used in combination of lowestPrice
 - Dedicated hosts
   - For licensing tagged to Hardwre (Oracle).
   - Regulatory requirement.
@@ -1445,6 +1497,12 @@ Overall 3 types of control
     - Available to Launch within the time windows you reserve. Allowing toi match the capacity reservation to predictable recurring schedule happening at a fraction of a day/month or week.
 - Instance Types overview
 - Other than Root volumes are not deleted by default during termination of instance.
+
+## EC2 Hybernate
+- OS gets hybernated, saving the contents from the RAM to EBS volume.
+- Instance retains its instance ID.
+- Option to "Enable hybernation as a Stop" Behavior while launching the instance.
+  - To enable hibernation, space is allocated on the root volume to store the instance memory (RAM). Make sure that the root volume is large enough to store the RAM contents and accommodate your expected usage, e.g. OS, applications. To use hibernation, the root volume must be an encrypted EBS volume. 
 
 # EBS
 - General purpose SSD
@@ -1474,15 +1532,33 @@ Overall 3 types of control
   - API NAME: Standadrd
   - 1G-1T
   - 40-200 IOPS
+## EBS Encryption
+- Now AWS support New ec2 instances with encrypted root device while launching the instance. 
+- If existing EC2 instances needs Root device volume encryption. 
+  - Provision an instance with unencrypted root volume
+  - Take snapshot and copy the snapshot to encrypt.
+  - Create an AMI from encrypted snapshot copy.
+
 
 # ENI vs ENA vs EFA
 ## ENI
 - Elastic Network Interface 
+
 ## ENA
 - Enhanced Networking. 
 - Uses single root I/o virtualization (SR-IOV) to provide high performance networking capabilities on supported instance types.
+- SR-IOV is a method for device virtuialization that provdes higher I/O performance and lower CPU utlization compare to tradition ENI.
+- Used whereever needs a good network performance.
+- EN provides high bandwidth, high packet per second and consistently lower inter instance latency. 
+- NO additional charges, but has to be on a supported instance.
+- It can enable by 
+  - ENA supporting upto 100Gbps.
+  - Intel 82599 Virtual Function interface support upto 10 Gbps.
 ## EFA
-- A network devide that you can attach to your EC2 instance to accelerate HPC and Machine learning apps
+- A network devide that you can attach to your EC2 instance to accelerate HPC and Machine learning apps.
+- EFA provides lower and more consitent latency and high throughput than the TCP transport traditionally used in cloudbased HPC Systems.
+- EFA can use OS-Bypass enables HPC and ML apps to bypass the OS system kernel and to communicate directly with the EFA device.
+  - This makes it faster with low latency and supported on on Linux.
 
 
 # Data and DB Migration
@@ -1863,6 +1939,8 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
       - SNS
       - ASG
       - EC2
+- Enable CloudWatch detailed monitoring for 1 min monitoring.
+
 ### CloudWatch Logs
 - Subset of CW designed to collect and store logs
 - Log Event: the time stamp YYYYMMDDHHMMSS together with the RAW Message makes up the LogEvent.
