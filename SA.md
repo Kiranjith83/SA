@@ -1308,6 +1308,10 @@ chkconfig httpd on
   - Kind of proxy, which leaves on same computer instances.
   - DAX is designed for high index read application that can't afford read latency.
   - Application require strongly consistent ones are not recommended, only good for eventual consistent reads. 
+- 10x performance improvement.
+- Reduces request time from milliseconds to Micro seconds.
+- No need for developers to manage the caching logic. 
+- Compatible with DynamoDB API Calls.
 
 ## Elastic Cache.
 - Think of a scenario, Amazon.com customer visiting a common store and many people visiting the same page.
