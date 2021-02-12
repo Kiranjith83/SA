@@ -148,6 +148,46 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Stop spending money on data center operations.
     - Analyze and attribute expenditure. 
     - Use managed services to reduce cost of ownership.
+
+# AWS Directory services
+## Managed AD (Directory service for Microsoft AD) .
+- AWS resources can connect to on prem AD.
+- Use existing AD credentials can connect to AD.
+- Can manage AWS console access. 
+- EC2 instances can have centralized user management.
+- AD domain controller on EC2 instances
+- Deployed in VPC, add DCs for HA.
+- Extend to on prem using AD Trust.
+- Benefits:
+  - Multi AZ deployment
+  - Patch, monitor and recovery
+  - Instance rotation.
+  - Snapshots and restore.
+## Simple AD
+- Standalone managed directory 
+- With basic AD Features
+- Small less than 500 users and larger 5000 users. 
+- Easier to manage EC2 win or Linux workload that needs LDAP.
+- It doesn't support trusts (Cant join on-prem AD)
+
+## AD Connector
+- Is a gateway (Proxy for on-premises AD)
+- Can avoid caching information in the cloud.
+- Allow on-premises users to log into AWS using AD.
+- Join EC2 instances to your existing AD Domain.
+- Scale across multiple AD Connectors.
+
+## Cloud Directory
+- Fully managed service
+- Directory based store for developers
+- Multiple hierarchies with hundreds of mullions of objects.
+- Use cases: Org charts, Course catalogs, device registries.
+
+## Cognito User Pools.
+- IDP work with Social media.
+
+
+
 # IAM
  - Root account to have MFA to enabled. 
  - Root user is responsible for setting up other IAM users.
@@ -1052,6 +1092,7 @@ Overall 3 types of control
     - When provision multi AZ RDS, it creates secondary standby instance,
     - RDS perform `synchronous replication` when Multi-AZ. Copied from Primary node to Secondary Node.
     - Replication happens between instances.
+    - Data transferred between Availability Zones for replication of Multi-AZ deployments is free. 
     - RDS perform an Automatic failover during failure.
     - It can happen if there are isolated issues with underlying hardware or configuration upgrade.
       - In the case of software upgrade, it changes the secondary instance first, changes the CNAME mapping then finally update the primary instance.
@@ -1728,6 +1769,7 @@ Capacity type - Two trpes.
 - Data can be synced to most of the above engines as well as RedShift, S3 and DDB.
 - AWS Schema Conversion Tool AWS SCT can be used to transform between different database engines as part of migration.
   - Transforms structure of DB change while converting data between different DB engines. 
+  - For example, migrate from Oracle to Aurora we need the SCT (Schema converstion Tool).
 - DMS can be used:
   - Migrate
   - Want to scaleup existing Database.
@@ -1874,7 +1916,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
     - Maintain the database and schema even if the data is not being quiried.
 - Athena tries to address these two issues.
 - Athena handles things differents, the data stays in S3 in original format.
-- Supports XML, JSON, CSV/TSV, ARVO, ORC, PARQUET etc..
+- Athena will work with a number of data formats including "JSON", "Apache Parquet", "Apache ORC" amongst others, but "XML" is not a format that is supported.
 - Main benefit is that all data can be on S3.
 - Amazon Athena is an interactive query service that utilizes schema-on-read mechanism.
   - Schema-on-read:
@@ -1909,6 +1951,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Failure of core nodes can cause storage instability and any job or part of a big job running on the system fails.
   - **Task nodes** they only runs tasks. It has no role in cluster management. 
   - Task nodes failures can be recovered.
+- You can configure the cluster to periodically archive the log file stored on the master node to S3. This has to be done at the setup stage while creating the cluster. It happens in five-min interval.
 - S3 uses as data store. EMRFS the whole data is residing on S3.
 - EMR is used for huge scale log analysis, indexing, machine learning, financial analysis, simulations, bioinformatics and many other large scale application.
   - It process huge sets of data.
