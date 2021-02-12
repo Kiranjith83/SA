@@ -179,7 +179,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 - Scale across multiple AD Connectors.
 ## Not compatible with MicroSoft AD
 ### Cloud Directory
-- Fully managed service
+- Fully managed directory service
 - Directory based store for developers
 - Multiple hierarchies with hundreds of mullions of objects.
 - Use cases: Org charts, Course catalogs, device registries.
