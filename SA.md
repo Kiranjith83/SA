@@ -190,7 +190,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 - Not compatible with MicroSoft AD
 
 # ARN
-Format
+- Format
+
 ![Alt text](/pic/arn.png?raw=true "ARN")
 
 # IAM
