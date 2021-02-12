@@ -216,6 +216,11 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Groups have no credentials. 
  ## IAM Policies
   - Json formatted documents gives permission as to what a user can do.
+  - Not explicitly allowed == implicitly denied. 
+  - Explicit deny precedence over everything.
+  - Permission boundaries:
+    - Controls the max permissions an IAM policy can grant. 
+
  ## IAM Roles.
   - Roles are never logged into but assumed and gains the permission it carries.
   - With roles, we define the entity who can assume the role at Trust relationships.
