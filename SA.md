@@ -1075,7 +1075,22 @@ Overall 3 types of control
     - Hierarchy of read replicas are possible. But there will be a lag and application has to support this eventual consistency.
     - Read replicas updates are independent.
     - Manually have to point to the read replica.
-
+### RDS Labtest
+Install and configure the wordpress
+```
+#!/bin/bash
+yum install httpd php php-mysql -y
+cd /var/www/html
+wget https://wordpress.org/wordpress-5.1.1.tar.gz
+tar -xzf wordpress-5.1.1.tar.gz
+cp -r wordpress/* /var/www/html/
+rm -rf wordpress
+rm -rf wordpress-5.1.1.tar.gz
+chmod -R 755 wp-content
+chown -R apache:apache wp-content
+service httpd start
+chkconfig httpd on
+```
 ### SQL Aurora
 - Is a custom designed database engine. 
 - Compatible with MySQL and PostgreSQL tools.
@@ -1282,7 +1297,7 @@ Overall 3 types of control
 - ES supports Redis and MemecacheD .
 - It is in-memory data store and two common use cases are:
   - Offloading database reads by caching responses, improving application speed and reduce costs.
-  - Storing user session state, allowing for stateless compute instances(used for fault tolerance architectures).
+  - Storing user session state, allowing for stateless compute instances(usezd for fault tolerance architectures).
 - It is generally used with Key Value databases.
 - But also used to store simple session data.
 - It can also use with SQL database engines.
@@ -1290,7 +1305,7 @@ Overall 3 types of control
 - Two flavours
   - Memcached
   - Redis
-  
+
 # Load Balancing
 - Historically, LBs were only able to route traffic to instances inside an AZ, causing uneven traffic distribution if AZ instances are not equal. 
   - To resolve this disparity introduced the cross zone loadbalancing, which is enabled by default now.
