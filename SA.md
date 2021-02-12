@@ -1110,12 +1110,13 @@ chkconfig httpd on
   - Aurora is billed for the storage that is used not the allocation.
   - In the cluster write comes from a single node, and read happens on other two nodes.
 - Aurora uses subnet groups, (Which subnet the db has to deploy into)
+- Read replicas upto 15
 - Cluster storage:
   - All instances primary and replicas use the same shared storage. The Cluster volumes.
-  - Cluster volume is SSD based and can be upto 64 TiB.
+  - Cluster volume is SSD based and can be scaled upto 64 TiB.
   - Replicates data six times across three AZ.
   - Tolerate two failures without writes being impacted and three failures without read impact.
-  - Aurora storage is auto healing.
+  - Aurora storage is auto healing, data blocks and disks are continuously scanned and repaired automatically.
 - Cluster scaling and availability.
   - Cluster volume scales automatically and billed for consumed data. Data is backed up to S3.
   - Aurora replicas improve availability, can be promoted to primary instance quickly and allow for efficient read scaling.
@@ -1150,6 +1151,11 @@ chkconfig httpd on
   - The region info of the cluster will be noted as 'Global'.
 
 #### Aurora Serverless Essentials
+Capacity type - Two trpes.
+  - Provisioned
+    - You provision and manage the server instance sizes.
+  - Serverless
+    - You specify the minimum and maximum amount of resources needed, and Aurora scales the capacity based on database load. This is a good option for intermittent or unpredictable workloads.
 - The relation DB without admin overhead. 
 - It offers ability to scale the capacity using ACUs(Aurora capacity Units).
 - Specify the min and max ACUs
@@ -1212,6 +1218,9 @@ chkconfig httpd on
     - Query can be only performed on a single partition key. If you want to work with multiple partition keys have to use SCAN.
 - Backup and restore
   - Point in time restore can be enabled at the table level.
+    - Restores to any point in the last 35 days.
+    - Incremental backups.
+    - Latest restorable: 5 min in the past.
   - Manual explicit backup is supported by DDB. Backup contains all the configurations and the indexes.
   - Restoring backup to the new table name.
 - Encryption comes as standard on DDB
@@ -1312,6 +1321,7 @@ chkconfig httpd on
 - Reduces request time from milliseconds to Micro seconds.
 - No need for developers to manage the caching logic. 
 - Compatible with DynamoDB API Calls.
+- DAX also has write through cache to improve the write performance.
 
 ## Elastic Cache.
 - Think of a scenario, Amazon.com customer visiting a common store and many people visiting the same page.
@@ -1328,6 +1338,8 @@ chkconfig httpd on
 - Two flavours
   - Memcached
   - Redis
+- Difference between MemCached and Redis.
+![Alt text](/pic/elasticCachecompare.png?raw=true "Difference between memchached and redis")
 
 # Load Balancing
 - Historically, LBs were only able to route traffic to instances inside an AZ, causing uneven traffic distribution if AZ instances are not equal. 
@@ -1965,10 +1977,11 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Payload poll is 25KB of data.
 
 ## RedShift
-- OLAP
+- OLAP (Online Analytics processing).
+  - Way of checking sum of things sold on each region.
 - Is petabyte scale data wareshouse solution.
 - Data base is designed for OLAP based application (Online Alalytical Processing).
-- OLTP (Online Transaction Processing) which is what most normal db do.
+- OLTP (Online Transaction Processing) which is what most other db do.
 - Update and add individual record is what RDS do. 
 - RedShift is used for Dataware housing and Analytics and data is stored in Column.
   - For example: Every ones firstname, surname and everyones age is stored together in same location of physical storage devices.
@@ -1977,6 +1990,13 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Traditional DB will be costly and time consuming for such scenarios.
 - It uses cluster architecture capable of loading and unloading data from S3.
 - Kinesis and Firehose can be a product that can store data in RedShift.
+- Priced on compute node hours.
+ - Not charged for leader node hours.
+- Backups
+  - Enabled by default with a 1 day retention period.
+  - Max retention period is 35 days.
+  - Maintains at least 3 copies of your data (Original, replica on compute node and backup in S3)
+  - For DR, RedShift can asynchronously replicate snapshots to S3 in another region.
 - Architecture    
 ![Alt text](/pic/redshift.png?raw=true "RedShift")
 - Leader node 
