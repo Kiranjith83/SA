@@ -191,8 +191,23 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 # ARN
 - Format
-
 ![Alt text](/pic/arn.png?raw=true "ARN")
+
+# AWS Resource Access Manager RAM.
+- Helps to share resources between two AWS Accounts.
+- Supported services
+  - AppMesh
+  - Aurora
+  - CodeBuild 
+  - EC2 & EC2 Image builder
+  - License Manager
+  - Resource Groups
+  - Route 53
+- While sharing.
+  - Account 1 sends invitation
+  - Account 2 has to accept the resource share
+- Using ARM can share an RDS to another account,
+  - Once its shared a clone can be made.
 
 # IAM
  - Root account to have MFA to enabled. 
