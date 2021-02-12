@@ -150,7 +150,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
     - Use managed services to reduce cost of ownership.
 
 # AWS Directory services
-## Managed AD (Directory service for Microsoft AD) .
+## Compatible with MS AD.
+### Managed AD (Directory service for Microsoft AD) .
 - AWS resources can connect to on prem AD.
 - Use existing AD credentials can connect to AD.
 - Can manage AWS console access. 
@@ -163,29 +164,30 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Patch, monitor and recovery
   - Instance rotation.
   - Snapshots and restore.
-## Simple AD
+### Simple AD
 - Standalone managed directory 
 - With basic AD Features
 - Small less than 500 users and larger 5000 users. 
 - Easier to manage EC2 win or Linux workload that needs LDAP.
 - It doesn't support trusts (Cant join on-prem AD)
 
-## AD Connector
+### AD Connector
 - Is a gateway (Proxy for on-premises AD)
 - Can avoid caching information in the cloud.
 - Allow on-premises users to log into AWS using AD.
 - Join EC2 instances to your existing AD Domain.
 - Scale across multiple AD Connectors.
-
-## Cloud Directory
+## Not compatible with MicroSoft AD
+### Cloud Directory
 - Fully managed service
 - Directory based store for developers
 - Multiple hierarchies with hundreds of mullions of objects.
 - Use cases: Org charts, Course catalogs, device registries.
+- Not compatible with MicroSoft AD
 
-## Cognito User Pools.
+### Cognito User Pools.
 - IDP work with Social media.
-
+- Not compatible with MicroSoft AD
 
 
 # IAM
