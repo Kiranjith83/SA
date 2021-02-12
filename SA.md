@@ -1064,6 +1064,8 @@ Overall 3 types of control
 
   - Read replicas
     - Allow systems to scale out to greater amount of read.
+    - ReadRplica can be only turned on if backup is on.
+    - MySQL can be created as Aurora ReadReplica to migrate the database from MySQL to Aurora.
     - They are the read only replicas of RDS created on same of different region.
     - It performs `Asynchronous replication`.
     - It is created independently, Meaning CNAME is different.
@@ -1075,7 +1077,13 @@ Overall 3 types of control
     - Hierarchy of read replicas are possible. But there will be a lag and application has to support this eventual consistency.
     - Read replicas updates are independent.
     - Manually have to point to the read replica.
-### RDS Labtest
+    - Available for
+      - MySQL Server
+      - PostgreSQL
+      - MariaDB
+      - Oracle
+      - Aurora
+### RDS Lab test
 Install and configure the wordpress
 ```
 #!/bin/bash
@@ -1091,6 +1099,7 @@ chown -R apache:apache wp-content
 service httpd start
 chkconfig httpd on
 ```
+
 ### SQL Aurora
 - Is a custom designed database engine. 
 - Compatible with MySQL and PostgreSQL tools.
@@ -1158,8 +1167,18 @@ chkconfig httpd on
 - To use the query editor it needs to use the Data API.
 - Data editor is only available in Aurora Serverless. 
 
-### NoSQL DynamoDB.
+## NoSQL DynamoDB.
 - NoSQL DB, features more in dev and sysops exams. 
+- Fast and flexible NoSQl DB service for all application which needs single digit Millisecond latency.
+- Supports both document and Key value data.
+- Great fit for Mobile, web, gaming, ad-tech, IoT etc.
+- Stored on SSD Storage in the backend.
+- Spread across 3 geographically distinct data centers.
+- Eventual consistent reads (Default)
+  - Consistently across all copies of data is usually reached within a sec. 
+  - Repeating the read after short time should return the read.
+- Strongly consistent read.
+  - If the written data has to be read within one sec or at the same time.
 - Referred to a key value, but not really true its more accurate to describe as a wide column store.
 - ITEM, is a collection of attributes upto 400KB inside a table that shares the same key structure as every other item in the table. 
   - Item consists of primary key of the table(partition key or both partition and sort keys).
