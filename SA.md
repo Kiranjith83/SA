@@ -589,34 +589,35 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - HTTP and HTTPS connection check in less that 4 seconds.
       - TCP health check: tcp connection within 10 seconds
     - The health checks status can be also Inverted and used.
+    - If a record set fails a health check it will be removed from Route53 until it passes the health check.
   - [Routing Polcy:](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html)
-    - Simple:
-      A simple routing policy is a single record within a hosted zone that contains one or more values. When queried, a simple routing policy record returns all the values in randomized order. 
+    - **Simple**:
+      A simple routing policy is a single record within a hosted zone that contains one or more values. When queried, a simple routing policy record returns all the values in ***randomized*** order. 
       - Pros: Simple, the default, even spread of requests
       - Cons: No performance control, no granular health checks, no influence on which IP is returned or not to be used as LoadBalancer. If Alias is picked, we can only select a single Alias record.
-    - Failover:
+    - **Failover**:
       Enhances the ability to failover from one to another record based on health check.
       - Failover routing allows you to create two records with the same name.
       - One is designated as the primary and another as secondary. Queries will rewove to the primary, - unless its unhealthy in which case route 53 will respond the secondary.
       - Failover can be combined with other ty;es to allow multiple primary and secondary records. Generally, failover is used to provide emergency resources during failures.
-    - Weighted routing:
-      Control amount of traffic reaching specific resources.
+    - **Weighted routing**:
+      Control amount of traffic reaching specific resources based on weight specified.
       - Route traffic to specific resource based on the weight. 
       - The higher weight number, the more traffic it gets.
         - Create 3 SSIDs with 3 different weights. 
           - with weight 1
           - with weight 2 
           - with weight 7 
-            - Traffic will be destributed amount 10%, 20% and 70% respectively.
+            - Traffic will be distributed amount 10%, 20% and 70% respectively.
       - SetID unique string, unique among the group of the record.
       - Used for testing new features, and small portion of DNS to be redirected to certain resources.
-    - Latency:
+    - **Latency**:
       With latency based routing, route53 consults a latency database each time a request occurs to a given latency based host in DNS from a resolver server. Record set with the same name are considered part pf the same latency based set. Each is allocated to a region. The record set returned is the one with the lowest latency to the resolver server.
       - It maintains a database of latency between internet based endpoints. 
       - The record is returned on the region based record which is configured at the Latency routing policy.
       - Lookup will resolve or return the one near to the client.
       - It is not only based on Geography, but also based on the ISP.
-    - Geolocation:
+    - **Geolocation**:
       Lets one choose the resources that serve traffic based on geographic region from which queries originated. 
       - With Geolocation pick a location Country, continent, and SetID.
       - A crucial difference between Latency and Geolocation is that, unless there is a geolocation based on region configured it will return no record for the client.
@@ -625,7 +626,7 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Different location of granularity can be applied to the location (Countries, Continents etc).
       - Default can be used to choose to return traffic for any geo location.
       - Order of traffic returned is based on the Geoproximilty.
-    - Multivalue Answer:
+    - **Multivalue Answer**:
       - Same like simple routing policy but allows multiple records with the same name. 
       - Returns upto 8 of the records in random.
 
