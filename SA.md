@@ -598,8 +598,8 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - **Failover**:
       Enhances the ability to failover from one to another record based on health check.
       - Failover routing allows you to create two records with the same name.
-      - One is designated as the primary and another as secondary. Queries will rewove to the primary, - unless its unhealthy in which case route 53 will respond the secondary.
-      - Failover can be combined with other ty;es to allow multiple primary and secondary records. Generally, failover is used to provide emergency resources during failures.
+      - One is designated as the primary and another as secondary. Queries will route to the primary, - unless its unhealthy in which case route 53 will respond the secondary.
+      - Failover can be combined with other types to allow multiple primary and secondary records. Generally, failover is used to provide emergency resources during failures.
     - **Weighted routing**:
       Control amount of traffic reaching specific resources based on weight specified.
       - Route traffic to specific resource based on the weight. 
@@ -625,10 +625,11 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - When a given resolver attempts a lookup, it returns only record with matching name and matching incoming location.
       - Different location of granularity can be applied to the location (Countries, Continents etc).
       - Default can be used to choose to return traffic for any geo location.
-      - Order of traffic returned is based on the Geoproximilty.
+      - Order of traffic returned is based on the Geo-proximity.
+        - Geo-proximity traffic policies can help to create a policy based on traffic policy created with restriction.
     - **Multivalue Answer**:
       - Same like simple routing policy but allows multiple records with the same name. 
-      - Returns upto 8 of the records in random.
+      - Returns up to 8 of the records in random.
 
 
 # S3
