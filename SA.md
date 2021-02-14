@@ -626,7 +626,9 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
       - Different location of granularity can be applied to the location (Countries, Continents etc).
       - Default can be used to choose to return traffic for any geo location.
       - Order of traffic returned is based on the Geo-proximity.
-        - Geo-proximity traffic policies can help to create a policy based on traffic policy created with restriction.
+        - [Geo-proximity traffic policies](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geoproximity) are created for a specific location to route traffic to a record.
+        - Geoproximity routing lets Amazon Route 53 route traffic to your resources based on the geographic location of your users and your resources.
+        - BIAS helps to choose to route more or less traffic to a resource.
     - **Multivalue Answer**:
       - Same like simple routing policy but allows multiple records with the same name. 
       - The record can get associated with the health check and can return only healthy records.
