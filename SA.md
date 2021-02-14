@@ -629,8 +629,8 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
         - Geo-proximity traffic policies can help to create a policy based on traffic policy created with restriction.
     - **Multivalue Answer**:
       - Same like simple routing policy but allows multiple records with the same name. 
+      - The record can get associated with the health check and can return only healthy records.
       - Returns up to 8 of the records in random.
-
 
 # S3
   - S3 Read and write consistency with new file explained as:
