@@ -1612,6 +1612,14 @@ Private link can solve the complex nature of VPC Peering and security considerat
 - Requires a Network Loadbalancer on the service VPC and an ENI on the customer VPC.
 - Architecture.
 ![Alt text](/pic/vpcPrivlink.png?raw=true "AWS VPC Priavate Link")
+- (Read More)[https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html]
+
+# AWS Transit gateway
+- Allows to transit traffic between many VPCs
+- Supports IP Multicast.
+- Simplifies network architecture.
+
+# 
 
 # Snowball, Snowball Edge, and Snowmobile
 - AWS Snowball, Snowball Edge, and Snowmobile are all products designed to allow huge data transfers in and out of AWS. 
