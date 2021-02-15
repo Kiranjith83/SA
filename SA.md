@@ -1154,6 +1154,10 @@ Overall 3 types of control
       - MariaDB
       - Oracle
       - Aurora
+- You can force RDS failover from one AZ to another by forcing a reboot.
+  - While rebooting choosing an option "Reboot with Failover".
+  - This will have a downtime for minute.
+
 ### RDS Lab test
 Install and configure the wordpress
 ```
@@ -1415,12 +1419,21 @@ Capacity type - Two trpes.
 # Load Balancing
 - Historically, LBs were only able to route traffic to instances inside an AZ, causing uneven traffic distribution if AZ instances are not equal. 
   - To resolve this disparity introduced the cross zone loadbalancing, which is enabled by default now.
+- [Read the FAQ](https://aws.amazon.com/elasticloadbalancing/faqs/)
+
 ## CLB
 - Supports layer 3 and 4 (TCP and SSL) and some HTTPS features(Configuring HTTP health check)
 - Its not a Layer 7 device so no real HTTPS. 
 - One SSL Cert per CLB, which can get expensive for complex deployments. 
 - SSL Offload, can be connected to AutoScaling Group.
 - Health check min time is 5 sec.
+- X-Forwarded-For header used for getting the IPv4 address of your end user.
+- Sticky session
+  - Stick the user session to a perticular instance.
+  - Useful if the application is saving session info or other details locally and need the session to the same instance.
+  - Sticky sessions will make sure the traffic from the client is always routed to the same instance.
+- Cross Zone Load Balancing.
+  - Traffic gets distributed amoung all availability zones.
 ## ALB
 - Operates at L7 OSI model
 - ALBS are recomended as the default LB for VPCs. Better performance and cheaper than CLB. 
@@ -1441,6 +1454,8 @@ Capacity type - Two trpes.
   - http request method
   - query string
   - source IP
+- Sticky session:
+  - Enabling stickiness sends traffic to the target group level.
 ## NLB 
 - Operates at Layer 4.
 - Less latency because no processing above Layer 4 is required, with highest performance. 
@@ -2398,6 +2413,25 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
   - No admin overhead, absolute no admin overhead with all above critera. 
 # OpsWorks
 - Designed for Infra engineer not for delveloper.
+
+# AWS Migration Services
+- DMS (Database Migration Service).
+  - Allows to move database to and from AWS.
+  - Homogenous migration.
+    - Oracle to Oracle
+  - Heterogenous migration
+    - Oracle to Amazon Aurora
+- SMS (Server Migration Service).
+  - Allows to incremental replication of on-prem application services into AWS.
+- AWS Application Discovery Service.
+  - Help customer to gather information of the datacenter. 
+  - Collected data is used to create the Total Cost of Ownership (TCO) once you migrate the service to AWS.
+- VM Import/Export.
+  - Migrate existing applications into EC2
+  - Can be used to create a DR strategy on AWS to use AWS as a second site.
+  - VM Import/Export enables you to easily import virtual machine images from your existing environment to Amazon EC2 instances and export them back to your on-premises environment
+- Download Amazon Linux2 as an ISO.
+  - Works on all types of hypervisors.
 
 # Exam Preperation
 - re:Invent Videos 1xx, 2xx, 3xx or 4xx videos. 
