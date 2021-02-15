@@ -1625,6 +1625,14 @@ Private link can solve the complex nature of VPC Peering and security considerat
 - Low cost and easy to manage
 - It operates over the public internet, but all traffic between the customer gateway and the AWS VPC CloudHub is encrypted.
 
+# AWS Network Cost optimization
+- Cost of traffic.
+![Alt text](/pic/networkcost.png?raw=true "AWS VPC traffic cost")
+- Use private IP over public IP to save on traffic cost.
+  - in this case it uses AWS Backbone network.
+- Group ec2 instances in same AZ which needs constant communication with private IP.
+  - Design for fail -> putting all in a single AZ can cause issues to availability. 
+
 # Snowball, Snowball Edge, and Snowmobile
 - AWS Snowball, Snowball Edge, and Snowmobile are all products designed to allow huge data transfers in and out of AWS. 
 - All devides are portable storage devices. 
