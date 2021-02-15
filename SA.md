@@ -1526,6 +1526,7 @@ Capacity type - Two trpes.
   - If same route mentioned twice then the static route is preferred. 
   - Any Direct is prefered over VPN.
   - Dynamic propogated leadned from BGP got lowest pref.
+- NAT Gateway starts at 5Gbps and scaled upto 45Gbps
 ## When and where to choose VPN 
 - Urgent need 
 - Cost constrains needed cheap and economical
@@ -1569,6 +1570,48 @@ Capacity type - Two trpes.
 - VPN as a additinal layer of HA (in addition to two DX).
 - If some form of connectivity is needed immediately, VPN provides before the DX connection is live.
 - VPN Can be used to add encryption on top of DX (Public VIF VPN).
+
+# Global Accelerator
+- AWS Global Accelerator is a networking service that sends your user’s traffic through Amazon Web Service’s global network infrastructure, improving your internet user performance by up to 60%. 
+- It provides 
+  - It has static IP addresser
+  - Accelerator. 
+    - Directs traffic to a optimal endpoint.
+    - it has one or more listener
+    - It will have a default DNS name. 
+  - Network zone
+    - Isolated unit with own set of network infrastructure (Similar to AZ).
+  - Listener.
+    - A listener processes inbound connections from client to Global accelerator, based on port or protocol.
+  - Endpoint group.
+  - Endpoint.
+    - Can be NLB, ALB, EC2 instances or EIP.
+  - Creating a Global Accelerator. 
+    1. Create an endpoint -> An application 3 tier architecture and get Loadbalancer.
+    2. Now create accelerator ->
+      - Config Listener (Almost similar like creating a LB)
+      - Endpoint -> Finally add the endpoint create in above step. 
+    - It creates the DNS name and get us the IP address.
+- Why to use?
+  - Improve availabilty anbd performance of your application. 
+
+# VPC Endpoints
+- Interface endpoints
+  - Creates ENI for private access in the VPC.
+- Gateway endpoints
+  - S3 and DynamoDB.
+
+# AWS Private Link (VPC Endpoint Service)
+One of the way to open up a service from one VPC to another VPC.
+Common options are:
+  - Openup to internet
+  - Use VPC Peering
+Private link can solve the complex nature of VPC Peering and security considerations that needs for Opening up VPC to internet for service access.
+- Private link allows to expose a service VPC to tens, hundreds or thousands of customer VPCs.
+- It doesn't require VPC Pering, no route tables, NAT, IGW etc.
+- Requires a Network Loadbalancer on the service VPC and an ENI on the customer VPC.
+- Architecture.
+![Alt text](/pic/vpcPrivlink.png?raw=true "AWS VPC Priavate Link")
 
 # Snowball, Snowball Edge, and Snowmobile
 - AWS Snowball, Snowball Edge, and Snowmobile are all products designed to allow huge data transfers in and out of AWS. 
