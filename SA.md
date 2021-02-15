@@ -1600,6 +1600,7 @@ Capacity type - Two trpes.
   - Creates ENI for private access in the VPC.
 - Gateway endpoints
   - S3 and DynamoDB.
+- Enabling private DNS requires both enableDnsSupport and enableDnsHostnames VPC attributes 
 
 # AWS Private Link (VPC Endpoint Service)
 One of the way to open up a service from one VPC to another VPC.
@@ -1613,6 +1614,9 @@ Private link can solve the complex nature of VPC Peering and security considerat
 - Architecture.
 ![Alt text](/pic/vpcPrivlink.png?raw=true "AWS VPC Priavate Link")
 - [Read More](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html)
+- To use AWS PrivateLink, create a VPC endpoint for a service in your VPC. You create the type of VPC endpoint required by the supported service. This creates an elastic network interface in your subnet with a private IP address that serves as an entry point for traffic destined to the service. 
+
+
 
 # AWS Transit gateway
 - Allows to transit traffic between many VPCs
@@ -2225,6 +2229,24 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Difference between Ctrail and CW Events is that CW events can do something based on a event, But ctrail can only monitor.
 - Apart form Ctrail, CW Event can see the issue as it occurs (No delay)
 
+### CloudWatch Creating Metrics filter for VPC Flow logs to send an Alarm for a traffic event.
+#### Create the VPC Flow log to log to CloudWatch log group.
+- Make sure the log streams are getting created. 
+
+#### Capture and test the metrics pattern.
+- From Cloudwatch log group create metrics fileter and use below format for testing. 
+##### CloudWatch Logs Metric Filter Pattern
+```
+[version, account, eni, source, destination, srcport, destport="22", protocol="6", packets, bytes, windowstart, windowend, action="REJECT", flowlogstatus]
+```
+##### Custom Log Data to Test
+```
+2 086112738802 eni-0d5d75b41f9befe9e 61.177.172.128 172.31.83.158 39611 22 6 1 40 1563108188 1563108227 REJECT OK
+2 086112738802 eni-0d5d75b41f9befe9e 182.68.238.8 172.31.83.158 42227 22 6 1 44 1563109030 1563109067 REJECT OK
+2 086112738802 eni-0d5d75b41f9befe9e 42.171.23.181 172.31.83.158 52417 22 6 24 4065 1563191069 1563191121 ACCEPT OK
+2 086112738802 eni-0d5d75b41f9befe9e 61.177.172.128 172.31.83.158 39611 80 6 1 40 1563108188 1563108227 REJECT OK
+``` 
+- Once you see the result, create an Alarm -> To SNS topic.
 
 ## CloudTrail
 - Is a governance, compliance, risk governance and auditing service.
@@ -2261,52 +2283,52 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - In Cloudwatch the log group includes all the interfaces as log stream.
 - VPC Flow logs can't be used for "Realtime" analytics.
 - Windows License activation, 169.254.168.254 address, Amazon DNS Traffic, DHCP traffic and VPC Router traffics are Not captured.
-### Analyze VPC Flow Logs Data in Athena
+
+### Analyze VPC Flow Logs Data in Athena.
+#### Create VPC flowlog to log data to S3. 
+- Configure VPC Flow log destination as S3. 
+- Capture the bucket and details that needs query and move to below steps.
 ##### Create the Athena table:
 ```
-    CREATE EXTERNAL TABLE IF NOT EXISTS default.vpc_flow_logs (
-      version int,
-      account string,
-      interfaceid string,
-      sourceaddress string,
-      destinationaddress string,
-      sourceport int,
-      destinationport int,
-      protocol int,
-      numpackets int,
-      numbytes bigint,
-      starttime int,
-      endtime int,
-      action string,
-      logstatus string
-    )  
-    PARTITIONED BY (dt string)
-    ROW FORMAT DELIMITED
-    FIELDS TERMINATED BY ' '
-    LOCATION 's3://{your_log_bucket}/AWSLogs/{account_id}/vpcflowlogs/us-east-1/'
-    TBLPROPERTIES ("skip.header.line.count"="1");
+CREATE EXTERNAL TABLE IF NOT EXISTS default.vpc_flow_logs (
+  version int,
+  account string,
+  interfaceid string,
+  sourceaddress string,
+  destinationaddress string,
+  sourceport int,
+  destinationport int,
+  protocol int,
+  numpackets int,
+  numbytes bigint,
+  starttime int,
+  endtime int,
+  action string,
+  logstatus string
+) PARTITIONED BY (
+  dt string
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ' LOCATION 's3://{your_log_bucket}/AWSLogs/{account_id}/vpcflowlogs/us-east-1/' TBLPROPERTIES ("skip.header.line.count"="1");
 ```
 
 ##### Create partitions to be able to read the data:
 ```
-    ALTER TABLE default.vpc_flow_logs
-    ADD PARTITION (dt='{Year}-{Month}-{Day}')
-    location 's3://{your_log_bucket}/AWSLogs/{account_id}/vpcflowlogs/us-east-1/{Year}/{Month}/{Day}';
+ALTER TABLE default.vpc_flow_logs
+ADD PARTITION (dt='{Year}-{Month}-{Day}') location 's3://{your_log_bucket}/AWSLogs/{account_id}/vpcflowlogs/us-east-1/{Year}/{Month}/{Day}';
 ```
-##### Run the following query in a new query window:
+##### Analyze the table:
 ```
-    SELECT day_of_week(from_iso8601_timestamp(dt)) AS
-      day,
-      dt,
-      interfaceid,
-      sourceaddress,
-      destinationport,
-      action,
-      protocol
-    FROM vpc_flow_logs
-    WHERE action = 'REJECT' AND protocol = 6
-    order by sourceaddress
-    LIMIT 100;
+SELECT day_of_week(from_iso8601_timestamp(dt)) AS
+  day,
+  dt,
+  interfaceid,
+  sourceaddress,
+  destinationport,
+  action,
+  protocol
+FROM vpc_flow_logs
+WHERE action = 'REJECT' AND protocol = 6
+order by sourceaddress
+LIMIT 100;
 ```
 # AWS KMS (Key management service)
 - KMS Allows to create modify and delete customer Master Keys.
