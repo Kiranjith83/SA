@@ -1612,14 +1612,18 @@ Private link can solve the complex nature of VPC Peering and security considerat
 - Requires a Network Loadbalancer on the service VPC and an ENI on the customer VPC.
 - Architecture.
 ![Alt text](/pic/vpcPrivlink.png?raw=true "AWS VPC Priavate Link")
-- (Read More)[https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html]
+- [Read More](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html)
 
 # AWS Transit gateway
 - Allows to transit traffic between many VPCs
 - Supports IP Multicast.
 - Simplifies network architecture.
 
-# 
+# AWS VPN CloudHub.
+- [ReadMore](https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-vpn-cloudhub.html)
+-  The AWS VPN CloudHub operates on a simple hub-and-spoke model that you can use with or without a VPC. Use this approach if you have multiple branch offices and existing internet connections and would like to implement a convenient, potentially low-cost hub-and-spoke model for primary or backup connectivity between these remote offices. 
+- Low cost and easy to manage
+- It operates over the public internet, but all traffic between the customer gateway and the AWS VPC CloudHub is encrypted.
 
 # Snowball, Snowball Edge, and Snowmobile
 - AWS Snowball, Snowball Edge, and Snowmobile are all products designed to allow huge data transfers in and out of AWS. 
