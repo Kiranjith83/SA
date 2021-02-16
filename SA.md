@@ -111,6 +111,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Encryption in transit
    - Use of TLS
 
+## Compare Symmetric and Asymmetric CMK (Customer managed Key) encryption
+![Alt text](/pic/encrypt.png?raw=true "encryptions ")
 
 # AWS WAF (Well architect framework)
 
