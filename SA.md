@@ -1965,8 +1965,6 @@ Types of IDF:
 #### Cognito Synchronisation
 - Tracks the association between user identity and the various different devices they sign-in from.
 - Push synchronization using SNS and all devices will be synchronized with the user data.
-
-
 - You can never access AWS resources without an AWS Identity and if you are using an different IDP you have to perform an exchange and of token, which is the basics of IDF.
 ## AWS Single SignOn with AD (SAML 2.0 Federation).
 ![Alt text](/pic/ssoad.png?raw=true "AWS Single SignOn with AD arch diagram")
@@ -1987,7 +1985,26 @@ Types of IDF:
   - The role assumption happens and gets back a temp sec credentials to directly access AWS Resources.
 - (A tool to play with Web Identity Federation)[https://web-identity-federation-playground.s3.amazonaws.com/index.html)
 
-# Simple Notification Service
+# Event driven architecture.
+## Dead Letter Queue - DLQ
+- Undeliverable mails - what to be done. What to be done for the messages that are not claimed.
+- SNS 
+  - Mesages published to a topic that fail to deliver are sent a SQS queue; help for further analysis or reprocessing
+- SQS
+  - Messages sent to SQS that exceed the queue's maxReceiveCount are sent to a DLQ (It can be another sqs queue)
+- Lambda
+  - Result from failed asynchronous invocations, Due to code error/exceptions or OOM error. Will retry twice and send to either an sqs queue or SNS topic.
+- DLQ example
+![Alt text](/pic/dlq.png?raw=true "DLQ")
+
+## Fanout Pattern
+- If a same message has to be send to multiple location and what if one of the end consumer didn't receive the message?
+- Rather than sending messages directly to the SQS, use SNS topic to send messages to multiple consumers at a time.
+- Example:
+![Alt text](/pic/fanout.png?raw=true "Fanout")
+  
+## Simple Notification Service
+- Architecture
 ![Alt text](/pic/sns.png?raw=true "SNS")
 - It is a publisher -> Topic <- subscriber based service. 
 - So the base entitity in SNS is a topic and various entities can send messages to this topic called publishers.
@@ -2010,7 +2027,7 @@ Types of IDF:
   - A multiple queue subscribing to the queue which receieves the message.
   - Each queues gets the identical message, and perform a job of decoding video to different bit rates.
 
-# Simple workflow service SWF
+## Simple workflow service SWF
 - AWS SWF is aweb service that makes it easy to coordinate work across distributed application components. 
 - You can think of Amazon SWF as a fully-managed state tracker and task coordinator in the Cloud.
 - SWF enables applications for a range of use cases:
@@ -2026,7 +2043,7 @@ Types of IDF:
 - SWF keepos track of all the tasks and events in application.
 
 
-# Simple Queue Service
+## Simple Queue Service
 - Almost similar to the SNS architecture, and can add complementary to the SNS service.
 - Fully managed HA message queues, used for inter process, inter server or inter service messaging. 
 - SQS is used to add a message to a queue, and one of the process or service can retrieve the message.
@@ -2087,7 +2104,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - A short poll returns immediately and long poll waits until the time.
 - A lambda can be triggered when a message is added to the queue.
 
-# Elastic Trancoder.
+## Elastic Trancoder.
 - Service allows to convert media from one format to another.
 - Pay for the compute resource used during the conversion.
 - If a 4k video is uploaded and need different formats, the transcoder can convert it.
