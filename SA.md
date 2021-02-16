@@ -2113,6 +2113,96 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - A short poll returns immediately and long poll waits until the time.
 - A lambda can be triggered when a message is added to the queue.
 
+### Sample python script for sending and receiving SQS messages
+- To Send
+```
+#!/usr/bin/env python3
+
+import argparse
+import logging
+import sys
+import uuid
+from time import sleep
+
+import boto3
+from botocore.exceptions import ClientError
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--queue-name", "-q", default="Messages", help="SQS queue name")
+parser.add_argument("--interval", "-i", default=0.1, help="timer interval", type=float)
+parser.add_argument("--message", "-m", help="message to send")
+parser.add_argument("--log", "-l", default="INFO", help="logging level")
+args = parser.parse_args()
+
+if args.log:
+    logging.basicConfig(format="[%(levelname)s] %(message)s", level=args.log)
+else:
+    parser.print_help(sys.stderr)
+
+sqs = boto3.client("sqs")
+
+try:
+    logging.info(f"Getting queue URL for queue: {args.queue_name}")
+    response = sqs.get_queue_url(QueueName=args.queue_name)
+except ClientError as e:
+    logging.error(e)
+    exit(1)
+
+queue_url = response["QueueUrl"]
+
+logging.info(f"Queue URL: {queue_url}")
+
+while True:
+    try:
+        message = str(uuid.uuid4())
+        logging.info("Sending message: " + message)
+        response = sqs.send_message(QueueUrl=queue_url, MessageBody=message)
+        logging.info("MessageId: " + response["MessageId"])
+        sleep(args.interval)
+    except ClientError as e:
+        logging.error(e)
+        exit(1)
+```
+
+- To receive
+```
+#!/usr/bin/env python3
+
+import logging
+import time
+
+import boto3
+from botocore.exceptions import ClientError
+
+QUEUE_NAME = "Messages"
+
+logging.basicConfig(format="[%(levelname)s] %(message)s", level="INFO")
+sqs = boto3.client("sqs")
+
+try:
+    logging.info(f"Getting queue URL for queue: {QUEUE_NAME}")
+    response = sqs.get_queue_url(QueueName=QUEUE_NAME)
+except ClientError as e:
+    logging.error(e)
+    exit(1)
+
+queue_url = response["QueueUrl"]
+logging.info(f"Queue URL: {queue_url}")
+
+logging.info("Receiving messages from queue...")
+
+while True:
+    messages = sqs.receive_message(QueueUrl=queue_url, MaxNumberOfMessages=10)
+    if "Messages" in messages:
+        for message in messages["Messages"]:
+            logging.info(f"Message body: {message['Body']}")
+            time.sleep(1)  # simulate work
+            sqs.delete_message(
+                QueueUrl=queue_url, ReceiptHandle=message["ReceiptHandle"]
+            )
+        else:
+            logging.info("Queue is now empty")
+```
 ## Elastic Trancoder.
 - Service allows to convert media from one format to another.
 - Pay for the compute resource used during the conversion.
