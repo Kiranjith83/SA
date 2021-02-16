@@ -38,6 +38,15 @@
   ## Undifferentiated heavy lifting. 
    - It means any part of application or system that is not specific to the business. 
      - Example: Describes the part of application that is used by every one, and dont have to focus on. AWS takes care of heavy lifting of the infrastructure management while running your EC2 instances.  
+
+- Reliability
+  - resource will work as designed
+Resiliency
+  -  able to recover from damage or disruption
+Durability
+  - resource will continue to exist until you decide to remove it
+Availability
+  - you can access a resource or service when you need it
    
 # Shared responsibility security model.
 
@@ -1748,6 +1757,7 @@ Private link can solve the complex nature of VPC Peering and security considerat
   - Recomended for apps that have a small number of critical instances that should be kept apart from each other.
   - EC2 instances never allowed on same underlying hardware.
   - This placement group is better for individual instances.
+  - A spread placement group supports a maximum of seven running instances per Availability Zone.
 - Partition Placement Group.
   - Similar like spread placement but used for group of instances.
   - EC2 creates a logical segment for a group of instances called partitions.
@@ -1947,6 +1957,21 @@ Types of IDF:
   - A multiple queue subscribing to the queue which receieves the message.
   - Each queues gets the identical message, and perform a job of decoding video to different bit rates.
 
+# Simple workflow service SWF
+- AWS SWF is aweb service that makes it easy to coordinate work across distributed application components. 
+- You can think of Amazon SWF as a fully-managed state tracker and task coordinator in the Cloud.
+- SWF enables applications for a range of use cases:
+  - Media processing.
+  - Web application backends.
+  - Business process workflow.
+  - Analytic pipelines.
+  - Designed as a coordination of tasks.
+  - It can combine automation tasks along with human activities. 
+    - Example: Ordering from Amazon. Think about tasks that are automated and need human interaction (Including the home delivery).
+- Workflows can last upto 1 year.
+- SWF is task oriented API where the SQS is message oriented API.
+- SWF keepos track of all the tasks and events in application.
+
 
 # Simple Queue Service
 - Almost similar to the SNS architecture, and can add complementary to the SNS service.
@@ -1970,6 +1995,7 @@ Types of IDF:
         - It waits for any messages until the waitTimeSeconds is expired.
 - Once you receive a message using either Short polling or Long polling the messages will be Hidden from the queue.
   - The message is hidden for the visibilityTimeOut (30 Sec) period. 
+  - Max visibity timeout is 12 hours.
   - When it expires the message returns to the queue for other polling service.
 - Once the message is processed, The message has to be deleted by the service.
   - This is the way the queues in the message gets HA and automatic retry.
@@ -1987,6 +2013,9 @@ Types of IDF:
     - 300 by default.
 - Architecture    
 ![Alt text](/pic/sqs.png?raw=true "SQS")
+- SQS is pull based
+- 256 KB in size.
+- Messages can be in the queue from 1 min to 14 days, default is 4 days.
 - Used to decouple the applications. 
 - In above example, the front end and backend are decoupled.
   - Each of them scales and will fail independedly.
