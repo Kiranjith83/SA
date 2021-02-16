@@ -2003,6 +2003,14 @@ Types of IDF:
 - Example:
 ![Alt text](/pic/fanout.png?raw=true "Fanout")
   
+## S3 event notification
+- Object created
+- Object removed 
+- Object restored 
+- Object RRS lost
+- Replication
+  - All these actions can be an event trigger from S3.
+
 ## Simple Notification Service
 - Architecture
 ![Alt text](/pic/sns.png?raw=true "SNS")
