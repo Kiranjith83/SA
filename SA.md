@@ -196,7 +196,14 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 ### Cognito User Pools.
 - IDP work with Social media.
-- Not compatible with MicroSoft AD
+- Not compatible with MicroSoft AD.
+- They manages the user directory.
+- Contains the email address, passwords, user IDs
+#### Cognito Identity Pools.
+- **The difference from the Cognito User pool is that, the Identity Pool enables to provide temporary AWS Credentials to services like S3, DDB etc**
+
+- Action of both the user pools and identity pools
+![Alt text](/pic/cognitoidp_userpool.png?raw=true "ARN")
 
 # ARN
 - Format
@@ -1940,7 +1947,10 @@ Types of IDF:
   - Cognito allows to merge different identity and provide it as a single user. 
   - Developers dont have to write code to handle the authentication or user ID management. 
   - Cognito in action
-    - ![Alt text](/pic/cognito.png?raw=true "AWS Cognito with Facebook")
+    - ![Alt text](/pic/cognito.png?raw=true "AWS Cognito with Facebook").
+  - Cognito brokers between the app and IDP to get the aws credentials.
+
+
 - You can never access AWS resources without an AWS Identity and if you are using an different IDP you have to perform an exchange and of token, which is the basics of IDF.
 ## AWS Single SignOn with AD (SAML 2.0 Federation).
 ![Alt text](/pic/ssoad.png?raw=true "AWS Single SignOn with AD arch diagram")
