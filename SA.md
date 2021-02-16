@@ -111,6 +111,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Encryption in transit
    - Use of TLS
 
+
 # AWS WAF (Well architect framework)
 
   The well architect framework tool is available, based on the pillers.
@@ -979,6 +980,7 @@ Overall 3 types of control
   - This incurs charges. Useful if customer is still seeing the older data, after the data is updated at the origin.
   - Create an invalidate individual objects, entire dir, sub dir etc (Example /* to invalidate everything).
     - It means no longer it will go to edge location.
+- CloudFront can be secured using the WAF, or use Geo Match feature for blocking an entire country to access the content.
 
 ## OAI
 - Origin Access Identity. 
@@ -2334,6 +2336,7 @@ while True:
   - Example, Streaming record from producers reaches Kinesis Stream, and Kinesis Fire hose can be a consumer, who does SQL query and stores data in ElasticSearch/S3.
 - Charge for every million payload poll.
   - Payload poll is 25KB of data.
+  - Key components of Kinesis Data Firehose are: delivery streams, records of data and destinations. Producers, shards and consumers are components of Kinesis Data Streams.
 ## Kinesis Analytics
 - Amazon Kinesis Data Analytics is the easiest way to transform and analyze streaming data in real time with Apache Flink.
 
@@ -2551,6 +2554,7 @@ WHERE action = 'REJECT' AND protocol = 6
 order by sourceaddress
 LIMIT 100;
 ```
+
 # AWS KMS (Key management service)
 - KMS Allows to create modify and delete customer Master Keys.
 - AWS KMS provides regional security Ket management and encryption and decryption services.
@@ -2600,6 +2604,11 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - In this example, a sample text is encrypted and decrypted using the CMK.
 - KMS has Custom Key store.
   - KMS is capable of Interacting with CloudHSM, so it can use FIPS 140-2 Level 3 encryption.
+- Pay per API call.
+
+## Compare Symmetric and Asymmetric CMK (Customer managed Key) encryption
+![Alt text](/pic/encrypt.png?raw=true "encryptions ")
+
 # AWS WAF
 - Allow all requests except the ones you specify.
 - Blocks all request except the one you specify
@@ -2611,6 +2620,11 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
   - Length of request.
   - Presence of malicious SQL code 
   - Cross site scripting 
+- WAF is more practical and useful where the NACLs are not possible
+  - Example: CloudFront, APIGateway.
+  - It can protect based on cross site, SQL injection, IP or range of IPs.
+  - DDOS is from a range of IPs and blocking with NACL wont be that effective. In this case WAF is more effective.
+
 
 # Beanstalk
 - When to select?
@@ -2638,6 +2652,9 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
   - VM Import/Export enables you to easily import virtual machine images from your existing environment to Amazon EC2 instances and export them back to your on-premises environment
 - Download Amazon Linux2 as an ISO.
   - Works on all types of hypervisors.
+
+# Security
+
 
 # Exam Preperation
 - re:Invent Videos 1xx, 2xx, 3xx or 4xx videos. 
