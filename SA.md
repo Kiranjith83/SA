@@ -336,6 +336,7 @@ zip -r9 lambda.zip PIL lambda_handler.py
     - Configure the S3 bucket events to notify Lambda from the s3 upload bucket.
 
 ## API Gateway
+- Helps as a front door for difference systems like EC2 instances, Lambda, Dynamo DB.
 Two types of APIs:
   - Rest API:
     -  Is simpler and wider compatibility. 
@@ -347,12 +348,33 @@ Two types of APIs:
     - A push will happen to large consumers at once.
 
 Overall steps in creating the API Gateway.
-  - Create API -> Create resource -> Use a method on how to interact with the resource -> Finally choose the integration method
+  - Create API (Container)
+    -> Create resource and nested resources (URL Paths) 
+      -> For each resources select a supported method on how to interact with the resource 
+        -> Select the security -> 
+          -> Finally choose the integration target.
     - [Sample](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/apigateway)
     - [AWS Documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-lambda.html)
   - Finally create the stage to publish the API.
-  
+  - Can use custom Domain.
+    - Supports AWS Certificate Manager.
   - Enabling API cache for returning similar requests.
+    - Reduce the number if req going to the backend integration target and can improve the response.
+- Cross origin resource sharing CORS:
+  - Same origin policy:
+    - Under this policy the web browser permits scripts contained in the first page are allowed to access the second web page only if the domain name is same.
+      - One page can talk to another page inside the web browser only if the domain name is same. This is to disable the cross site scripting XSS attacks.
+  - In AWS we different domain names. For example: AWS APIs, AWS S3 all do have different domain names.
+  - To over come this problem we have CORS.
+  - CORS allows restricted resources (ex: fonts) on a web page to be requested from another domain outside the domain from which the first resource was served.
+  - [CORS](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html)
+  - CORS is a security measure allowing a web application running in one domain to reference resources in another.
+  - If an application is running a webpage that loads object from a different S3 bucket, CORS can be used.
+  - How it work?
+    - Browser makes an HTTP Options call for a URL (Get/PUT/POSt etc).
+    - Server returns a response that says: "These other domains are approved to GET the URL."
+     - If not enabled?
+        - Error - "Origin policy cannot be read at the remote resource?". If you get the error enable CORS on API Gateway.
 
 ## Step functions.
   - Addresses the short runtime of Lambda, Stateless of Lambda
