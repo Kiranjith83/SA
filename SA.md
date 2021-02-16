@@ -1932,6 +1932,8 @@ Types of IDF:
   - **SMAL 2.0 IDF**: An on prem or AWS hosted directory service instance is configured to allow AD users to login to AWS.
     - Integrates different ID providers with application.
   - **Web Identity Federation:** IDPs such as Google, Amazon and Facebook are allowed to assume role and access resources in the account.
+    - Lets you give your users access to AWS resources after they have successfully authenticated with a web based IDP like Amazon, Facebook or google.
+    - Following successful authentication the users receives an authentication code from the ID provider, whch they can trade for temporary AWS Cred.
 - Cognito and Secure Token Service (STS) are used for SAML and Web Identity federation.
   - A federated identity is verified using an external IDP and by proving the identity (using a token or assertion of some kind) is allowed to swap that ID for a temporary AWS Cred by assuming a role.
   - Cognito is a broker for SSO or IDF which provides a ID pool.
