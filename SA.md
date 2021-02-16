@@ -2242,6 +2242,8 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Example, Streaming record from producers reaches Kinesis Stream, and Kinesis Fire hose can be a consumer, who does SQL query and stores data in ElasticSearch/S3.
 - Charge for every million payload poll.
   - Payload poll is 25KB of data.
+## Kinesis Analytics
+- Amazon Kinesis Data Analytics is the easiest way to transform and analyze streaming data in real time with Apache Flink.
 
 ## RedShift
 - OLAP (Online Analytics processing).
