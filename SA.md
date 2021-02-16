@@ -201,7 +201,6 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 - Contains the email address, passwords, user IDs
 #### Cognito Identity Pools.
 - **The difference from the Cognito User pool is that, the Identity Pool enables to provide temporary AWS Credentials to services like S3, DDB etc**
-
 - Action of both the user pools and identity pools
 ![Alt text](/pic/cognitoidp_userpool.png?raw=true "ARN")
 
@@ -1941,6 +1940,7 @@ Types of IDF:
   - **Web Identity Federation:** IDPs such as Google, Amazon and Facebook are allowed to assume role and access resources in the account.
     - Lets you give your users access to AWS resources after they have successfully authenticated with a web based IDP like Amazon, Facebook or google.
     - Following successful authentication the users receives an authentication code from the ID provider, whch they can trade for temporary AWS Cred.
+## Cognito
 - Cognito and Secure Token Service (STS) are used for SAML and Web Identity federation.
   - A federated identity is verified using an external IDP and by proving the identity (using a token or assertion of some kind) is allowed to swap that ID for a temporary AWS Cred by assuming a role.
   - Cognito is a broker for SSO or IDF which provides a ID pool.
@@ -1949,6 +1949,22 @@ Types of IDF:
   - Cognito in action
     - ![Alt text](/pic/cognito.png?raw=true "AWS Cognito with Facebook").
   - Cognito brokers between the app and IDP to get the aws credentials.
+### Cognito User Pools.
+- IDP work with Social media.
+- Not compatible with MicroSoft AD.
+- They manages the user directory.
+- Contains the email address, passwords, user IDs
+- User pool is user based. It handles things like user registration, auithentication, and account recovery.
+#### Cognito Identity Pools.
+- **The difference from the Cognito User pool is that, the Identity Pool enables to provide temporary AWS Credentials to services like S3, DDB etc**
+- ID Pool authorizes the access to AWS Services.
+- Action of both the user pools and identity pools
+![Alt text](/pic/cognitoidp_userpool.png?raw=true "ARN")
+- Action of both the user pools and identity pools
+![Alt text](/pic/cognitoidp_userpool.png?raw=true "ARN")
+#### Cognito Synchronisation
+- Tracks the association between user identity and the various different devices they sign-in from.
+- Push synchronization using SNS and all devices will be synchronized with the user data.
 
 
 - You can never access AWS resources without an AWS Identity and if you are using an different IDP you have to perform an exchange and of token, which is the basics of IDF.
