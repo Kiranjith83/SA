@@ -2050,6 +2050,7 @@ Types of IDF:
 - Workflows can last upto 1 year.
 - SWF is task oriented API where the SQS is message oriented API.
 - SWF keepos track of all the tasks and events in application.
+- One time only completion is a key feature of SWF. At one time this was a key distinction from Standard SQS queues, however with SQS FIFO queues, this is no longer a distinguishing feature
 
 
 ## Simple Queue Service
