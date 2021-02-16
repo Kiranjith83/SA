@@ -2091,6 +2091,7 @@ Types of IDF:
     - Order of the message added is the order that you receive. 
     - Limited to ~3000 messages per sec with batching.
     - 300 by default.
+    - You can't convert an existing standard queue into a FIFO queue. To make the move, you must either create a new FIFO queue for your application or delete your existing standard queue and recreate it as a FIFO queue. 
 - Architecture    
 ![Alt text](/pic/sqs.png?raw=true "SQS")
 - SQS is pull based
