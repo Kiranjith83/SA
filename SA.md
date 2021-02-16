@@ -374,7 +374,7 @@ Overall steps in creating the API Gateway.
     - Browser makes an HTTP Options call for a URL (Get/PUT/POSt etc).
     - Server returns a response that says: "These other domains are approved to GET the URL."
      - If not enabled?
-        - Error - "Origin policy cannot be read at the remote resource?". If you get the error enable CORS on API Gateway.
+        - Error - "`Origin policy cannot be read at the remote resource?`". If you get the error enable CORS on API Gateway.
 
 ## Step functions.
   - Addresses the short runtime of Lambda, Stateless of Lambda
@@ -2131,6 +2131,10 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - Remember query can be achieved by Athena.
 
 ##  Kinesis and Firehose
+- Example:
+  - Purchase something from Amazon and its data. 
+  - Stock price change data.
+  - Geospatial data (Uber capturing your "Live" location for sending car.)
 - Is scalable and resilient streaming service from AWS>
 - It is designed to ingest large amount of data from hunders, thousands or even millions of producers.
 - Consumers can access a rolling window of that data or it can be stored in persistent storage of database products.
@@ -2154,7 +2158,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
   - It allows consumptions to consumers. 
   - It include storage for all incoming data with a 24 hour default window and can be increased to seven daus for an additional charge. 
   - Data records are added by producers and read by consimers.
-  - A stream provides a rolling 24 hour, the data is not modified or deleted until the data record rolling window.
+  - A stream provides a rolling 24 hour (Upto 7 days), the data is not modified or deleted until the data record rolling window.
   - Stream can scale almost infinetly, and is performed using Kinesis Shard. 
 - Kinesis Shard.
   - Shard provides capacity to the Stream.
@@ -2173,7 +2177,7 @@ aws sqs delete-message --queue-url https://URL --receipt-handle "INSERTHANDLE"
 - Example data from IoT process the data
   - Lambda of Temperature to report temp.
   - Lambda of Rain predicts rain from the same stream data.
-- Kinesis Data Firehose.
+## Kinesis Data Firehose.
   - It can accept record from Stream.
   - It can persistently store data on S3.
   - It can also be stored on RedShift, Elastic Search and Splunk.
