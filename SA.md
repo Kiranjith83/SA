@@ -2013,6 +2013,7 @@ Types of IDF:
 
 ## Simple Notification Service
 - Architecture
+
 ![Alt text](/pic/sns.png?raw=true "SNS")
 - It is a publisher -> Topic <- subscriber based service. 
 - So the base entitity in SNS is a topic and various entities can send messages to this topic called publishers.
