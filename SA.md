@@ -334,6 +334,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Lambda functions are independent, 1 event = 1 function. 
   - Lambda scales out automatically.
   - Xray can be used for complex Lambda architecture.
+  - Lambda like EC2 and ECS supports hyper-threading on one or more virtual CPUs (if your code supports hyper-threading)
+  - ALB, Cognito, Lex, Alexa, API Gateway, CloudFront, and Kinesis Data Firehose are all valid direct (synchronous) triggers for Lambda functions. S3 is one of the valid asynchronous triggers.
 
 Example:
   - [Git Link:](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/lambda)
