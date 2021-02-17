@@ -2623,7 +2623,15 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - Dedicated hardware security module.
 - FIPS 140-2 Level 3.
 - KMS is level 2. 
+- You manage your own key with CloudHSM. 
+- It is single tendent multi AZ solution.
+- Managed component and its a dedicated hardware.
+- Industry standard API and no AWS API to handle cloudHSM.
+- CloudHSM work on its dedicated hardware and uses one ENI to be provisioned on customer end.
+- CloudHSM is not highly available by default and needs multi az deployment for HA.
 
+# AWS SSM Parameter store.
+- 
 
 # AWS WAF
 - Allow all requests except the ones you specify.
