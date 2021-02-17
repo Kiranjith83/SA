@@ -325,8 +325,12 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 ## Lambda:
   - Function as a service.
+  - It can be Event Driven compute service.
+  - Also it can be Compute service in response to HTTP call.
   - Executes upto 15 minutes.
   - Invoked by events, time, or by a different service.
+  - First 1 mill record.
+  - .20$ per 1 million.
 
 Example:
   - [Git Link:](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/lambda)
