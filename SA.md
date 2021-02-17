@@ -2631,6 +2631,22 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - CloudHSM is not highly available by default and needs multi az deployment for HA.
 
 # AWS SSM Parameter store.
+- Secure serverless storage for configuration and secrets and it can be encrypted with KMS.
+- Store parameters in hierarchies. 
+  - Helps to retrieve data part of a tree structure. 
+  - data can be specified as absolute path. GetParametersByPath API call.
+- Track versions.
+- Set TTL to expire certain types of values such as passwords to start rotating passwords.
+- Integration with CloudFormation.
+- Free storage of parameters upto 10,000 store.
+
+# AWS Secrets Manager.
+- Similar to Paramter store but -
+  - Charge per secret store and per 10000 API calls.
+- Ability to rotate the keys automatically and apply credentials to aws services.
+  - Apply new key/password in RDS for you.
+- Ability to Generate random Secrets.
+- Secret manager can be shared accross accounts.
 - 
 
 # AWS WAF
