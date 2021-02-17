@@ -417,8 +417,8 @@ Anatomy of SAM template
   - Applies the same properties to all Lambda functions
 - Resource/AWS::Serverless::Function:
   - Creates Lambda function from the local code. Also creates an API Gateway endpoint, Mapping and Permissions.
-
-
+- `sam init` to initiate the sam working directory, including all the necessary templates.
+- `sam deploy --guided` to deploy the application.
 
 # Container-Based Compute and Microservices
 
