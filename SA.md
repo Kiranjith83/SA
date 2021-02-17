@@ -2564,6 +2564,7 @@ LIMIT 100;
 - KMS can use CloudHSM via Custom Key Stores (FIPS 140-2 Level 3)
 - KMS manages customer master keys (CMK), which are created in a region and never leave the region or KMS.
 - They can encrypt or decrypt data **utp 4 KB**.
+  - Now to encrypt a data which is more than 4KB we have to use DEK (Data Encryption Keys).
 - By default KMS is capable of performing cyrptographic operations on Data upto 4 KB in size using CMKs
 - Any form of encryption in AWS uses KMS.
 - Types of CMK
@@ -2594,6 +2595,10 @@ LIMIT 100;
   - KMS can run re-encrypt, to encrypt plain text.
 - KMS can generate DEK (Data encryption Keys) using CMK to encrypt large amount (> 4KB data) file. 
 - Hand on demo Customer Managed Keys
+  - In this example, a sample text is encrypted and decrypted using the CMK.
+  - KMS has Custom Key store.
+    - KMS is capable of Interacting with CloudHSM, so it can use FIPS 140-2 Level 3 encryption.
+  - below example encrypt the file that is in 4KB in size.
 ```
 aws kms create-key --description "LA KMS DEMO CMK"
 aws kms create-alias --target-key-id XXX --alias-name "alias/lakmsdemo" --region us-east-1
@@ -2601,15 +2606,24 @@ echo "this is a secret message" > topsecret.txt
 aws kms encrypt --key-id KEYID --plaintext file://topsecret.txt --output text --query CiphertextBlob 
 aws kms encrypt --key-id KEYID --plaintext file://topsecret.txt --output text --query CiphertextBlob | base64 --decode > topsecret.encrypted
 aws kms decrypt --ciphertext-blob fileb://topsecret.encrypted --output text --query Plaintext | base64 --decode 
+```
+- To encrypt the data which is more than 4KB, first generate the DEK.
+```
 aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 ```
-- In this example, a sample text is encrypted and decrypted using the CMK.
-- KMS has Custom Key store.
-  - KMS is capable of Interacting with CloudHSM, so it can use FIPS 140-2 Level 3 encryption.
+ - This will return the plain text data key. The cyphertextBlob has metadata which tells which CMK the DEK is generated. The CypherTextBlob has to be stored along with the encrypted data.
+ - This is also referred as a envolep encryption and an efficient method to encrypt the large amount of files.
+
 - Pay per API call.
 
 ## Compare Symmetric and Asymmetric CMK (Customer managed Key) encryption
 ![Alt text](/pic/encrypt.png?raw=true "encryptions ")
+
+# CloudHSM (Hardware Security Modules)
+- Dedicated hardware security module.
+- FIPS 140-2 Level 3.
+- KMS is level 2. 
+
 
 # AWS WAF
 - Allow all requests except the ones you specify.
