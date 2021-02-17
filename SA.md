@@ -2693,7 +2693,13 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
     - Request size.
     - Value in request header (block if no user agent header is available).
 
-
+# AWS Firewall Manager
+- Security managment service allows centrally configure and manage firewall rules across AWS Organization.
+- WAF rules can be deployed to API Gateway and Cloudfront
+- Shield properties to:
+  - ALB, ELB, EIP or CloudFront
+  - Consistencly apply DDoS to all.
+- Ensure SG rules for EC2 and ENIs.
 
 # Beanstalk
 - When to select?
