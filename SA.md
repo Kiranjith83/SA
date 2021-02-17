@@ -351,7 +351,7 @@ zip -r9 lambda.zip PIL lambda_handler.py
   - The event is driven from the upload S3 bucket trigger, where the images are uploaded.
     - Configure the S3 bucket events to notify Lambda from the s3 upload bucket.
 
-- Lambda supported triggers as if today.
+- Lambda supported triggers as if in last quarter 2020.
 ![Alt text](/pic/lambdatrigger.png?raw=true "Lambda Triggers")
 
 ## API Gateway
