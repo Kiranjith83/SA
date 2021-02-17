@@ -825,8 +825,6 @@ Overall 3 types of control
 - Using Bucket ACLs & IAM (Programmatic (Programmatic)
 - Cross Account IAM Roles (Programmatic and Console access).
 
-
-
 ### When to use IAM policies vs. S3 policies
   - [MUST READ HERE](https://aws.amazon.com/blogs/security/iam-policies-and-bucket-policies-and-acls-oh-my-controlling-access-to-s3-resources/)
 
@@ -869,7 +867,7 @@ Overall 3 types of control
           - When uploading object, you also provide the encryption key and heavy load of encryption is managed by S3.
           - Once the encryption is done, key is discarded. 
           - Admin heavy process in managing the keys. Customer should take care of key management.
-      - Client side encryption.
+      - Client side encryption ( client library such as Amazon S3 Encryption Client.).
         - Encrypt and upload to S3.
         - Use client, application or manually perform the action.
         - Example: Backup application uses S3 storage, backup data is encrypted prior to upload to S3.
@@ -1328,13 +1326,15 @@ Capacity type - Two trpes.
   - Repeating the read after short time should return the read.
 - Strongly consistent read.
   - If the written data has to be read within one sec or at the same time.
+  - DynamoDB supports eventually consistent and strongly consistent reads. The best way to ensure data consistency on DynamoDB is using strongly consistent reads.
+  - When you request a strongly consistent read, DynamoDB returns a response with the most up-to-date data, reflecting the updates from all prior write operations that were successful. However, this consistency comes with some disadvantages such as read might not be available if there is a network delay or outage, higher latency than eventually consistent reads, global secondary indexes not supported, and use of more throughput capacity than eventually consistent reads. 
 - Referred to a key value, but not really true its more accurate to describe as a wide column store.
 - ITEM, is a collection of attributes upto 400KB inside a table that shares the same key structure as every other item in the table. 
   - Item consists of primary key of the table(partition key or both partition and sort keys).
   - Attributes and values. Example "Name": "customer name"
   - As long of the primary keys (paritition keys or sortkeys) are unique it adds new entry.
   - Items in the table can have various structure in the attribute values.
-  - All total of max value of 400KB.
+  - ***All total of max value of 400KB.(The combined Value and Name combined must not exceed 400 KB)***.
   - When reading or writing the item, have to read the full size of the item.
   - GetItem API is used to get the item, it can be retrieved by partition or Sort keys.
 - An attribute can be various available data types Like string, boolean etc. 
@@ -1699,7 +1699,9 @@ Private link can solve the complex nature of VPC Peering and security considerat
 - [Read More](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html)
 - To use AWS PrivateLink, create a VPC endpoint for a service in your VPC. You create the type of VPC endpoint required by the supported service. This creates an elastic network interface in your subnet with a private IP address that serves as an entry point for traffic destined to the service. 
 
-
+# VPC Peering
+- VPC peering does not support edge to edge routing.
+- [must read before exam - Unsupported VPC Peering routing](https://docs.aws.amazon.com/vpc/latest/peering/invalid-peering-configurations.html)
 
 # AWS Transit gateway
 - Allows to transit traffic between many VPCs
@@ -1788,6 +1790,7 @@ Private link can solve the complex nature of VPC Peering and security considerat
   - Regulatory requirement.
   - On demand hourly
   - Reservation purchase 70% off on ondemand.
+  - The tenancy of an instance can only be changed between variants of ‘dedicated' tenancy hosting. It cannot be changed from or to default tenancy hosting.
 - Reserved Instance types
   - Standard reserved 
     - 75% off on-demand instance
@@ -1817,6 +1820,7 @@ Private link can solve the complex nature of VPC Peering and security considerat
   - EC2 instances never allowed on same underlying hardware.
   - This placement group is better for individual instances.
   - A spread placement group supports a maximum of seven running instances per Availability Zone.
+  - The placement group can only have 7 running instances per Availability Zone
 - Partition Placement Group.
   - Similar like spread placement but used for group of instances.
   - EC2 creates a logical segment for a group of instances called partitions.
@@ -2777,3 +2781,7 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - 65 Questions
 - Passing score 720
 - 3 yrs validity.
+
+## Exam questions 
+- While editing Amazon S3 bucket permissions (policies and ACLs), to whom does the concept of the "resource owner" refer?
+  - The "resource owner" refers to the `AWS account that creates Amazon S3 buckets and objects`.
