@@ -331,6 +331,9 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - Invoked by events, time, or by a different service.
   - First 1 mill record.
   - .20$ per 1 million.
+  - Lambda functions are independent, 1 event = 1 function. 
+  - Lambda scales out automatically.
+  - Xray can be used for complex Lambda architecture.
 
 Example:
   - [Git Link:](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/lambda)
@@ -347,6 +350,9 @@ zip -r9 lambda.zip PIL lambda_handler.py
 ```
   - The event is driven from the upload S3 bucket trigger, where the images are uploaded.
     - Configure the S3 bucket events to notify Lambda from the s3 upload bucket.
+
+- Lambda supported triggers as if today.
+![Alt text](/pic/lambdatrigger.png?raw=true "Lambda Triggers")
 
 ## API Gateway
 - Helps as a front door for difference systems like EC2 instances, Lambda, Dynamo DB.
@@ -398,6 +404,21 @@ Overall steps in creating the API Gateway.
   - Example: 
     - User approval cycle for a change management. 
     - [Example use case:](https://github.com/linuxacademy/content-aws-csa2019/tree/master/lesson_files/03_compute/Topic4_Serverless/StepFunctions)
+
+## SAM (Serverless Application Model)
+- CFN extension optimized for Serverless.
+- Supports anything that CFN supports.
+- Run Serverless applications locally.
+- Package and deploy application using Code Deploy.
+Anatomy of SAM template
+- Transform:
+  - Tells CFN this is a SAM template.
+- Globals:
+  - Applies the same properties to all Lambda functions
+- Resource/AWS::Serverless::Function:
+  - Creates Lambda function from the local code. Also creates an API Gateway endpoint, Mapping and Permissions.
+
+
 
 # Container-Based Compute and Microservices
 
