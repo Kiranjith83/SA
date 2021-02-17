@@ -2640,30 +2640,59 @@ aws kms generate-data-key --key-id KEYID --key-spec AES_256 --region us-east-1
 - Integration with CloudFormation.
 - Free storage of parameters upto 10,000 store.
 
-# AWS Secrets Manager.
+# AWS Secret Manager.
 - Similar to Paramter store but -
   - Charge per secret store and per 10000 API calls.
 - Ability to rotate the keys automatically and apply credentials to aws services.
   - Apply new key/password in RDS for you.
 - Ability to Generate random Secrets.
 - Secret manager can be shared accross accounts.
-- 
+
+# AWS Shield
+- Prevents DDOS account
+- Sits at the edge of the AWS perimeter. 
+- AWS Shiled standard
+  - When using WAF and cloudfront the shield standard comes with out additional charges.
+  - It protects against common Layer 3 and 4 attacks.
+    - SYN/UDP Flood
+      - Huge number of connections half open making server busy.
+    - Reflection attacks.
+      - Source IP of the packet is spoofed, and the response is send to the spoofed IP address.
+  - Stopped a 2.3 Tbps DDOS attack for three days in Feb 2020 which is tripple the size of GitHub DOS attack which took it down.
+- AWS Shield Advanced. 
+  - Provides enahanced level with 3000$ per AWS Org.
+  - Protects EC2, ELB, CloudFront, Global Accelerator, Route 53.
+  - Gets 24x7 access to DDoS reponse team.
+  - DDoS Cost protection for scaling.
 
 # AWS WAF
+- Monitor HTTP/S requests.
+- Control access to content.
 - Allow all requests except the ones you specify.
 - Blocks all request except the one you specify
 - Count the requests that match the properties that you specify.
+- Can confgure filtering rules to allow/deny access.
 - Protection based on conditions
   - IP address
   - Country
   - Strings
   - Length of request.
   - Presence of malicious SQL code 
-  - Cross site scripting 
+  - Cross site scripting (XSS).
 - WAF is more practical and useful where the NACLs are not possible
   - Example: CloudFront, APIGateway.
   - It can protect based on cross site, SQL injection, IP or range of IPs.
   - DDOS is from a range of IPs and blocking with NACL wont be that effective. In this case WAF is more effective.
+- WAF Allows three different behaviors once it matches the filer.
+  - **Allow** all requests, except the ones you specify
+  - **Block** all requests, except the one you specify
+  - **Count** the requests that matches the properties you specify
+- Properties include
+    - Originating IP address
+    - Orginating Country
+    - Request size.
+    - Value in request header (block if no user agent header is available).
+
 
 
 # Beanstalk
