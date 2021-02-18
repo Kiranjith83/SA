@@ -2139,7 +2139,10 @@ Types of IDF:
 - In above example, the front end and backend are decoupled.
   - Each of them scales and will fail independedly.
   - Based on the messages in the queue the worker pool instances can be scaled.
-- Hands on experience
+### SQS Delay queue and Visibility timeout
+- Delay queues are similar to visibility timeouts because both features make messages unavailable to consumers for a specific period of time. 
+- The difference between the two is that, for delay queues, a message is hidden when it is first added to queue, whereas for visibility timeouts a message is hidden only after it is consumed from the queue. 
+### SQS Hands on experience
 ```
 aws sqs get-queue-attributes --queue-url https://URL --attribute-names All
 aws sqs send-message --queue-url https://URL --message-body "INSERTMESSAGE"
