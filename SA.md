@@ -768,6 +768,8 @@ In the case of 10.0.0.0/16 network, subnetting will have below network.
     - Long term archival for cold backup.
     - 180 days and 40KB min
     - Cheaper than Glacier and replacement for Tape storage.
+  - Reduced Redundancy Storage
+    - Reduced Redundancy Storage is the only S3 Class that does not offer 99.999999999% durability
 ### Storage class comparison
 ![Alt text](/pic/s3compare.png?raw=true "S3Comapre")
 ## S3 Lifecycle
@@ -2095,6 +2097,7 @@ Types of IDF:
 - Allowing Asyncronosly to talk between two components between applications.
 - Example, once upload a file to S3, send a message to SQS so worker can go and pull the message and perform a job.
 - Each message can contain upto 256 KB, if the message is more than 256 KB then can have the data residing on S3 and the SQS message can just be the link to S3.
+- ***Messages can be retained in queues for up to 14 days.***
 - Messages from the queue are pulled by **Polling**.
   - Two types of polling.
     - Short polling.
