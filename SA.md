@@ -41,11 +41,11 @@
 
 - Reliability
   - resource will work as designed
-Resiliency
+- Resiliency
   -  able to recover from damage or disruption
-Durability
+- Durability
   - resource will continue to exist until you decide to remove it
-Availability
+- Availability
   - you can access a resource or service when you need it
    
 # Shared responsibility security model.
