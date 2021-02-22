@@ -184,6 +184,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 - It doesn't support trusts (Cant join on-prem AD)
 
 ### AD Connector
+- [Link](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html)
 - Is a gateway (Proxy for on-premises AD)
 - AD Connector is a directory gateway with which you can redirect directory requests to your on-premises Microsoft Active Directory without caching any information in the cloud.
 - Can avoid caching information in the cloud.
