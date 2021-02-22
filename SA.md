@@ -185,10 +185,12 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 ### AD Connector
 - Is a gateway (Proxy for on-premises AD)
+- AD Connector is a directory gateway with which you can redirect directory requests to your on-premises Microsoft Active Directory without caching any information in the cloud.
 - Can avoid caching information in the cloud.
 - Allow on-premises users to log into AWS using AD.
 - Join EC2 instances to your existing AD Domain.
 - Scale across multiple AD Connectors.
+- AD Connector cannot be shared with other AWS accounts. If this is a requirement, consider using AWS Managed Microsoft AD to Share your directory. AD Connector is also not multi-VPC aware, which means that AWS applications like Amazon WorkSpaces are required to be provisioned into the same VPC as your AD Connector. 
 ## Not compatible with MicroSoft AD
 ### Cloud Directory
 - Fully managed directory service
