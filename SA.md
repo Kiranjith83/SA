@@ -67,12 +67,12 @@
   - RPO 
     - How much a business can tolerate to lose, expressed in time. The maximum time between a failure and the last successful backup. 
   - RTO 
-     - The maximum amount of time a system cab be down. How long a solution takes to recover 
-  Other consideration.
+     - The maximum amount of time a system can be down. How long a solution takes to recover 
+- Other consideration.
   - People.
      Are they on call, do they have necessary access and docs to recover. 
 
-# scaling
+# Scaling
   - Choice of scaling method (Vertical/Horizontal) determines the cost and how the scaling is configured. 
   - Appropriately selecting the scaling method determines how you architect the application, cost and what if developers need to incorporate to support their application.
   - Elasticiy:
