@@ -208,6 +208,8 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 #### Cognito Identity Pools.
 - **The difference from the Cognito User pool is that, the Identity Pool enables to provide temporary AWS Credentials to services like S3, DDB etc**
 - Action of both the user pools and identity pools
+- Identity pools provide AWS credentials to grant your users access to other AWS services. 
+- To enable users in your user pool to access AWS resources, you can configure an identity pool to exchange user pool tokens for AWS credentials.
 ![Alt text](/pic/cognitoidp_userpool.png?raw=true "ARN")
 
 # ARN
