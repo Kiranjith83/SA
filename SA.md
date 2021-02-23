@@ -417,13 +417,13 @@ Overall steps in creating the API Gateway.
 - Supports anything that CFN supports.
 - Run Serverless applications locally.
 - Package and deploy application using Code Deploy.
-Anatomy of SAM template
-- Transform:
-  - Tells CFN this is a SAM template.
-- Globals:
-  - Applies the same properties to all Lambda functions
-- Resource/AWS::Serverless::Function:
-  - Creates Lambda function from the local code. Also creates an API Gateway endpoint, Mapping and Permissions.
+- Anatomy of SAM template
+  - Transform:
+    - Tells CFN this is a SAM template.
+  - Globals:
+    - Applies the same properties to all Lambda functions
+  - Resource/AWS::Serverless::Function:
+    - Creates Lambda function from the local code. Also creates an API Gateway endpoint, Mapping and Permissions.
 - `sam init` to initiate the sam working directory, including all the necessary templates.
 - `sam deploy --guided` to deploy the application.
 
