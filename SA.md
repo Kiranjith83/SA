@@ -1029,6 +1029,9 @@ Overall 3 types of control
   - If individual file access needs control, then signed URL.
 - Signed Cookies.
   - If individual needs access to more services then Signed Cookies are used.
+- When to use CloudFront Signed URLs over S3 signed URLs?
+  - If access to object is restricted with OAI(Origin Access Identity). 
+  - Applications can use CloudFront SDKs to generate the signed URL. 
 
 # Amazon FSx for Windows.
 - Provides a fully managed native win filesystem so you can easily move windows based applications that require file storage to aws.
