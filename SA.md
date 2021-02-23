@@ -856,12 +856,12 @@ Overall 3 types of control
   - Encryption
     - At rest.
       - Server side encryption.
-         - SSE-S3
+        - SSE-S3
           - AES-256 algorithm is used by SSE-S3.
           - S3 manages encryption end to end with less administration over head.
           - S3 data encryption using Keys managed by S3.
           - It uses one of the KMS DEK to encrypt the data, and keys are encrypted and stored with the Objects.
-         - SSE-KMS
+        - SSE-KMS
           - SSE-KMS allows role separation.
           - Unlike in SSE-S3, the user who has access to object can decrypt the data.
           - A specific KMS master key is used to encrypt the data.
@@ -869,7 +869,7 @@ Overall 3 types of control
           - And the permission specifically can be defined at the CMK.
           - This enabled  to have specific IAM user/role who has permission to the KMS key to decrypt the data.
           - S3 Admin and KMS key access can be given to two different users for role separation.
-         - SSE-C
+        - SSE-C
           - Server side encryption with customer managed key.
           - When uploading object, you also provide the encryption key and heavy load of encryption is managed by S3.
           - Once the encryption is done, key is discarded. 
