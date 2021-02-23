@@ -1002,8 +1002,8 @@ Overall 3 types of control
 - Regional Edge Caches
   - Larger versions of edge locations. Less of them but have more capacity and can serve larger areas.
 - Origin fetch:
- - If the content is not cached at the edge location, it will perform a origin fetch from origin.
- - TTL expires the cache.
+  - If the content is not cached at the edge location, it will perform a origin fetch from origin.
+  - TTL expires the cache.
 - By default the CloudFront comes up with default domain name at cloudfront distribution. that works with both HTTP and HTTPS.
   - But this can be changed with custom domain name for the distribution, if so need to create SSL certificate proves ownership of the domain. 
   - The cert can be imported from ACM.
@@ -1032,6 +1032,7 @@ Overall 3 types of control
 - When to use CloudFront Signed URLs over S3 signed URLs?
   - If access to object is restricted with OAI(Origin Access Identity). 
   - Applications can use CloudFront SDKs to generate the signed URL. 
+  - Only authrorized people need to access a resource, then signed URL can be used.
 
 # Amazon FSx for Windows.
 - Provides a fully managed native win filesystem so you can easily move windows based applications that require file storage to aws.
