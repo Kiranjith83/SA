@@ -1203,6 +1203,9 @@ Overall 3 types of control
     - RDS perform an Automatic failover during failure.
     - It can happen if there are isolated issues with underlying hardware or configuration upgrade.
       - In the case of software upgrade, it changes the secondary instance first, changes the CNAME mapping then finally update the primary instance.
+        - Perform maintenance on the standby.
+        - Promote the standby to primary.
+        - Perform maintenance on the old primary, which becomes the new standby.
     - Converting from normal to multi-az occurs downtime.
     - If any RDS but Aurora, CNAME Points to Primary. No additional capability  or control is given for the standby. 
       - From RDS perspective there will be a brief outage during failover. As DNS involved, it might take from single digit sec to double digit. 
