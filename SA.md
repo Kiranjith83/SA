@@ -1897,7 +1897,8 @@ Private link can solve the complex nature of VPC Peering and security considerat
 - It can enable by 
   - ENA supporting upto 100Gbps.
   - Intel 82599 Virtual Function interface support upto 10 Gbps.
-## EFA
+## EFA ( Elastic Fabric Adapter )
+- Run HPC and ML applications at scale.
 - A network devide that you can attach to your EC2 instance to accelerate HPC and Machine learning apps.
 - EFA provides lower and more consitent latency and high throughput than the TCP transport traditionally used in cloudbased HPC Systems.
 - EFA can use OS-Bypass enables HPC and ML apps to bypass the OS system kernel and to communicate directly with the EFA device.
