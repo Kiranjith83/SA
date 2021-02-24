@@ -1495,8 +1495,8 @@ Capacity type - Two trpes.
 - Two flavours
   - Memcached
   - Redis
-- Difference between MemCached and Redis.
-![Alt text](/pic/elasticCachecompare.png?raw=true "Difference between memchached and redis")
+### Difference between MemCached and Redis.
+![Alt text](/pic/elasticCachecompare.png?raw=true "Memchached and redis")
 
 # Load Balancing
 - Historically, LBs were only able to route traffic to instances inside an AZ, causing uneven traffic distribution if AZ instances are not equal. 
