@@ -2450,6 +2450,10 @@ while True:
   - Five minutes metrics for 63 days.
   - One minute metrics for 15 days.
     - *The older the data get the lesser the granularity. Super detail data only matter is short term. The long term will be checked with the trend*.
+    - Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution custom metrics.
+    - Data points with a period of 60 seconds (1 minute) are available for 15 days
+    - Data points with a period of 300 seconds (5 minute) are available for 63 days 
+    - Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months)
 - Metrics are grouped into **Namespaces**
 - Alarm can be created on Metrics taking a action if the alarm is triggered. 
   - Alarms have three states
