@@ -1851,13 +1851,13 @@ Private link can solve the complex nature of VPC Peering and security considerat
 - General purpose SSD
   - General workload
   - API NAME: gp2
-  - 1GiB - 16Gib
+  - 1GiB - 16TB
   - Max IOPS 16000
 - Provisioned IOPS SSD
   - High performance
   - Database
   - API NAME: io1
-  - 4G - 16G
+  - 4G - 16TB
   - 64000 IOPS
 - Throughput Optimized HDD
   - Low cost HDD for frequent accessed, throughput sensitive workloads
