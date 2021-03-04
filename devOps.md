@@ -84,3 +84,5 @@ SDLC (22% on exam.  system development and lifecycle)
 # Step Functions.
 
 # OpsWorks
+
+# CloudWatch
