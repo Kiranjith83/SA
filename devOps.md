@@ -86,3 +86,16 @@ SDLC (22% on exam.  system development and lifecycle)
 # OpsWorks
 
 # CloudWatch
+- Data points < 60 Sec are available for 3 hours.
+- Data points ~= 60 sec (1 min) available for 15 days. 
+- Data points ~= 300 sec (5 mins) available for 63 days. 
+- Data points ~= 3600 sec (1 hour) available for 445 days (15 months).
+
+## CW Events
+- AWS Resources can generate an event when there is a change in its environment.
+    - Eg: EC2 instance state changed from Pending to Starting. 
+## CW Rules
+- Matches the incoming events and routes them to a target for an action.
+## CW Targets
+- Target process the events. It receives the event in the json format. 
+    - Ex: Lambda, Kinesis, SNS and many more.
