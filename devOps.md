@@ -72,5 +72,15 @@ SDLC (22% on exam.  system development and lifecycle)
 # Beanstalk
 
 # AWS Config
+- AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources. 
 - Constantly monitors and looks for changes to the AWS Configuration. 
 - It can capture the state of configuration at a given point of time.
+
+# AWS Managed Services
+
+# Lambda
+- 1 million free req per month. 
+
+# Step Functions.
+
+# OpsWorks
