@@ -99,3 +99,54 @@ SDLC (22% on exam.  system development and lifecycle)
 ## CW Targets
 - Target process the events. It receives the event in the json format. 
     - Ex: Lambda, Kinesis, SNS and many more.
+
+# AWS Xray 
+
+# AWS Service Catalog.
+- Create and distribute application stacks called Products.
+- Products can be grouped into folders called Portfolio.
+
+# AWS Trusted Advisor.
+- Cost optimization.
+- Performance.
+- Security.
+- Fault tolerance.
+- Service Limits.
+
+# AWS Systems Manager.
+- Can also use for multi cloud management. 
+- On prem instances can be managed with AWS SSM
+    - mi-0123456abcdefg (M is the prefix)
+- Run command
+    - For remote command execution.
+- State Manager.
+    - Configuration management.
+    - Bootstrap instances.
+- Inventory
+    - Information and overview of systems, software installed.
+- Maintenance Window.
+    - Lets to schedule window to run maintenance tasks.
+- Patch Manager
+    - Automates the patching.
+- Automation.
+    - Helps top automate common repetitive tasks. 
+- Parameter stores.
+    - Centralized location to save configuration data and secrets.
+- Session Manager.
+    - Secured way to connect to the instance.
+    - Amazon EC2 instances, on-premises instances, and virtual machines (VMs) through an interactive one-click browser-based shell or through the AWS Command Line Interface (AWS CLI).
+
+# AWS ORganization
+- Policy based management for more than one AWS Accounts. 
+- SCPs don't affect users or roles in the management account. They affect only the member accounts in your organization. 
+
+# AWS Secrets Manager.
+- Helps to protects secrets used by applications or other services.
+- Hardcoded credentials can be replaced with the API call to access the credentials from secret manager.
+- Allows automatically rotates the passwords.
+
+# AWS Macie
+- Security service using machine learning automatically discovers and classify and protect the sensitive data PI(Personal Identity) or IPs (Intellectual properties)
+
+# AWS Certrificate manager.
+- Cert manager to provision, manage and deploy TLS Certificates.
