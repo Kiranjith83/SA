@@ -150,3 +150,23 @@ SDLC (22% on exam.  system development and lifecycle)
 
 # AWS Certrificate manager.
 - Cert manager to provision, manage and deploy TLS Certificates.
+
+# Incident and Event Management.
+# AWS GaurdDuty.
+- Threat detection service, monitors AWS Account for malicious and unauthorized access.
+- It does this by monitoring :
+    - AWS API Calls
+    - Unauthorized deployments 
+    - Compromized instances. 
+- It performs these actions using threat intelligent feeds, cloudwatch events and machine learning.
+- To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from AWS CloudTrail event logs, VPC Flow Logs, and DNS logs to detect anomalies involving the following AWS resource types: IAM Access Keys, EC2 Instances, and S3 Buckets. 
+
+# AWS Inspector.
+- Assess application vulnerabilities
+- Identifies security issues.
+- Amazon Inspector is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS. 
+- Network inspection
+- Host Assessments (using agent)
+
+# AWS Kinesis
+
