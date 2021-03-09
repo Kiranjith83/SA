@@ -217,3 +217,14 @@ SDLC (22% on exam.  system development and lifecycle)
 # DDB DAX
 
 # AWS SMS (Server Migration Service)
+
+# White papers to refer:
+- Running containerized MicroServices on AWS
+- Microservices on AWS.
+- Infrastructure as a Code.
+- Practicing CI and CD on AWS.
+- Jenkins on AWS
+- Import Windows server to Amazon EC2 with PowerShell
+- Blue Green deployments on AWS.
+- Introduction to DevOps on AWS.
+- Development and Test on AWS.
