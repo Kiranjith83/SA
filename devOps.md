@@ -170,3 +170,50 @@ SDLC (22% on exam.  system development and lifecycle)
 
 # AWS Kinesis
 
+# AWS SSO
+
+# AWS CloudFront.
+
+# AutoScaling and Lifecycle Hooks.
+## Life cycle
+- Allows to take custom action when Auto scaling Launches or terminates the instance.
+- It starts when launching the instance.
+- Ends when the instance is terminated.
+- Ends when the Autoscaling group takes the instance out of service and terminates it.
+
+# AWS Route53. 
+
+# AWS RDS.
+
+# AWS Arora 
+## Connection endpoints.
+- Cluster endpoints.
+- Reader endpoints.
+- Custom endpoints.
+- Instance Endpoints.
+
+# AWS DynamoDB
+
+# AWS Tagging.
+- Cost allocation tags allows to pull cost for resources based on the tag from the Billing console.
+
+# EFS
+
+# ElasticCache
+
+# Direct Connect.
+
+# Lambda function dead letter queue.
+
+# AWS CloudSearch.
+- Setup manage and scale `search functionality` within your websie.
+
+# AWS ElasticSearch Service.
+- Provides ELK Stack.
+    - Elasticsearch
+    - Logstash
+    - Kibana
+
+# DDB DAX
+
+# AWS SMS (Server Migration Service)
